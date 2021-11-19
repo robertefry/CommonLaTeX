@@ -286,9 +286,9 @@ minimum width=3cm,minimum height=1cm,text centered,draw=black]
     tabsize=4,
 }
 
-\NewDocumentEnvironment{sourcecode}{O{Source Code}}
+\NewDocumentEnvironment{sourcecode}{D<>{0em}O{Source Code}}
 {
-    \begin{block}[C][#1]
+    \begin{block}<#2>[C][#2]
 }{
     \end{block}
 }
