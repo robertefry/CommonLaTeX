@@ -1,0 +1,294 @@
+
+% ------------------------------------------------------------------------------
+%   Package Includes
+% ------------------------------------------------------------------------------
+
+% Programming
+\usepackage{xparse}
+\usepackage{etoolbox}
+
+% Dummy Text
+\usepackage[english]{babel}
+\usepackage{lipsum}
+\usepackage{blindtext}
+
+% Page Formatting
+\usepackage[many]{tcolorbox}
+\usepackage{vwcol}
+\usepackage{wrapfig}
+
+% Text Formatting
+\usepackage{exercise}
+\usepackage[inline,shortlabels]{enumitem}
+\usepackage{listings}
+\usepackage{siunitx}
+\usepackage{wasysym}
+\usepackage{stmaryrd}
+
+% Math Formatting
+\usepackage[g]{esvect}
+\usepackage{stackrel}
+\usepackage{cancel}
+
+% Tikz Picture
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{tkz-euclide}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{angles,quotes}
+\usetikzlibrary{shapes.geometric,arrows}
+
+% Graph Plotting
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+
+% Physics Packages
+\usepackage{physics}
+\usepackage{physconst}
+
+% Math Packages
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+
+% ------------------------------------------------------------------------------
+%   Programming
+% ------------------------------------------------------------------------------
+
+% IF Statement
+\usepackage{xifthen}
+\newcommand{\ifeq}[3]{\ifthenelse{\equal{#1}{#2}}{#3}{  }}
+\newcommand{\ifne}[3]{\ifthenelse{\equal{#1}{#2}}{  }{#3}}
+\newcommand{\ifel}[4]{\ifthenelse{\equal{#1}{#2}}{#3}{#4}}
+
+% SWITCH Statement
+\newcommand{\xcase}[2]{#1 #2} % Dummy, so \renewcommand has something to overwrite...
+\NewDocumentEnvironment{switch}{m}{\renewcommand{\xcase}{\ifeq{#1}}}{}
+
+
+% ------------------------------------------------------------------------------
+%   Page Formatting
+% ------------------------------------------------------------------------------
+
+% Break Commands
+\newcommand{\xbreakpage}{\mbox{}\newpage}
+\newcommand{\xbreakparg}{\mbox{}\par}
+\newcommand{\xbreakline}{\mbox{}\newline}
+
+% Force GoodBreak Between Sections (redundant?)
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\goodbreak}
+\newcommand{\subsectionbreak}{\goodbreak}
+\newcommand{\subsubsectionbreak}{\goodbreak}
+
+
+% ------------------------------------------------------------------------------
+%   Text Commands
+% ------------------------------------------------------------------------------
+
+% Block Environments
+\NewDocumentEnvironment{block}{D<>{0em}O{m}O{}}
+{
+    \begin{center}
+
+    \ifeq{#2}{m}
+    {
+        \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,blanker]
+        \ifne{#3}{}{ \textit{\underline{#3:}}\hspace{\parindent} }
+    }
+    \ifeq{#2}{M}
+    {
+        \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]
+        \ifne{#3}{}{ \textit{\underline{#3:}}\hspace{\parindent} }
+    }
+    \ifeq{#2}{t}
+    {
+        \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,blanker]
+        \ifne{#3}{}{ \textbf{#3}\vspace{0.33\baselineskip}\xbreakline{} }
+    }
+    \ifeq{#2}{T}
+    {
+        \ifel{#3}{}
+        {
+            \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]
+        }{
+            \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,title=\textbf{#3},sharp corners,boxrule=1pt]
+        }
+    }
+    \ifeq{#2}{C}
+    {
+        \ifel{#3}{}
+        {
+            \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]
+        }{
+            \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,title=\textbf{#3},sharp corners,boxrule=1pt]
+        }
+        \begin{quote}
+    }
+}{
+    \ifeq{#2}{C}
+    {
+        \end{quote}
+    }
+
+    \end{tcolorbox}
+    \end{center}
+}
+
+% Named Block Environments
+\NewDocumentEnvironment{claim}    {D<>{0em}}{ \begin{block}[m][Claim]     }{ \end{block} }
+\NewDocumentEnvironment{condition}{D<>{0em}}{ \begin{block}[m][Condition] }{ \end{block} }
+\NewDocumentEnvironment{case}     {D<>{0em}}{ \begin{block}[m][Case]      }{ \end{block} }
+\NewDocumentEnvironment{remark}   {D<>{0em}}{ \begin{block}[m][Remark]    }{ \end{block} }
+\NewDocumentEnvironment{exempli}  {D<>{0em}}{ \begin{block}[m][Example]   }{ \end{block} }
+\NewDocumentEnvironment{note}     {D<>{0em}}{ \begin{block}[m][Note]      }{ \end{block} }
+\NewDocumentEnvironment{notice}   {D<>{0em}}{ \begin{block}[m][Notice]    }{ \end{block} }
+\NewDocumentEnvironment{todo}     {D<>{0em}}{ \begin{block}[m][TODO]      }{ \end{block} }
+
+% Theorem Environments
+\newtheorem{counter}{counter}[subsection]
+\NewDocumentCommand{\DefineMathEnvironment}{mmO{\itshape}}
+{
+    \newtheoremstyle{thmstyle}{\topsep}{\topsep}{#3}{}{\bfseries}{}{\newline}{}
+    \theoremstyle{thmstyle}
+    \newtheorem{#1}[counter]{#2}
+    \AfterEndEnvironment{#1}{\goodbreak}
+}
+\DefineMathEnvironment{definition}{Definition}
+\DefineMathEnvironment{axiom}{Axiom}
+\DefineMathEnvironment{postulate}{Postulate}
+\DefineMathEnvironment{lemma}{Lemma}
+\DefineMathEnvironment{theorem}{Theorem}
+\DefineMathEnvironment{corollary}{Corollary}
+\DefineMathEnvironment{example}{Example}[]
+
+
+% ------------------------------------------------------------------------------
+%   Math Commands
+% ------------------------------------------------------------------------------
+
+% Unify Vector Commands (\vv,\vb)
+\DeclareDocumentCommand{\va} {m}{ \vv{#1} }
+%\DeclareDocumentCommand{\vb} {m}{ \vb{#1} }
+\DeclareDocumentCommand{\vab}{m}{ \vv{\vb{#1}} }
+\DeclareDocumentCommand{\vec}{m}{ \vv{#1} }
+
+% Matrix Commands
+\NewDocumentCommand{\xm}{O{p}m}{ \begin{#1matrix} #2 \end{#1matrix} }
+
+% Math Symbols
+\NewDocumentCommand{\divs}{}{ \;\big\vert\; }
+\NewDocumentCommand{\nmapsto}{}{ \;\cancel{\mapsto}\; }
+\NewDocumentCommand{\nequiv}{}{ \;\cancel{\equiv}\; }
+
+% ~ Math Enclosures ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+% Math Enclosures
+\NewDocumentCommand{\xenclose}{D<>{0}mmm}
+{
+    \begin{switch}{#1}
+        \xcase{0}{ \left#2 #4 \right#3 }
+        \xcase{1}{ \bigl#2 #4 \bigr#3 }
+        \xcase{2}{ \Bigl#2 #4 \Bigr#3 }
+        \xcase{3}{ \biggl#2 #4 \biggr#3 }
+        \xcase{4}{ \Biggl#2 #4 \Biggr#3 }
+        \xcase{-1}{ #2 #4 #3 }
+    \end{switch}
+}
+
+% Math Enclosure Groups
+\NewDocumentCommand{\xgroup}{D<>{0}O{.}m}
+{
+    \begin{switch}{#2}
+        \xcase{.}{ \xenclose<#1>{.}{.}{#3} }             % default
+        \xcase{p}{ \xenclose<#1>{(}{)}{#3} }             % parenthesis
+        \xcase{b}{ \xenclose<#1>{[}{]}{#3} }             % brackets
+        \xcase{B}{ \xenclose<#1>{\{}{\}}{#3} }           % braces
+        \xcase{c}{ \xenclose<#1>{\langle}{\rangle}{#3} } % chevrons
+        \xcase{v}{ \xenclose<#1>{\vert}{\vert}{#3} }     % absolute
+        \xcase{V}{ \xenclose<#1>{\Vert}{\Vert}{#3} }     % normal
+        \xcase{f}{ \xenclose<#1>{\lfloor}{\rfloor}{#3} } % floor
+        \xcase{F}{ \xenclose<#1>{\lceil}{\rceil}{#3} }   % ceil
+        \xcase{r}{ \xenclose<#1>{\lfloor}{\rceil}{#3} }  % round
+    \end{switch}
+}
+
+% Named Enclosure Groups
+\NewDocumentCommand{\xparen}{D<>{0}m}{ \xgroup<#1>[p]{#2} }
+\NewDocumentCommand{\xbrack}{D<>{0}m}{ \xgroup<#1>[b]{#2} }
+\NewDocumentCommand{\xbrace}{D<>{0}m}{ \xgroup<#1>[B]{#2} }
+\NewDocumentCommand{\xchevn}{D<>{0}m}{ \xgroup<#1>[c]{#2} }
+\NewDocumentCommand{\xabs}  {D<>{0}m}{ \xgroup<#1>[v]{#2} }
+\NewDocumentCommand{\xnorm} {D<>{0}m}{ \xgroup<#1>[V]{#2} }
+\NewDocumentCommand{\xfloor}{D<>{0}m}{ \xgroup<#1>[f]{#2} }
+\NewDocumentCommand{\xceil} {D<>{0}m}{ \xgroup<#1>[F]{#2} }
+\NewDocumentCommand{\xround}{D<>{0}m}{ \xgroup<#1>[r]{#2} }
+
+% Math Function Enclosures
+\NewDocumentCommand{\xfunc}{D<>{0}O{f}mm}
+{
+    \begin{switch}{#2}
+        \xcase{f}{ #3\xparen[1]{#4} } % function
+        \xcase{t}{ #3\xbrace[1]{#4} } % transform
+        \xcase{a}{ #3\xbrack[1]{#4} } % adjoin
+    \end{switch}
+}
+
+% Named Function Enclosures
+%\NewDocumentCommand{\xfunc}{D<>{0}mm}{ \xfunc<#1>[f]{#3}{#4} }
+\NewDocumentCommand{\xtrans}{D<>{0}mm}{ \xfunc<#1>[t]{#2}{#3} }
+\NewDocumentCommand{\xadjoin}{D<>{0}mm}{ \xfunc<#1>[a]{#2}{#3} }
+
+
+% ------------------------------------------------------------------------------
+%   Tikz Styles
+% ------------------------------------------------------------------------------
+
+\tikzstyle{flow_startstop} = [rectangle,rounded corners,
+minimum width=3cm,minimum height=1cm,text centered,draw=black]
+\tikzstyle{flow_inout} = [trapezium,trapezium left angle=70,trapezium right angle=110,
+minimum width=3cm,minimum height=1cm,text centered,draw=black]
+\tikzstyle{flow_process} = [rectangle
+minimum width=3cm,minimum height=1cm,text centered,draw=black]
+\tikzstyle{flow_decision} = [diamond
+minimum width=3cm,minimum height=1cm,text centered,draw=black]
+
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{process} = [rectangle,minimum width=3cm,minimum height=1cm,text centered,draw=black]
+
+
+% ------------------------------------------------------------------------------
+%   Source Code
+% ------------------------------------------------------------------------------
+
+\usepackage{sourcecodepro}
+\definecolor{color_keyword}{rgb}{0.500,0.000,0.125}
+\definecolor{color_comment}{rgb}{0.500,0.500,0.500}
+\definecolor{color_strings}{rgb}{0.000,0.500,0.250}
+
+\lstdefinelanguage{PlainText}{
+}
+\lstset{
+    basicstyle=\scriptsize{}\ttfamily{},
+    keywordstyle=\color{color_keyword},
+    commentstyle=\color{color_comment},
+    stringstyle=\color{color_strings},
+    numbers=left,
+    numberstyle=\tiny{},
+    tabsize=4,
+    breakatwhitespace=false,
+    breaklines=true,
+    showtabs=false,
+    tabsize=4,
+}
+
+\NewDocumentEnvironment{sourcecode}{O{Source Code}}
+{
+    \begin{block}[C][#1]
+}{
+    \end{block}
+}
