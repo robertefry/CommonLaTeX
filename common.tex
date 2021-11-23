@@ -114,6 +114,17 @@
 %   Text Commands
 % ------------------------------------------------------------------------------
 
+% Repeat a String N Times
+\makeatletter
+\newcount\x@repeat@count
+\newcommand{\xrepeat}[2]{%
+  \begingroup
+  \x@repeat@count=\z@
+  \@whilenum\x@repeat@count<#1\do{#2\advance\x@repeat@count\@ne}%
+  \endgroup
+}
+\makeatother
+
 % Block Environments
 \NewDocumentEnvironment{block}{D<>{0em}O{m}O{}}
 {
