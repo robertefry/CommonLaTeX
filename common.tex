@@ -27,6 +27,7 @@
 \usepackage{siunitx}
 \usepackage{wasysym}
 \usepackage{stmaryrd}
+\usepackage{xcolor}
 
 % Math Formatting
 \usepackage[g]{esvect}
@@ -125,6 +126,15 @@
 }
 \makeatother
 
+% Format TODO Marker
+\NewDocumentCommand{\TODO}{}
+{
+    \begin{center}
+        \color{red}
+        \textbf{\textit{\xrepeat{6}{=}\underline{TODO}\xrepeat{6}{=}}}
+    \end{center}
+}
+
 % Block Environments
 \NewDocumentEnvironment{block}{D<>{0em}O{m}O{}}
 {
@@ -182,6 +192,7 @@
 \NewDocumentEnvironment{exempli}  {D<>{0em}}{ \begin{block}[m][Example]   }{ \end{block} }
 \NewDocumentEnvironment{note}     {D<>{0em}}{ \begin{block}[m][Note]      }{ \end{block} }
 \NewDocumentEnvironment{notice}   {D<>{0em}}{ \begin{block}[m][Notice]    }{ \end{block} }
+\NewDocumentEnvironment{hint}     {D<>{0em}}{ \begin{block}[m][Hint]      }{ \end{block} }
 \NewDocumentEnvironment{todo}     {D<>{0em}}{ \begin{block}[m][TODO]      }{ \end{block} }
 
 % Theorem Environments
