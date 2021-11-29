@@ -139,7 +139,13 @@
     \end{center}
 }
 
-% Block Environments
+
+% ------------------------------------------------------------------------------
+%   Text Environments
+% ------------------------------------------------------------------------------
+
+% ~ Block Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 \NewDocumentEnvironment{block}{D<>{0em}O{m}O{}}
 {
     \begin{center}
@@ -199,22 +205,27 @@
 \NewDocumentEnvironment{hint}     {D<>{0em}}{ \begin{block}[m][Hint]      }{ \end{block} }
 \NewDocumentEnvironment{todo}     {D<>{0em}}{ \begin{block}[m][TODO]      }{ \end{block} }
 
-% Theorem Environments
+% ~ Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 \newtheorem{counter}{counter}[subsection]
-\NewDocumentCommand{\DefineMathEnvironment}{mmO{\itshape}}
+\NewDocumentCommand{\DefineTheoremEnvironment}{D<>{0em}mmO{\itshape}}
 {
-    \newtheoremstyle{#1thmstyle}{\topsep}{\topsep}{#3}{}{\bfseries}{}{\newline}{}
-    \theoremstyle{#1thmstyle}
-    \newtheorem{#1}[counter]{#2}
-    \AfterEndEnvironment{#1}{\goodbreak}
+    \NewDocumentEnvironment{#2*}{D<>{#1}}{ \begin{block}[m][#3] }{ \end{block} }
+
+    \newtheoremstyle{#2thmstyle}{\topsep}{\topsep}{#4}{}{\bfseries}{}{\newline}{}
+    \theoremstyle{#2thmstyle}
+    \newtheorem{#2}[counter]{#3}
+    \AfterEndEnvironment{#2}{\goodbreak}
 }
-\DefineMathEnvironment{definition}{Definition}
-\DefineMathEnvironment{axiom}{Axiom}
-\DefineMathEnvironment{postulate}{Postulate}
-\DefineMathEnvironment{lemma}{Lemma}
-\DefineMathEnvironment{theorem}{Theorem}
-\DefineMathEnvironment{corollary}{Corollary}
-\DefineMathEnvironment{example}{Example}[]
+
+% Named Theorem Environments
+\DefineTheoremEnvironment{definition}{Definition}
+\DefineTheoremEnvironment{axiom}{Axiom}
+\DefineTheoremEnvironment{postulate}{Postulate}
+\DefineTheoremEnvironment{lemma}{Lemma}
+\DefineTheoremEnvironment{theorem}{Theorem}
+\DefineTheoremEnvironment{corollary}{Corollary}
+\DefineTheoremEnvironment{example}{Example}[]
 
 
 % ------------------------------------------------------------------------------
