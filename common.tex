@@ -226,14 +226,21 @@
 % Matrix Commands
 \NewDocumentCommand{\xm}{O{p}m}{ \begin{#1matrix} #2 \end{#1matrix} }
 
-% Math Symbols
-\NewDocumentCommand{\divs}{}{ \;\big\vert\; }
-\NewDocumentCommand{\nmapsto}{}{ \;\cancel{\mapsto}\; }
-\NewDocumentCommand{\nequiv}{}{ \;\cancel{\equiv}\; }
-
 % Math Commands
 \NewDocumentCommand{\usb}{mm}{\underset{#1}{\underbrace{#2}}}
 \NewDocumentCommand{\osb}{mm}{\overset{#1}{\overbrace{#2}}}
+
+% ~ Math Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\newcommand{\divs}{ \;\big\vert\; }
+\newcommand{\nequiv}{ \;\cancel{\equiv}\; }
+
+\newcommand{\nmapsfrom}{ \;\cancel{\mapsfrom}\; }
+\newcommand{\nmapsto}{ \;\cancel{\mapsto}\; }
+\newcommand{\mapto}{ \rightarrow }
+\newcommand{\mapfrom}{ \leftarrow }
+\newcommand{\nmapto}{ \nrightarrow }
+\newcommand{\nmapfrom}{ \nleftarrow }
 
 % ~ Math Enclosures ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
