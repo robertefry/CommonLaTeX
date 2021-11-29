@@ -203,8 +203,8 @@
 \newtheorem{counter}{counter}[subsection]
 \NewDocumentCommand{\DefineMathEnvironment}{mmO{\itshape}}
 {
-    \newtheoremstyle{thmstyle}{\topsep}{\topsep}{#3}{}{\bfseries}{}{\newline}{}
-    \theoremstyle{thmstyle}
+    \newtheoremstyle{#1thmstyle}{\topsep}{\topsep}{#3}{}{\bfseries}{}{\newline}{}
+    \theoremstyle{#1thmstyle}
     \newtheorem{#1}[counter]{#2}
     \AfterEndEnvironment{#1}{\goodbreak}
 }
