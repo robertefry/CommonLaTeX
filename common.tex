@@ -34,7 +34,6 @@
 \usepackage{xcolor}
 
 % Math Formatting
-\usepackage[g]{esvect}
 \usepackage{stackrel}
 
 % Tikz Picture
@@ -220,11 +219,9 @@
 %   Math Commands
 % ------------------------------------------------------------------------------
 
-% Unify Vector Commands (\vv,\vb)
-\DeclareDocumentCommand{\va} {m}{ \vv{#1} }
-%\DeclareDocumentCommand{\vb} {m}{ \vb{#1} }
-\DeclareDocumentCommand{\vab}{m}{ \vv{\vb{#1}} }
-\DeclareDocumentCommand{\vec}{m}{ \vv{#1} }
+% Vector Commands
+\usepackage[g]{esvect}
+\NewDocumentCommand{\xv}{m}{ \vv{#1} }
 
 % Matrix Commands
 \NewDocumentCommand{\xm}{O{p}m}{ \begin{#1matrix} #2 \end{#1matrix} }
