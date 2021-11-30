@@ -144,6 +144,9 @@
 %   Text Environments
 % ------------------------------------------------------------------------------
 
+% Proof without QED
+\newenvironment{proof*}{\renewcommand{\qedsymbol}{}\proof}{\endproof}
+
 % ~ Block Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \NewDocumentEnvironment{block}{D<>{0em}O{m}O{}}
