@@ -119,6 +119,10 @@
 %   Text Commands
 % ------------------------------------------------------------------------------
 
+% Underlined Text
+\usepackage{ulem}
+\DeclareDocumentCommand{\underline}{m}{\uline{#1}}
+
 % Repeat a String N Times
 \makeatletter%
 \newcount\x@repeat@count%
