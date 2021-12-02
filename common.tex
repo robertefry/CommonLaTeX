@@ -250,6 +250,13 @@
 
 % ~ Major Block Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+\NewDocumentCommand{\MakeMajorTheorem}{mmo}%
+{%
+    \MakeNewTheorem{#1}{#2}[#3]%
+    \BeforeBeginEnvironment{#1}{\goodbreak\vspace{-10pt}}%
+    \BeforeBeginEnvironment{#1*}{\goodbreak\vspace{-10pt}}%
+}%
+
 \makeatletter\newtheoremstyle{blockmajor}%
     {\item[\rlap{\vbox{\hbox{\hskip\labelsep \theorem@headerfont
     ##1\ ##2\theorem@separator}\hbox{\strut}}}]}%
@@ -265,12 +272,12 @@
 
 \ProvideDocumentCommand{\majorcounter}{}{section} % renew this command to change major-theorem counters
 
-\MakeNewTheorem{Definition}{Definition}[\majorcounter]
-\MakeNewTheorem{Postulate}{Postulate}[\majorcounter]
-\MakeNewTheorem{Lemma}{Lemma}[\majorcounter]
-\MakeNewTheorem{Theorem}{Theorem}[\majorcounter]
-\MakeNewTheorem{Corollary}{Corollary}[\majorcounter]
-\MakeNewTheorem{Example}{Example}[\majorcounter]
+\MakeMajorTheorem{Definition}{Definition}[\majorcounter]
+\MakeMajorTheorem{Postulate}{Postulate}[\majorcounter]
+\MakeMajorTheorem{Lemma}{Lemma}[\majorcounter]
+\MakeMajorTheorem{Theorem}{Theorem}[\majorcounter]
+\MakeMajorTheorem{Corollary}{Corollary}[\majorcounter]
+\MakeMajorTheorem{Example}{Example}[\majorcounter]
 
 
 % ------------------------------------------------------------------------------
