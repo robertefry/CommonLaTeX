@@ -193,10 +193,16 @@
 \theoreminframepreskip{0pt}
 \theoreminframepostskip{0pt}
 
-\NewDocumentCommand{\MakeNewTheorem}{mm}%
+\NewDocumentCommand{\MakeNewTheorem}{mmo}%
 {%
-    \newtheorem{#1}{#2}%
-    \newframedtheorem{*#1}{#2}%
+    \IfValueTF{#3}
+    {%
+        \newtheorem{#1}{#2}[#3]%
+        \newframedtheorem{*#1}{#2}[#3]%
+    }{%
+        \newtheorem{#1}{#2}%
+        \newframedtheorem{*#1}{#2}%
+    }%
 }%
 
 % ~ Proof Environment ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
