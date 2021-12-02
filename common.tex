@@ -183,6 +183,12 @@
     \end{center}%
 }%
 
+% Block Lists
+\NewDocumentEnvironment{*itemize}{}{\begin{itemize}}{\end{itemize}}
+\NewDocumentEnvironment{*itemize*}{}{\begin{block}<3em>\begin{itemize*}}{\end{itemize*}\end{block}}
+\NewDocumentEnvironment{*enumerate}{}{\begin{enumerate}}{\end{enumerate}}
+\NewDocumentEnvironment{*enumerate*}{}{\begin{block}<3em>\begin{enumerate*}}{\end{enumerate*}\end{block}}
+
 
 % ------------------------------------------------------------------------------
 %   Theorem Environments
