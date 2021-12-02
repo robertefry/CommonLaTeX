@@ -58,7 +58,7 @@
 % Math Packages
 \usepackage{mathtools}
 \usepackage{amsmath}
-\usepackage{amsthm}
+% \usepackage{amsthm} (replaced with ntheorem)
 \usepackage{amssymb}
 \usepackage{amsfonts}
 
@@ -116,7 +116,7 @@
 
 
 % ------------------------------------------------------------------------------
-%   Text Commands
+%   Text Commands & Environments
 % ------------------------------------------------------------------------------
 
 % Underlined Text
@@ -145,95 +145,108 @@
 
 
 % ------------------------------------------------------------------------------
-%   Text Environments
+%   Block Environment
 % ------------------------------------------------------------------------------
 
-% Proof without QED
-\newenvironment{proof*}{\renewcommand{\qedsymbol}{}\proof}{\endproof}
-
-% ~ Block Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-\NewDocumentEnvironment{block}{D<>{0em}O{m}O{}}%
+\NewDocumentEnvironment{block}{D<>{0em}O{m}o}%
 {%
     \begin{center}%
     %
     \ifeq{#2}{m}%
     {%
         \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,blanker]%
-        \ifne{#3}{}{ \textit{\underline{#3:}}\hspace{\parindent} }%
+        \IfValueT{#3}{\textsl{\uline{#3:}\ }}%
     }%
     \ifeq{#2}{M}%
     {%
         \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]%
-        \ifne{#3}{}{ \textit{\underline{#3:}}\hspace{\parindent} }%
+        \IfValueT{#3}{\textsl{\uline{#3:}\ }}%
     }%
     \ifeq{#2}{t}%
     {%
         \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,blanker]%
-        \ifne{#3}{}{ \textbf{#3}\vspace{0.33\baselineskip}\xbreakline{} }%
+        \IfValueT{#3}{\textbf{#3}\xbreakline}%
     }%
     \ifeq{#2}{T}%
     {%
-        \ifel{#3}{}%
-        {%
-            \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]%
-        }{%
-            \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,title=\textbf{#3},sharp corners,boxrule=1pt]%
-        }%
+        \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]%
+        \IfValueT{#3}{\textbf{#3}\xbreakline}%
     }%
-    \ifeq{#2}{C}%
+    \ifeq{#2}{s}%
     {%
-        \ifel{#3}{}%
-        {%
-            \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]%
-        }{%
-            \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,title=\textbf{#3},sharp corners,boxrule=1pt]%
-        }%
-        \begin{quote}%
+        \IfValueTF{#3}%
+            {\begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt,title=\textbf{#3}]}%
+            {\begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]}%
     }%
 }{%
-    \ifeq{#2}{C}%
-    {%
-        \end{quote}%
-    }%
-    %
     \end{tcolorbox}%
     \end{center}%
 }%
 
-% Named Block Environments
-\NewDocumentEnvironment{claim}    {D<>{0em}}{ \begin{block}[m][Claim]     }{ \end{block} }
-\NewDocumentEnvironment{condition}{D<>{0em}}{ \begin{block}[m][Condition] }{ \end{block} }
-\NewDocumentEnvironment{case}     {D<>{0em}}{ \begin{block}[m][Case]      }{ \end{block} }
-\NewDocumentEnvironment{remark}   {D<>{0em}}{ \begin{block}[m][Remark]    }{ \end{block} }
-\NewDocumentEnvironment{thatis}   {D<>{0em}}{ \begin{block}[m][That is]   }{ \end{block} }
-\NewDocumentEnvironment{exempli}  {D<>{0em}}{ \begin{block}[m][Example]   }{ \end{block} }
-\NewDocumentEnvironment{note}     {D<>{0em}}{ \begin{block}[m][Note]      }{ \end{block} }
-\NewDocumentEnvironment{notice}   {D<>{0em}}{ \begin{block}[m][Notice]    }{ \end{block} }
-\NewDocumentEnvironment{hint}     {D<>{0em}}{ \begin{block}[m][Hint]      }{ \end{block} }
-\NewDocumentEnvironment{todo}     {D<>{0em}}{ \begin{block}[m][TODO]      }{ \end{block} }
 
-% ~ Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% ------------------------------------------------------------------------------
+%   Theorem Environments
+% ------------------------------------------------------------------------------
 
-\newtheorem{counter}{counter}[subsection]
-\NewDocumentCommand{\DefineTheoremEnvironment}{D<>{0em}mmO{\itshape}}%
+\usepackage{framed}
+\usepackage[framed,thmmarks]{ntheorem}
+\theoreminframepreskip{0pt}
+\theoreminframepostskip{0pt}
+
+\makeatletter\newtheoremstyle{nonumberuline}%
+    {\item[\theorem@headerfont\hskip \labelsep \uline{##1}\theorem@separator]}%
+    {\item[\theorem@headerfont\hskip \labelsep \uline{##1\ (##3)}\theorem@separator]}%
+\makeatother%
+
+\NewDocumentCommand{\MakeNewTheorem}{mm}%
 {%
-    \NewDocumentEnvironment{#2*}{D<>{#1}}{ \begin{block}[m][#3] }{ \end{block} }%
-    %
-    \newtheoremstyle{#2thmstyle}{\topsep}{\topsep}{#4}{}{\bfseries}{}{\newline}{}%
-    \theoremstyle{#2thmstyle}%
-    \newtheorem{#2}[counter]{#3}%
-    \AfterEndEnvironment{#2}{\goodbreak}%
+    \newtheorem{#1}{#2}%
+    \newframedtheorem{*#1}{#2}%
 }%
 
-% Named Theorem Environments
-\DefineTheoremEnvironment{definition}{Definition}
-\DefineTheoremEnvironment{axiom}{Axiom}
-\DefineTheoremEnvironment{postulate}{Postulate}
-\DefineTheoremEnvironment{lemma}{Lemma}
-\DefineTheoremEnvironment{theorem}{Theorem}
-\DefineTheoremEnvironment{corollary}{Corollary}
-\DefineTheoremEnvironment{example}{Example}[]
+% ~ Proof Environment ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\theoremstyle{nonumberplain}
+\theoremheaderfont{\itshape}
+\theorembodyfont{\upshape}
+\theoremseparator{.}
+\theoremsymbol{\ensuremath{\square}}
+
+\MakeNewTheorem{proof}{Proof}
+
+% ~ Minor Block Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\theoremstyle{nonumberuline}
+\theoremheaderfont{\itshape}
+\theorembodyfont{\upshape}
+\theoremseparator{;}
+\theoremsymbol{}
+
+\MakeNewTheorem{claim}{Claim}
+\MakeNewTheorem{condition}{Condition}
+\MakeNewTheorem{case}{Case}
+\MakeNewTheorem{remark}{Remark}
+\MakeNewTheorem{thatis}{That is}
+\MakeNewTheorem{example}{Example}
+\MakeNewTheorem{note}{Note}
+\MakeNewTheorem{notice}{Notice}
+\MakeNewTheorem{hint}{Hint}
+\MakeNewTheorem{todo}{TODO}
+
+% ~ Major Block Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\theoremstyle{break}
+\theoremheaderfont{\normalfont\bfseries}
+\theorembodyfont{\slshape}
+\theoremseparator{.}
+\theoremsymbol{}
+
+\MakeNewTheorem{Definition}{Definition}[section]
+\MakeNewTheorem{Postulate}{Postulate}[section]
+\MakeNewTheorem{Lemma}{Lemma}[section]
+\MakeNewTheorem{Theorem}{Theorem}[section]
+\MakeNewTheorem{Corollary}{Corollary}[section]
+\MakeNewTheorem{Example}{Example}[section]
 
 
 % ------------------------------------------------------------------------------
@@ -368,11 +381,4 @@ minimum width=3cm,minimum height=1cm,text centered,draw=black]
     breaklines=true,%
     showtabs=false,%
     tabsize=4,%
-}%
-
-\NewDocumentEnvironment{sourcecode}{D<>{0em}O{Source Code}}%
-{%
-    \begin{block}<#2>[C][#2]%
-}{%
-    \end{block}%
 }%
