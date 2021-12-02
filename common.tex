@@ -260,12 +260,14 @@
 \theoremseparator{.}
 \theoremsymbol{}
 
-\MakeNewTheorem{Definition}{Definition}[section]
-\MakeNewTheorem{Postulate}{Postulate}[section]
-\MakeNewTheorem{Lemma}{Lemma}[section]
-\MakeNewTheorem{Theorem}{Theorem}[section]
-\MakeNewTheorem{Corollary}{Corollary}[section]
-\MakeNewTheorem{Example}{Example}[section]
+\ProvideDocumentCommand{\majorcounter}{}{section} % renew this command to change major-theorem counters
+
+\MakeNewTheorem{Definition}{Definition}[\majorcounter]
+\MakeNewTheorem{Postulate}{Postulate}[\majorcounter]
+\MakeNewTheorem{Lemma}{Lemma}[\majorcounter]
+\MakeNewTheorem{Theorem}{Theorem}[\majorcounter]
+\MakeNewTheorem{Corollary}{Corollary}[\majorcounter]
+\MakeNewTheorem{Example}{Example}[\majorcounter]
 
 
 % ------------------------------------------------------------------------------
