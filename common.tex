@@ -193,11 +193,6 @@
 \theoreminframepreskip{0pt}
 \theoreminframepostskip{0pt}
 
-\makeatletter\newtheoremstyle{nonumberuline}%
-    {\item[\theorem@headerfont\hskip \labelsep \uline{##1}\theorem@separator]}%
-    {\item[\theorem@headerfont\hskip \labelsep \uline{##1\ (##3)}\theorem@separator]}%
-\makeatother%
-
 \NewDocumentCommand{\MakeNewTheorem}{mm}%
 {%
     \newtheorem{#1}{#2}%
@@ -216,7 +211,12 @@
 
 % ~ Minor Block Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\theoremstyle{nonumberuline}
+\makeatletter\newtheoremstyle{blockminor}%
+    {\item[\theorem@headerfont\hskip \labelsep \uline{##1}\theorem@separator]}%
+    {\item[\theorem@headerfont\hskip \labelsep \uline{##1\ (##3)}\theorem@separator]}%
+\makeatother%
+
+\theoremstyle{blockminor}
 \theoremheaderfont{\itshape}
 \theorembodyfont{\upshape}
 \theoremseparator{;}
@@ -235,7 +235,14 @@
 
 % ~ Major Block Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\theoremstyle{break}
+\makeatletter\newtheoremstyle{blockmajor}%
+    {\item[\rlap{\vbox{\hbox{\hskip\labelsep \theorem@headerfont
+    ##1\ ##2\theorem@separator}\hbox{\strut}}}]}%
+    {\item[\rlap{\vbox{\hbox{\hskip\labelsep \theorem@headerfont
+    ##1\ ##2\ \textnormal{(##3)}\theorem@separator}\hbox{\strut}}}]}%
+\makeatother%
+
+\theoremstyle{blockmajor}
 \theoremheaderfont{\normalfont\bfseries}
 \theorembodyfont{\slshape}
 \theoremseparator{.}
