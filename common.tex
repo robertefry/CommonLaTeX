@@ -138,10 +138,12 @@
 % Format TODO Marker
 \NewDocumentCommand{\TODO}{}%
 {%
-    \begin{center}%
-        \color{red}%
-        \textbf{\textit{\xrepeat{6}{=}\underline{TODO}\xrepeat{6}{=}}}%
-    \end{center}%
+    \begin{minipage}{\textwidth}%
+        \begin{center}%
+            \color{red}%
+            \textbf{\textit{\xrepeat{6}{=}\underline{TODO}\xrepeat{6}{=}}}%
+        \end{center}%
+    \end{minipage}%
 }%
 
 
