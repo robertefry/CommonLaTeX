@@ -253,8 +253,8 @@
 \NewDocumentCommand{\MakeMajorTheorem}{mmo}%
 {%
     \MakeNewTheorem{#1}{#2}[#3]%
-    \BeforeBeginEnvironment{#1}{\goodbreak\vspace{-10pt}}%
-    \BeforeBeginEnvironment{#1*}{\goodbreak\vspace{-10pt}}%
+    \BeforeBeginEnvironment{#1}{\penalty-500}%
+    \BeforeBeginEnvironment{#1*}{\penalty-500}%
 }%
 
 \makeatletter\newtheoremstyle{blockmajor}%
