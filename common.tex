@@ -311,6 +311,9 @@
 \NewDocumentCommand{\xtrans} {D<>{0}mm}{ \xfunc<#1>[t]{#2}{#3} }%
 \NewDocumentCommand{\xadjoin}{D<>{0}mm}{ \xfunc<#1>[a]{#2}{#3} }%
 
+% Partial Derivatives
+\NewDocumentCommand{\pd}{O{}m}{\partial^{#1} #2}
+
 
 % ------------------------------------------------------------------------------
 %   Tikz Styles
