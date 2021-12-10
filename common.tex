@@ -160,8 +160,7 @@
 %   Theorem Environments
 % ------------------------------------------------------------------------------
 
-\usepackage{framed}
-\usepackage[framed,thmmarks]{ntheorem}
+\usepackage[thmmarks]{ntheorem}
 \theoreminframepreskip{0pt}
 \theoreminframepostskip{0pt}
 
@@ -170,11 +169,10 @@
     \IfValueTF{#3}
     {%
         \newtheorem{#1}{#2}[#3]%
-        \newframedtheorem{*#1}{#2}[#3]%
     }{%
         \newtheorem{#1}{#2}%
-        \newframedtheorem{*#1}{#2}%
     }%
+    \NewDocumentEnvironment{*#1}{}{\begin{block}[M]\begin{#1}}{\end{#1}\end{block}}
 }%
 
 % ~ Proof Environment ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
