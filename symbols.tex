@@ -1,0 +1,65 @@
+
+% Symbol Packages
+\usepackage{cancel}
+\usepackage{wasysym}
+\usepackage{stmaryrd}
+
+% Un-named Greek Characters
+\newcommand{\omicron}{o}
+\newcommand{\Alpha}{A}
+\newcommand{\Beta}{B}
+\newcommand{\Epsilon}{E}
+\newcommand{\Zeta}{Z}
+\newcommand{\Eta}{H}
+\newcommand{\Iota}{I}
+\newcommand{\Kappa}{K}
+\newcommand{\Mu}{M}
+\newcommand{\Nu}{N}
+\newcommand{\Omicron}{O}
+\newcommand{\Rho}{P}
+\newcommand{\Tau}{T}
+\newcommand{\Chi}{X}
+
+% TODO Marker
+\NewDocumentCommand{\marktodo}{}%
+{%
+    \begin{minipage}{\textwidth}%
+        \begin{center}%
+            \color{red}%
+            \textbf{\textit{======\underline{TODO}======}}%
+        \end{center}%
+    \end{minipage}%
+}%
+
+% ~ Math Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\renewcommand{\bar}[1]{\overline{#1}}
+
+\newcommand{\divs}{ \;\big\vert\; }
+\newcommand{\nequiv}{ \;\cancel{\equiv}\; }
+
+\newcommand{\nmapsfrom}{ \;\cancel{\mapsfrom}\; }
+\newcommand{\nmapsto}{ \;\cancel{\mapsto}\; }
+\newcommand{\mapto}{ \rightarrow }
+\newcommand{\longmapto}{ \longrightarrow }
+\newcommand{\mapfrom}{ \leftarrow }
+\newcommand{\longmapfrom}{ \longleftarrow }
+\newcommand{\nmapto}{ \nrightarrow }
+\newcommand{\nmapfrom}{ \nleftarrow }
+
+\newcommand{\contradiction}{ \ensuremath{\lightning} }
+\DeclareMathOperator*{\Forall}{\mbox{\Large $\mathsurround0pt\forall$}}
+
+% Math Commands
+\NewDocumentCommand{\usb}{mm}{\underset{#1}{\underbrace{#2}}}
+\NewDocumentCommand{\osb}{mm}{\overset{#1}{\overbrace{#2}}}
+
+% Math Symbols
+\NewDocumentCommand{\Obj}{O{}m}{\xfunc{\textnormal{Obj}_{#1}}{#2}}
+\NewDocumentCommand{\Hom}{O{}m}{\xfunc{\textnormal{Hom}_{#1}}{#2}}
+\NewDocumentCommand{\Ker}{O{}m}{\xfunc{\textnormal{Ker}_{#1}}{#2}}
+\NewDocumentCommand{\Img}{O{}m}{\xfunc{\textnormal{Im}_{#1}}{#2}}
+\NewDocumentCommand{\Ann}{O{}m}{\xfunc{\textnormal{Ann}_{#1}}{#2}}
+
+\newcommand{\LHS}{\mbox{LHS}}
+\newcommand{\RHS}{\mbox{RHS}}

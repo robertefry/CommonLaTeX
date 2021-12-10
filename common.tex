@@ -22,11 +22,6 @@
 \usepackage{bm}
 \usepackage{bbold}
 
-% Extra Symbols
-\usepackage{cancel}
-\usepackage{wasysym}
-\usepackage{stmaryrd}
-
 % Text Formatting
 \usepackage{exercise}
 \usepackage[inline,shortlabels]{enumitem}
@@ -61,27 +56,6 @@
 % \usepackage{amsthm} (replaced with ntheorem)
 \usepackage{amssymb}
 \usepackage{amsfonts}
-
-
-% ------------------------------------------------------------------------------
-%   Un-named Character Sets
-% ------------------------------------------------------------------------------
-
-% Un-named Greek Characters
-\newcommand{\omicron}{o}
-\newcommand{\Alpha}{A}
-\newcommand{\Beta}{B}
-\newcommand{\Epsilon}{E}
-\newcommand{\Zeta}{Z}
-\newcommand{\Eta}{H}
-\newcommand{\Iota}{I}
-\newcommand{\Kappa}{K}
-\newcommand{\Mu}{M}
-\newcommand{\Nu}{N}
-\newcommand{\Omicron}{O}
-\newcommand{\Rho}{P}
-\newcommand{\Tau}{T}
-\newcommand{\Chi}{X}
 
 
 % ------------------------------------------------------------------------------
@@ -134,17 +108,6 @@
   \endgroup%
 }%
 \makeatother%
-
-% Format TODO Marker
-\NewDocumentCommand{\marktodo}{}%
-{%
-    \begin{minipage}{\textwidth}%
-        \begin{center}%
-            \color{red}%
-            \textbf{\textit{\xrepeat{6}{=}\underline{TODO}\xrepeat{6}{=}}}%
-        \end{center}%
-    \end{minipage}%
-}%
 
 
 % ------------------------------------------------------------------------------
@@ -290,28 +253,6 @@
 
 % Matrix Commands
 \NewDocumentCommand{\xm}{O{p}m}{ \begin{#1matrix} #2 \end{#1matrix} }
-
-% Math Commands
-\NewDocumentCommand{\usb}{mm}{\underset{#1}{\underbrace{#2}}}
-\NewDocumentCommand{\osb}{mm}{\overset{#1}{\overbrace{#2}}}
-
-% ~ Math Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-\renewcommand{\bar}[1]{\overline{#1}}
-
-\newcommand{\divs}{ \;\big\vert\; }
-\newcommand{\nequiv}{ \;\cancel{\equiv}\; }
-
-\newcommand{\nmapsfrom}{ \;\cancel{\mapsfrom}\; }
-\newcommand{\nmapsto}{ \;\cancel{\mapsto}\; }
-\newcommand{\mapto}{ \rightarrow }
-\newcommand{\longmapto}{ \longrightarrow }
-\newcommand{\mapfrom}{ \leftarrow }
-\newcommand{\longmapfrom}{ \longleftarrow }
-\newcommand{\nmapto}{ \nrightarrow }
-\newcommand{\nmapfrom}{ \nleftarrow }
-
-\newcommand{\contradiction}{ \ensuremath{\lightning} }
 
 % ~ Math Enclosures ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
