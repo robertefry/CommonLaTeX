@@ -303,9 +303,9 @@
 \NewDocumentCommand{\xfunc}{D<>{0}O{f}mm}%
 {%
     \begin{switch}{#2}%
-        \xcase{f}{ #3\xparen<#1>{#4} } % function%
-        \xcase{t}{ #3\xbrace<#1>{#4} } % transform%
-        \xcase{a}{ #3\xbrack<#1>{#4} } % adjoin%
+        \xcase{f}{ #3\xparen<#1>{#4} }      % function%
+        \xcase{t}{ #3\xbrace<#1>{#4} }      % transform%
+        \xcase{a}{ #3\xbrack<#1>{\,#4\,} }  % adjoin%
     \end{switch}%
 }%
 \NewDocumentCommand{\xtrans} {D<>{0}mm}{ \xfunc<#1>[t]{#2}{#3} }%
