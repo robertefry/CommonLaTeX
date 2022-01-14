@@ -165,14 +165,18 @@
 \theoreminframepostskip{0pt}
 \newcommand{\qedhere}{\hfill\proofSymbol}
 
-\NewDocumentCommand{\MakeNewTheorem}{mmo}%
+\NewDocumentCommand{\MakeNewTheorem}{momo}%
 {%
-    \IfValueTF{#3}
+    \IfValueTF{#4}
     {%
-        \newtheorem{#1}{#2}[#3]%
+        \newtheorem{#1}{#3}[#4]%
     }{%
-        \newtheorem{#1}{#2}%
-    }%
+    \IfValueTF{#2}%
+    {%
+        \newtheorem{#1}[#2]{#3}%
+    }{%
+        \newtheorem{#1}{#3}%
+    }}%
     \NewDocumentEnvironment{*#1}{}{\begin{block}[M]\begin{#1}}{\end{#1}\end{block}}
 }%
 
@@ -216,9 +220,9 @@
 
 % ~ Major Block Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\NewDocumentCommand{\MakeMajorTheorem}{mmo}%
+\NewDocumentCommand{\MakeMajorTheorem}{momo}%
 {%
-    \MakeNewTheorem{#1}{#2}[#3]%
+    \MakeNewTheorem{#1}[#2]{#3}[#4]%
     \BeforeBeginEnvironment{#1}{\penalty-500}%
     \BeforeBeginEnvironment{#1*}{\penalty-500}%
 }%
@@ -237,13 +241,14 @@
 \theoremsymbol{}
 
 \ProvideDocumentCommand{\majorcounter}{}{section} % renew this command to change major-theorem counters
+\newtheorem{thm}{thm}[\majorcounter]
 
-\MakeMajorTheorem{Definition}{Definition}[\majorcounter]
-\MakeMajorTheorem{Postulate}{Postulate}[\majorcounter]
-\MakeMajorTheorem{Lemma}{Lemma}[\majorcounter]
-\MakeMajorTheorem{Theorem}{Theorem}[\majorcounter]
-\MakeMajorTheorem{Corollary}{Corollary}[\majorcounter]
-\MakeMajorTheorem{Example}{Example}[\majorcounter]
+\MakeMajorTheorem{Definition}[thm]{Definition}
+\MakeMajorTheorem{Postulate}[thm]{Postulate}
+\MakeMajorTheorem{Lemma}[thm]{Lemma}
+\MakeMajorTheorem{Theorem}[thm]{Theorem}
+\MakeMajorTheorem{Corollary}[thm]{Corollary}
+\MakeMajorTheorem{Example}[thm]{Example}
 
 
 % ------------------------------------------------------------------------------
