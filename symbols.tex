@@ -4,6 +4,8 @@
 \usepackage{wasysym}
 \usepackage{stmaryrd}
 
+% ~ Text Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 % Un-named Greek Characters
 \newcommand{\omicron}{o}
 \newcommand{\Alpha}{A}
@@ -58,12 +60,12 @@
 
 % ~ Math Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\renewcommand{\bar}[1]{\overline{#1}}
+% Object Symbols
+\newcommand{\LHS}{\mbox{LHS}}
+\newcommand{\RHS}{\mbox{RHS}}
 \renewcommand{\emptyset}{\varnothing}
 
-\newcommand{\divs}{ \;\big\vert\; }
-\newcommand{\nequiv}{ \;\cancel{\equiv}\; }
-
+% Mapping Arrows
 \newcommand{\nmapsfrom}{ \;\cancel{\mapsfrom}\; }
 \newcommand{\nmapsto}{ \;\cancel{\mapsto}\; }
 \newcommand{\mapto}{ \rightarrow }
@@ -73,19 +75,36 @@
 \newcommand{\nmapto}{ \nrightarrow }
 \newcommand{\nmapfrom}{ \nleftarrow }
 
-\newcommand{\contradiction}{ \ensuremath{\lightning} }
-\DeclareMathOperator*{\Forall}{\mbox{\Large $\mathsurround0pt\forall$}}
+% Relation Symbols
+\newcommand{\divs}{ \;\big\vert\; }
+\newcommand{\ndivs}{ \;\cancel{\big\vert}\; }
+\newcommand{\nequiv}{ \;\cancel{\equiv}\; }
 
-% Math Commands
+% Proof Symbols
+\newcommand{\contradiction}{ \ensuremath{\lightning} }
+
+% Formatting Commands
+\renewcommand{\bar}[1]{\overline{#1}}
 \NewDocumentCommand{\usb}{mm}{\underset{#1}{\underbrace{#2}}}
 \NewDocumentCommand{\osb}{mm}{\overset{#1}{\overbrace{#2}}}
 
-% Math Symbols
-\NewDocumentCommand{\Obj}{O{}m}{\xfunc{\textnormal{Obj}_{#1}}{#2}}
-\NewDocumentCommand{\Hom}{O{}m}{\xfunc{\textnormal{Hom}_{#1}}{#2}}
-\NewDocumentCommand{\Ker}{O{}m}{\xfunc{\textnormal{Ker}_{#1}}{#2}}
-\NewDocumentCommand{\Img}{O{}m}{\xfunc{\textnormal{Im}_{#1}}{#2}}
-\NewDocumentCommand{\Ann}{O{}m}{\xfunc{\textnormal{Ann}_{#1}}{#2}}
+% ~ Math Operators ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\newcommand{\LHS}{\mbox{LHS}}
-\newcommand{\RHS}{\mbox{RHS}}
+\NewDocumentCommand{\xDeclareMathOperator}{mm}%
+{%
+    \expandafter\NewDocumentCommand\csname #1\endcsname{e{_}e{^}g}%
+    {%
+        \operatorname{#2}%
+        \IfValueT{##1}{_{##1}}\IfValueT{##2}{^{##2}}%
+        \IfValueT{##3}{\xparen{##3}}%
+    }%
+}%
+
+\xDeclareMathOperator{Obj}{\textnormal{Obj}}
+\xDeclareMathOperator{Hom}{\textnormal{Hom}}
+\xDeclareMathOperator{Ann}{\textnormal{Ann}}
+
+\xDeclareMathOperator{Ker}{\textnormal{Ker}}
+\xDeclareMathOperator{Dom}{\textnormal{Dom}}
+\xDeclareMathOperator{CoDom}{\textnormal{CoDom}}
+\xDeclareMathOperator{Img}{\textnormal{Im}}
