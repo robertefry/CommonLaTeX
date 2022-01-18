@@ -92,11 +92,12 @@
 
 \NewDocumentCommand{\xDeclareMathOperator}{mm}%
 {%
-    \expandafter\NewDocumentCommand\csname #1\endcsname{e{_}e{^}g}%
+    \expandafter\DeclareDocumentCommand\csname #1\endcsname{e{_}e{^}og}%
     {%
         \operatorname{#2}%
         \IfValueT{##1}{_{##1}}\IfValueT{##2}{^{##2}}%
-        \IfValueT{##3}{\xparen{##3}}%
+        \IfValueT{##3}{\xbrack{##3}}%
+        \IfValueT{##4}{\xparen{##4}}%
     }%
 }%
 
