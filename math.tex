@@ -1,0 +1,82 @@
+
+% Physics Packages
+\usepackage{physics}
+\usepackage{physconst}
+
+% Math Packages
+\usepackage{mathtools}
+\usepackage{amsmath}
+% \usepackage{amsthm} (replaced with ntheorem)
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+% ------------------------------------------------------------------------------
+%   Math Commands
+% ------------------------------------------------------------------------------
+
+% Vector Commands
+\usepackage[g]{esvect}
+\NewDocumentCommand{\xv}{m}{ \vv{#1} }
+
+% Matrix Commands
+\NewDocumentCommand{\xm}{O{p}m}{ \begin{#1matrix} #2 \end{#1matrix} }
+
+% ------------------------------------------------------------------------------
+%   Math Enclosures
+% ------------------------------------------------------------------------------
+
+% Math Enclosures
+\NewDocumentCommand{\xenclose}{D<>{0}mmm}%
+{%
+    \begin{switch}{#1}%
+        \xcase{0}{ \left#2 #4 \right#3 }%
+        \xcase{1}{ \bigl#2 #4 \bigr#3 }%
+        \xcase{2}{ \Bigl#2 #4 \Bigr#3 }%
+        \xcase{3}{ \biggl#2 #4 \biggr#3 }%
+        \xcase{4}{ \Biggl#2 #4 \Biggr#3 }%
+        \xcase{-1}{ #2 #4 #3 }%
+    \end{switch}%
+}%
+
+% Math Enclosure Groups
+\NewDocumentCommand{\xgroup}{D<>{0}O{.}m}%
+{%
+    \begin{switch}{#2}%
+        \xcase{.}{ \xenclose<#1>{.}{.}{#3} }             % default
+        \xcase{p}{ \xenclose<#1>{(}{)}{#3} }             % parenthesis
+        \xcase{b}{ \xenclose<#1>{[}{]}{#3} }             % brackets
+        \xcase{B}{ \xenclose<#1>{\{}{\}}{#3} }           % braces
+        \xcase{c}{ \xenclose<#1>{\langle}{\rangle}{#3} } % chevrons
+        \xcase{v}{ \xenclose<#1>{\vert}{\vert}{#3} }     % absolute
+        \xcase{V}{ \xenclose<#1>{\Vert}{\Vert}{#3} }     % normal
+        \xcase{f}{ \xenclose<#1>{\lfloor}{\rfloor}{#3} } % floor
+        \xcase{F}{ \xenclose<#1>{\lceil}{\rceil}{#3} }   % ceil
+        \xcase{r}{ \xenclose<#1>{\lfloor}{\rceil}{#3} }  % round
+    \end{switch}%
+}%
+
+% Named Enclosure Groups
+\NewDocumentCommand{\xparen}{D<>{0}m}{ \xgroup<#1>[p]{#2} }
+\NewDocumentCommand{\xbrack}{D<>{0}m}{ \xgroup<#1>[b]{#2} }
+\NewDocumentCommand{\xbrace}{D<>{0}m}{ \xgroup<#1>[B]{#2} }
+\NewDocumentCommand{\xchevn}{D<>{0}m}{ \xgroup<#1>[c]{#2} }
+\NewDocumentCommand{\xabs}  {D<>{0}m}{ \xgroup<#1>[v]{#2} }
+\NewDocumentCommand{\xnorm} {D<>{0}m}{ \xgroup<#1>[V]{#2} }
+\NewDocumentCommand{\xfloor}{D<>{0}m}{ \xgroup<#1>[f]{#2} }
+\NewDocumentCommand{\xceil} {D<>{0}m}{ \xgroup<#1>[F]{#2} }
+\NewDocumentCommand{\xround}{D<>{0}m}{ \xgroup<#1>[r]{#2} }
+
+% Math Function Enclosures
+\NewDocumentCommand{\xfunc}{D<>{0}O{f}mm}%
+{%
+    \begin{switch}{#2}%
+        \xcase{f}{ #3\xparen<#1>{#4} }      % function%
+        \xcase{t}{ #3\xbrace<#1>{#4} }      % transform%
+        \xcase{a}{ #3\xbrack<#1>{\,#4\,} }  % adjoin%
+    \end{switch}%
+}%
+\NewDocumentCommand{\xtrans} {D<>{0}mm}{ \xfunc<#1>[t]{#2}{#3} }%
+\NewDocumentCommand{\xadjoin}{D<>{0}mm}{ \xfunc<#1>[a]{#2}{#3} }%
+
+% Partial Derivatives
+\NewDocumentCommand{\pd}{O{}m}{\partial^{#1} #2}

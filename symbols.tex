@@ -1,0 +1,140 @@
+
+% Extra Fonts
+\usepackage{bm}
+\usepackage{bbold}
+
+% Math Formatting
+\usepackage{stackrel}
+
+% Symbol Packages
+\usepackage{cancel}
+\usepackage{wasysym}
+\usepackage{stmaryrd}
+
+% ~ Text Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+% Un-named Greek Characters
+\newcommand{\omicron}{o}
+\newcommand{\Alpha}{A}
+\newcommand{\Beta}{B}
+\newcommand{\Epsilon}{E}
+\newcommand{\Zeta}{Z}
+\newcommand{\Eta}{H}
+\newcommand{\Iota}{I}
+\newcommand{\Kappa}{K}
+\newcommand{\Mu}{M}
+\newcommand{\Nu}{N}
+\newcommand{\Omicron}{O}
+\newcommand{\Rho}{P}
+\newcommand{\Tau}{T}
+\newcommand{\Chi}{X}
+
+% Large-Scale Greek Characters
+\usepackage{scalerel}
+\newcommand{\bigalpha}  {\scalerel*{\alpha}{X}}
+\newcommand{\bigbeta}   {\scalerel*{\beta}{X}}
+\newcommand{\biggamma}  {\scalerel*{\gamma}{X}}
+\newcommand{\bigdelta}  {\scalerel*{\delta}{X}}
+\newcommand{\bigepsilon}{\scalerel*{\epsilon}{X}}
+\newcommand{\bigzeta}   {\scalerel*{\zeta}{X}}
+\newcommand{\bigeta}    {\scalerel*{\eta}{X}}
+\newcommand{\bigtheta}  {\scalerel*{\theta}{X}}
+\newcommand{\bigiota}   {\scalerel*{\iota}{X}}
+\newcommand{\bigkappa}  {\scalerel*{\kappa}{X}}
+\newcommand{\biglambda} {\scalerel*{\lambda}{X}}
+\newcommand{\bigmu}     {\scalerel*{\mu}{X}}
+\newcommand{\bignu}     {\scalerel*{\nu}{X}}
+\newcommand{\bigxi}     {\scalerel*{\xi}{X}}
+\newcommand{\bigomicron}{\scalerel*{\omicron}{X}}
+\newcommand{\bigpi}     {\scalerel*{\pi}{X}}
+\newcommand{\bigrho}    {\scalerel*{\rho}{X}}
+\newcommand{\bigsigma}  {\scalerel*{\sigma}{X}}
+\newcommand{\bigtau}    {\scalerel*{\tau}{X}}
+\newcommand{\bigupsilon}{\scalerel*{\upsilon}{X}}
+\newcommand{\bigphi}    {\scalerel*{\phi}{X}}
+\newcommand{\bigchi}    {\scalerel*{\chi}{X}}
+\newcommand{\bigpsi}    {\scalerel*{\psi}{X}}
+\newcommand{\bigomega}  {\scalerel*{\omega}{X}}
+
+% Markers
+\NewDocumentCommand{\marktodo}{}%
+{%
+    \begin{center}%
+        \color{red}%
+        \textbf{\textit{======\underline{TODO}======}}%
+    \end{center}%
+}%
+\NewDocumentCommand{\markreview}{}%
+{%
+    \begin{center}%
+        \color{blue}%
+        \textbf{\textit{=====\underline{REVIEW}=====}}%
+    \end{center}%
+}%
+
+% ~ Math Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+% Shorthand Symbols
+\newcommand{\vhi}{\varphi}
+
+% Object Symbols
+\newcommand{\xlet}{\qq*{Let}}
+\newcommand{\LHS}{\mbox{LHS}}
+\newcommand{\RHS}{\mbox{RHS}}
+\renewcommand{\emptyset}{\varnothing}
+
+% Mapping Arrows
+\newcommand{\nmapsfrom}{ \;\cancel{\mapsfrom}\; }
+\newcommand{\nmapsto}{ \;\cancel{\mapsto}\; }
+\newcommand{\mapto}{ \rightarrow }
+\newcommand{\longmapto}{ \longrightarrow }
+\newcommand{\mapfrom}{ \leftarrow }
+\newcommand{\longmapfrom}{ \longleftarrow }
+\newcommand{\nmapto}{ \nrightarrow }
+\newcommand{\nmapfrom}{ \nleftarrow }
+
+% Relation Symbols
+\newcommand{\divs}{ \;\big\vert\; }
+\newcommand{\ndivs}{ \;\cancel{\big\vert}\; }
+\newcommand{\nequiv}{ \;\cancel{\equiv}\; }
+
+% Logic Symbols
+\newcommand{\lxor}{\;\underline{\lor}\;}
+
+% Proof Symbols
+\newcommand{\contradiction}{ \ensuremath{\lightning} }
+
+% Formatting Commands
+\NewDocumentCommand{\usb}{mm}{\underset{#1}{\underbrace{#2}}}
+\NewDocumentCommand{\osb}{mm}{\overset{#1}{\overbrace{#2}}}
+
+% Scientific Notation
+\NewDocumentCommand{\xe}{O{10}m}%
+{%
+    \scaleobj{0.67}{\times\textnormal{#1}}^{#2}%
+}%
+
+% ~ Math Operators ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\NewDocumentCommand{\xDeclareMathOperator}{mm}%
+{%
+    \expandafter\DeclareDocumentCommand\csname #1\endcsname{D<>{0}e{_}e{^}og}%
+    {%
+        \operatorname{#2}%
+        \IfValueT{##2}{_{##2}}\IfValueT{##3}{^{##3}}%
+        \IfValueT{##4}{\xbrack<##1>{##4}}%
+        \IfValueT{##5}{\xparen<##1>{##5}}%
+    }%
+}%
+
+\xDeclareMathOperator{Obj}{\textnormal{Obj}}
+\xDeclareMathOperator{Hom}{\textnormal{Hom}}
+\xDeclareMathOperator{Ann}{\textnormal{Ann}}
+
+\xDeclareMathOperator{Ker}{\textnormal{Ker}}
+\xDeclareMathOperator{Dom}{\textnormal{Dom}}
+\xDeclareMathOperator{CoDom}{\textnormal{CoDom}}
+\xDeclareMathOperator{Img}{\textnormal{Im}}
+
+\xDeclareMathOperator{Mat}{\textnormal{Mat}}
+\xDeclareMathOperator{GL}{\textnormal{GL}}

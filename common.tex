@@ -1,16 +1,7 @@
 
-% ------------------------------------------------------------------------------
-%   Package Includes
-% ------------------------------------------------------------------------------
-
 % Programming
 \usepackage{xparse}
 \usepackage{etoolbox}
-
-% Dummy Text
-\usepackage[english]{babel}
-\usepackage{lipsum}
-\usepackage{blindtext}
 
 % Page Formatting
 \usepackage[many]{tcolorbox}
@@ -18,71 +9,12 @@
 \usepackage{multicol}
 \usepackage{wrapfig}
 
-% Extra Fonts
-\usepackage{bm}
-\usepackage{bbold}
-
-% Extra Symbols
-\usepackage{cancel}
-\usepackage{wasysym}
-\usepackage{stmaryrd}
-
 % Text Formatting
 \usepackage{exercise}
 \usepackage[inline,shortlabels]{enumitem}
 \usepackage{listings}
 \usepackage{siunitx}
 \usepackage{xcolor}
-
-% Math Formatting
-\usepackage{stackrel}
-
-% Tikz Picture
-\usepackage{tikz}
-\usepackage{tikz-cd}
-\usepackage{circuitikz}
-\usepackage{tkz-euclide}
-\usetikzlibrary{calc}
-\usetikzlibrary{positioning}
-\usetikzlibrary{angles,quotes}
-\usetikzlibrary{shapes.geometric,arrows}
-
-% Graph Plotting
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.17}
-
-% Physics Packages
-\usepackage{physics}
-\usepackage{physconst}
-
-% Math Packages
-\usepackage{mathtools}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
-\usepackage{amsfonts}
-
-
-% ------------------------------------------------------------------------------
-%   Un-named Character Sets
-% ------------------------------------------------------------------------------
-
-% Un-named Greek Characters
-\newcommand{\omicron}{o}
-\newcommand{\Alpha}{A}
-\newcommand{\Beta}{B}
-\newcommand{\Epsilon}{E}
-\newcommand{\Zeta}{Z}
-\newcommand{\Eta}{H}
-\newcommand{\Iota}{I}
-\newcommand{\Kappa}{K}
-\newcommand{\Mu}{M}
-\newcommand{\Nu}{N}
-\newcommand{\Omicron}{O}
-\newcommand{\Rho}{P}
-\newcommand{\Tau}{T}
-\newcommand{\Chi}{X}
-
 
 % ------------------------------------------------------------------------------
 %   Programming
@@ -98,31 +30,6 @@
 \newcommand{\xcase}[2]{#1 #2} % Dummy, so \renewcommand has something to overwrite...
 \NewDocumentEnvironment{switch}{m}{\renewcommand{\xcase}{\ifeq{#1}}}{}
 
-
-% ------------------------------------------------------------------------------
-%   Page Formatting
-% ------------------------------------------------------------------------------
-
-% Break Commands
-\newcommand{\xbreakpage}{\mbox{}\newpage}
-\newcommand{\xbreakparg}{\mbox{}\par}
-\newcommand{\xbreakline}{\mbox{}\newline}
-
-% Force GoodBreak Between Sections (redundant?)
-\usepackage{titlesec}
-\newcommand{\sectionbreak}{\goodbreak}
-\newcommand{\subsectionbreak}{\goodbreak}
-\newcommand{\subsubsectionbreak}{\goodbreak}
-
-
-% ------------------------------------------------------------------------------
-%   Text Commands
-% ------------------------------------------------------------------------------
-
-% Underlined Text
-\usepackage{ulem}
-\DeclareDocumentCommand{\underline}{m}{\uline{#1}}
-
 % Repeat a String N Times
 \makeatletter%
 \newcount\x@repeat@count%
@@ -134,245 +41,17 @@
 }%
 \makeatother%
 
-% Format TODO Marker
-\NewDocumentCommand{\TODO}{}%
-{%
-    \begin{center}%
-        \color{red}%
-        \textbf{\textit{\xrepeat{6}{=}\underline{TODO}\xrepeat{6}{=}}}%
-    \end{center}%
-}%
-
-
 % ------------------------------------------------------------------------------
-%   Text Environments
+%   Page Formatting
 % ------------------------------------------------------------------------------
 
-% Proof without QED
-\newenvironment{proof*}{\renewcommand{\qedsymbol}{}\proof}{\endproof}
+% Break Commands
+\newcommand{\xbreakpage}{\mbox{}\newpage}
+\newcommand{\xbreakparg}{\mbox{}\par}
+\newcommand{\xbreakline}{\mbox{}\newline}
 
-% ~ Block Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-\NewDocumentEnvironment{block}{D<>{0em}O{m}O{}}%
-{%
-    \begin{center}%
-    %
-    \ifeq{#2}{m}%
-    {%
-        \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,blanker]%
-        \ifne{#3}{}{ \textit{\underline{#3:}}\hspace{\parindent} }%
-    }%
-    \ifeq{#2}{M}%
-    {%
-        \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]%
-        \ifne{#3}{}{ \textit{\underline{#3:}}\hspace{\parindent} }%
-    }%
-    \ifeq{#2}{t}%
-    {%
-        \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,blanker]%
-        \ifne{#3}{}{ \textbf{#3}\vspace{0.33\baselineskip}\xbreakline{} }%
-    }%
-    \ifeq{#2}{T}%
-    {%
-        \ifel{#3}{}%
-        {%
-            \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]%
-        }{%
-            \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,title=\textbf{#3},sharp corners,boxrule=1pt]%
-        }%
-    }%
-    \ifeq{#2}{C}%
-    {%
-        \ifel{#3}{}%
-        {%
-            \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]%
-        }{%
-            \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,title=\textbf{#3},sharp corners,boxrule=1pt]%
-        }%
-        \begin{quote}%
-    }%
-}{%
-    \ifeq{#2}{C}%
-    {%
-        \end{quote}%
-    }%
-    %
-    \end{tcolorbox}%
-    \end{center}%
-}%
-
-% Named Block Environments
-\NewDocumentEnvironment{claim}    {D<>{0em}}{ \begin{block}[m][Claim]     }{ \end{block} }
-\NewDocumentEnvironment{condition}{D<>{0em}}{ \begin{block}[m][Condition] }{ \end{block} }
-\NewDocumentEnvironment{case}     {D<>{0em}}{ \begin{block}[m][Case]      }{ \end{block} }
-\NewDocumentEnvironment{remark}   {D<>{0em}}{ \begin{block}[m][Remark]    }{ \end{block} }
-\NewDocumentEnvironment{thatis}   {D<>{0em}}{ \begin{block}[m][That is]   }{ \end{block} }
-\NewDocumentEnvironment{exempli}  {D<>{0em}}{ \begin{block}[m][Example]   }{ \end{block} }
-\NewDocumentEnvironment{note}     {D<>{0em}}{ \begin{block}[m][Note]      }{ \end{block} }
-\NewDocumentEnvironment{notice}   {D<>{0em}}{ \begin{block}[m][Notice]    }{ \end{block} }
-\NewDocumentEnvironment{hint}     {D<>{0em}}{ \begin{block}[m][Hint]      }{ \end{block} }
-\NewDocumentEnvironment{todo}     {D<>{0em}}{ \begin{block}[m][TODO]      }{ \end{block} }
-
-% ~ Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-\newtheorem{counter}{counter}[subsection]
-\NewDocumentCommand{\DefineTheoremEnvironment}{D<>{0em}mmO{\itshape}}%
-{%
-    \NewDocumentEnvironment{#2*}{D<>{#1}}{ \begin{block}[m][#3] }{ \end{block} }%
-    %
-    \newtheoremstyle{#2thmstyle}{\topsep}{\topsep}{#4}{}{\bfseries}{}{\newline}{}%
-    \theoremstyle{#2thmstyle}%
-    \newtheorem{#2}[counter]{#3}%
-    \AfterEndEnvironment{#2}{\goodbreak}%
-}%
-
-% Named Theorem Environments
-\DefineTheoremEnvironment{definition}{Definition}
-\DefineTheoremEnvironment{axiom}{Axiom}
-\DefineTheoremEnvironment{postulate}{Postulate}
-\DefineTheoremEnvironment{lemma}{Lemma}
-\DefineTheoremEnvironment{theorem}{Theorem}
-\DefineTheoremEnvironment{corollary}{Corollary}
-\DefineTheoremEnvironment{example}{Example}[]
-
-
-% ------------------------------------------------------------------------------
-%   Math Commands
-% ------------------------------------------------------------------------------
-
-% Vector Commands
-\usepackage[g]{esvect}
-\NewDocumentCommand{\xv}{m}{ \vv{#1} }
-
-% Matrix Commands
-\NewDocumentCommand{\xm}{O{p}m}{ \begin{#1matrix} #2 \end{#1matrix} }
-
-% Math Commands
-\NewDocumentCommand{\usb}{mm}{\underset{#1}{\underbrace{#2}}}
-\NewDocumentCommand{\osb}{mm}{\overset{#1}{\overbrace{#2}}}
-
-% ~ Math Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-\newcommand{\divs}{ \;\big\vert\; }
-\newcommand{\nequiv}{ \;\cancel{\equiv}\; }
-
-\newcommand{\nmapsfrom}{ \;\cancel{\mapsfrom}\; }
-\newcommand{\nmapsto}{ \;\cancel{\mapsto}\; }
-\newcommand{\mapto}{ \rightarrow }
-\newcommand{\longmapto}{ \longrightarrow }
-\newcommand{\mapfrom}{ \leftarrow }
-\newcommand{\longmapfrom}{ \longleftarrow }
-\newcommand{\nmapto}{ \nrightarrow }
-\newcommand{\nmapfrom}{ \nleftarrow }
-
-% ~ Math Enclosures ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-% Math Enclosures
-\NewDocumentCommand{\xenclose}{D<>{0}mmm}%
-{%
-    \begin{switch}{#1}%
-        \xcase{0}{ \left#2 #4 \right#3 }%
-        \xcase{1}{ \bigl#2 #4 \bigr#3 }%
-        \xcase{2}{ \Bigl#2 #4 \Bigr#3 }%
-        \xcase{3}{ \biggl#2 #4 \biggr#3 }%
-        \xcase{4}{ \Biggl#2 #4 \Biggr#3 }%
-        \xcase{-1}{ #2 #4 #3 }%
-    \end{switch}%
-}%
-
-% Math Enclosure Groups
-\NewDocumentCommand{\xgroup}{D<>{0}O{.}m}%
-{%
-    \begin{switch}{#2}%
-        \xcase{.}{ \xenclose<#1>{.}{.}{#3} }             % default
-        \xcase{p}{ \xenclose<#1>{(}{)}{#3} }             % parenthesis
-        \xcase{b}{ \xenclose<#1>{[}{]}{#3} }             % brackets
-        \xcase{B}{ \xenclose<#1>{\{}{\}}{#3} }           % braces
-        \xcase{c}{ \xenclose<#1>{\langle}{\rangle}{#3} } % chevrons
-        \xcase{v}{ \xenclose<#1>{\vert}{\vert}{#3} }     % absolute
-        \xcase{V}{ \xenclose<#1>{\Vert}{\Vert}{#3} }     % normal
-        \xcase{f}{ \xenclose<#1>{\lfloor}{\rfloor}{#3} } % floor
-        \xcase{F}{ \xenclose<#1>{\lceil}{\rceil}{#3} }   % ceil
-        \xcase{r}{ \xenclose<#1>{\lfloor}{\rceil}{#3} }  % round
-    \end{switch}%
-}%
-
-% Named Enclosure Groups
-\NewDocumentCommand{\xparen}{D<>{0}m}{ \xgroup<#1>[p]{#2} }
-\NewDocumentCommand{\xbrack}{D<>{0}m}{ \xgroup<#1>[b]{#2} }
-\NewDocumentCommand{\xbrace}{D<>{0}m}{ \xgroup<#1>[B]{#2} }
-\NewDocumentCommand{\xchevn}{D<>{0}m}{ \xgroup<#1>[c]{#2} }
-\NewDocumentCommand{\xabs}  {D<>{0}m}{ \xgroup<#1>[v]{#2} }
-\NewDocumentCommand{\xnorm} {D<>{0}m}{ \xgroup<#1>[V]{#2} }
-\NewDocumentCommand{\xfloor}{D<>{0}m}{ \xgroup<#1>[f]{#2} }
-\NewDocumentCommand{\xceil} {D<>{0}m}{ \xgroup<#1>[F]{#2} }
-\NewDocumentCommand{\xround}{D<>{0}m}{ \xgroup<#1>[r]{#2} }
-
-% Math Function Enclosures
-\NewDocumentCommand{\xfunc}{D<>{0}O{f}mm}%
-{%
-    \begin{switch}{#2}%
-        \xcase{f}{ #3\xparen<#1>{#4} } % function%
-        \xcase{t}{ #3\xbrace<#1>{#4} } % transform%
-        \xcase{a}{ #3\xbrack<#1>{#4} } % adjoin%
-    \end{switch}%
-}%
-\NewDocumentCommand{\xtrans} {D<>{0}mm}{ \xfunc<#1>[t]{#2}{#3} }%
-\NewDocumentCommand{\xadjoin}{D<>{0}mm}{ \xfunc<#1>[a]{#2}{#3} }%
-
-
-% ------------------------------------------------------------------------------
-%   Tikz Styles
-% ------------------------------------------------------------------------------
-
-\NewDocumentEnvironment{ctikzpicture}{}{\begin{center}\begin{tikzpicture}}{\end{tikzpicture}\end{center}}
-
-\tikzstyle{flow_startstop} = [rectangle,rounded corners,
-minimum width=3cm,minimum height=1cm,text centered,draw=black]
-\tikzstyle{flow_inout} = [trapezium,trapezium left angle=70,trapezium right angle=110,
-minimum width=3cm,minimum height=1cm,text centered,draw=black]
-\tikzstyle{flow_process} = [rectangle,
-minimum width=3cm,minimum height=1cm,text centered,draw=black]
-\tikzstyle{flow_decision} = [diamond,
-minimum width=3cm,minimum height=1cm,text centered,draw=black]
-
-\tikzstyle{arrow} = [thick,->,>=stealth]
-\tikzstyle{process} = [rectangle,minimum width=3cm,minimum height=1cm,text centered,draw=black]
-
-\tikzset%
-{%
-    ,baseline={([yshift=-0.5ex]current bounding box.center)}%
-}%
-
-
-% ------------------------------------------------------------------------------
-%   Source Code
-% ------------------------------------------------------------------------------
-
-\usepackage{sourcecodepro}
-\definecolor{color_keyword}{rgb}{0.500,0.000,0.125}
-\definecolor{color_comment}{rgb}{0.500,0.500,0.500}
-\definecolor{color_strings}{rgb}{0.000,0.500,0.250}
-
-\lstdefinelanguage{PlainText}{%
-}%
-\lstset{%
-    basicstyle=\scriptsize{}\ttfamily{},%
-    keywordstyle=\color{color_keyword},%
-    commentstyle=\color{color_comment},%
-    stringstyle=\color{color_strings},%
-    numbers=left,%
-    numberstyle=\tiny{},%
-    tabsize=4,%
-    breakatwhitespace=false,%
-    breaklines=true,%
-    showtabs=false,%
-    tabsize=4,%
-}%
-
-\NewDocumentEnvironment{sourcecode}{D<>{0em}O{Source Code}}%
-{%
-    \begin{block}<#2>[C][#2]%
-}{%
-    \end{block}%
-}%
+% Force GoodBreak Between Sections (redundant?)
+\usepackage[explicit]{titlesec}
+\newcommand{\sectionbreak}{\goodbreak}
+\newcommand{\subsectionbreak}{\goodbreak}
+\newcommand{\subsubsectionbreak}{\goodbreak}
