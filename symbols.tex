@@ -94,6 +94,12 @@
 \NewDocumentCommand{\usb}{mm}{\underset{#1}{\underbrace{#2}}}
 \NewDocumentCommand{\osb}{mm}{\overset{#1}{\overbrace{#2}}}
 
+% Scientific Notation
+\NewDocumentCommand{\xe}{O{10}m}%
+{%
+    \scaleobj{0.67}{\times\textnormal{#1}}^{#2}%
+}%
+
 % ~ Math Operators ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \NewDocumentCommand{\xDeclareMathOperator}{mm}%
