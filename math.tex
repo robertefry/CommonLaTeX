@@ -99,16 +99,10 @@
 \NewDocumentCommand{\xround}{D<>{0}m}{ \xgroup<#1>[r]{#2} }
 
 % Math Function Enclosures
-\NewDocumentCommand{\xfunc}{D<>{0}O{f}mm}%
+\NewDocumentCommand{\xf}{D<>{0}O{p}mm}%
 {%
-    \begin{switch}{#2}%
-        \xcase{f}{ #3\xparen<#1>{#4} }      % function%
-        \xcase{t}{ #3\xbrace<#1>{#4} }      % transform%
-        \xcase{a}{ #3\xbrack<#1>{\,#4\,} }  % adjoin%
-    \end{switch}%
+    #3\xgroup<#1>[#2]{#4}
 }%
-\NewDocumentCommand{\xtrans} {D<>{0}mm}{ \xfunc<#1>[t]{#2}{#3} }%
-\NewDocumentCommand{\xadjoin}{D<>{0}mm}{ \xfunc<#1>[a]{#2}{#3} }%
 
 % Partial Derivatives
 \NewDocumentCommand{\pd}{O{}m}{\partial^{#1} #2}
