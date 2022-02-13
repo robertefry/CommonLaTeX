@@ -11,8 +11,6 @@
 \usepackage{wasysym}
 \usepackage{stmaryrd}
 
-% ~ Text Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 % Un-named Greek Characters
 \newcommand{\omicron}{o}
 \newcommand{\Alpha}{A}
@@ -56,6 +54,9 @@
 \newcommand{\bigpsi}    {\scalerel*{\psi}{X}}
 \newcommand{\bigomega}  {\scalerel*{\omega}{X}}
 
+% Shorthand Symbols
+\newcommand{\vhi}{\varphi}
+
 % Markers
 \NewDocumentCommand{\marktodo}{}%
 {%
@@ -72,38 +73,6 @@
     \end{center}%
 }%
 
-% ~ Math Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-% Shorthand Symbols
-\newcommand{\vhi}{\varphi}
-
-% Object Symbols
-\newcommand{\xlet}{\qq*{Let}}
-\newcommand{\LHS}{\mbox{LHS}}
-\newcommand{\RHS}{\mbox{RHS}}
-\renewcommand{\emptyset}{\varnothing}
-
-% Mapping Arrows
-\newcommand{\nmapsfrom}{ \;\cancel{\mapsfrom}\; }
-\newcommand{\nmapsto}{ \;\cancel{\mapsto}\; }
-\newcommand{\mapto}{ \rightarrow }
-\newcommand{\longmapto}{ \longrightarrow }
-\newcommand{\mapfrom}{ \leftarrow }
-\newcommand{\longmapfrom}{ \longleftarrow }
-\newcommand{\nmapto}{ \nrightarrow }
-\newcommand{\nmapfrom}{ \nleftarrow }
-
-% Relation Symbols
-\newcommand{\divs}{ \;\big\vert\; }
-\newcommand{\ndivs}{ \;\cancel{\big\vert}\; }
-\newcommand{\nequiv}{ \;\cancel{\equiv}\; }
-
-% Logic Symbols
-\newcommand{\lxor}{\;\underline{\lor}\;}
-
-% Proof Symbols
-\newcommand{\contradiction}{ \ensuremath{\lightning} }
-
 % Formatting Commands
 \NewDocumentCommand{\usb}{mm}{\underset{#1}{\underbrace{#2}}}
 \NewDocumentCommand{\osb}{mm}{\overset{#1}{\overbrace{#2}}}
@@ -113,28 +82,3 @@
 {%
     \scaleobj{0.67}{\times\textnormal{#1}}^{#2}%
 }%
-
-% ~ Math Operators ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-\NewDocumentCommand{\xDeclareMathOperator}{mm}%
-{%
-    \expandafter\DeclareDocumentCommand\csname #1\endcsname{D<>{0}e{_}e{^}og}%
-    {%
-        \operatorname{#2}%
-        \IfValueT{##2}{_{##2}}\IfValueT{##3}{^{##3}}%
-        \IfValueT{##4}{\xbrack<##1>{##4}}%
-        \IfValueT{##5}{\xparen<##1>{##5}}%
-    }%
-}%
-
-\xDeclareMathOperator{Obj}{\textnormal{Obj}}
-\xDeclareMathOperator{Hom}{\textnormal{Hom}}
-\xDeclareMathOperator{Ann}{\textnormal{Ann}}
-
-\xDeclareMathOperator{Ker}{\textnormal{Ker}}
-\xDeclareMathOperator{Dom}{\textnormal{Dom}}
-\xDeclareMathOperator{CoDom}{\textnormal{CoDom}}
-\xDeclareMathOperator{Img}{\textnormal{Im}}
-
-\xDeclareMathOperator{Mat}{\textnormal{Mat}}
-\xDeclareMathOperator{GL}{\textnormal{GL}}

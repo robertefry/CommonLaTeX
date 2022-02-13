@@ -79,10 +79,7 @@
 \theoremindent1em
 \MakeNewTheorem{proof}{Proof}
 
-\theoremindent0em
-\MakeNewTheorem{Proof}{Proof}
-
-% ~ Minor Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% ~ Minor Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \makeatletter\newtheoremstyle{blockminor}%
     {\item[\theorem@headerfont\hskip \labelsep \uline{##1}\theorem@separator]}%
@@ -100,13 +97,13 @@
 \MakeNewTheorem{case}{Case}
 \MakeNewTheorem{remark}{Remark}
 \MakeNewTheorem{thatis}{That is}
-\MakeNewTheorem{example}{Example}
+\MakeNewTheorem{exempli}{Example}
 \MakeNewTheorem{note}{Note}
 \MakeNewTheorem{notice}{Notice}
 \MakeNewTheorem{hint}{Hint}
 \MakeNewTheorem{todo}{TODO}
 
-% ~ Major Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% ~ Major Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \NewDocumentCommand{\MakeMajorTheorem}{momo}%
 {%
@@ -131,16 +128,9 @@
 \ProvideDocumentCommand{\majorcounter}{}{section} % renew this command to change major-theorem counters
 \newtheorem{thm}{thm}[\majorcounter]
 
-\MakeMajorTheorem{Definition}[thm]{Definition}
-\MakeMajorTheorem{Postulate}[thm]{Postulate}
-\MakeMajorTheorem{Lemma}[thm]{Lemma}
-\MakeMajorTheorem{Theorem}[thm]{Theorem}
-\MakeMajorTheorem{Corollary}[thm]{Corollary}
-\MakeMajorTheorem{Example}[thm]{Example}
-
-% ~ Other Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-\theoremstyle{break}
-\theorembodyfont{\normalfont}
-
-\MakeMajorTheorem{Part}{Part}
+\MakeMajorTheorem{definition}[thm]{Definition}
+\MakeMajorTheorem{postulate}[thm]{Postulate}
+\MakeMajorTheorem{lemma}[thm]{Lemma}
+\MakeMajorTheorem{theorem}[thm]{Theorem}
+\MakeMajorTheorem{corollary}[thm]{Corollary}
+\MakeMajorTheorem{example}[thm]{Example}

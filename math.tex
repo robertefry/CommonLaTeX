@@ -6,20 +6,44 @@
 % Math Packages
 \usepackage{mathtools}
 \usepackage{amsmath}
-% \usepackage{amsthm} (replaced with ntheorem)
+% \usepackage{amsthm} (replaced with theorem::ntheorem)
 \usepackage{amssymb}
 \usepackage{amsfonts}
 
 % ------------------------------------------------------------------------------
-%   Math Commands
+%   Math Symbols
 % ------------------------------------------------------------------------------
 
-% Vector Commands
-\usepackage[g]{esvect}
-\NewDocumentCommand{\xv}{m}{ \vv{#1} }
+% Noun Symbols
+\newcommand{\LHS}{\mbox{LHS}}
+\newcommand{\RHS}{\mbox{RHS}}
+\renewcommand{\emptyset}{\varnothing}
 
-% Matrix Commands
-\NewDocumentCommand{\xm}{O{p}m}{ \begin{#1matrix} #2 \end{#1matrix} }
+\newcommand{\xlet}{\qq*{Let}}
+
+% Mapping Arrows
+\newcommand{\nmapsfrom}{ \;\cancel{\mapsfrom}\; }
+\newcommand{\nmapsto}{ \;\cancel{\mapsto}\; }
+\newcommand{\mapto}{ \rightarrow }
+\newcommand{\longmapto}{ \longrightarrow }
+\newcommand{\mapfrom}{ \leftarrow }
+\newcommand{\longmapfrom}{ \longleftarrow }
+\newcommand{\nmapto}{ \nrightarrow }
+\newcommand{\nmapfrom}{ \nleftarrow }
+
+% Relation Symbols
+\newcommand{\divs}{ \;\big\vert\; }
+\newcommand{\ndivs}{ \;\cancel{\big\vert}\; }
+\newcommand{\nequiv}{ \;\cancel{\equiv}\; }
+
+% Logic Symbols
+\newcommand{\lxor}{\;\underline{\lor}\;}
+
+% Proof Symbols
+\newcommand{\contradiction}{ \ensuremath{\lightning} }
+
+% Partial Derivatives
+\NewDocumentCommand{\pd}{O{}m}{\partial^{#1} #2}
 
 % ------------------------------------------------------------------------------
 %   Math Enclosures
@@ -66,17 +90,42 @@
 \NewDocumentCommand{\xceil} {D<>{0}m}{ \xgroup<#1>[F]{#2} }
 \NewDocumentCommand{\xround}{D<>{0}m}{ \xgroup<#1>[r]{#2} }
 
-% Math Function Enclosures
-\NewDocumentCommand{\xfunc}{D<>{0}O{f}mm}%
+% Math Functions
+\NewDocumentCommand{\xf}{D<>{0}O{p}mm}%
 {%
-    \begin{switch}{#2}%
-        \xcase{f}{ #3\xparen<#1>{#4} }      % function%
-        \xcase{t}{ #3\xbrace<#1>{#4} }      % transform%
-        \xcase{a}{ #3\xbrack<#1>{\,#4\,} }  % adjoin%
-    \end{switch}%
+    #3\xgroup<#1>[#2]{#4}
 }%
-\NewDocumentCommand{\xtrans} {D<>{0}mm}{ \xfunc<#1>[t]{#2}{#3} }%
-\NewDocumentCommand{\xadjoin}{D<>{0}mm}{ \xfunc<#1>[a]{#2}{#3} }%
 
-% Partial Derivatives
-\NewDocumentCommand{\pd}{O{}m}{\partial^{#1} #2}
+% Math Vector
+\usepackage[g]{esvect}
+\NewDocumentCommand{\xv}{m}{ \vv{#1} }
+
+% Math Matrix
+\NewDocumentCommand{\xm}{O{p}m}{ \begin{#1matrix} #2 \end{#1matrix} }
+
+% ------------------------------------------------------------------------------
+%   Math Operators
+% ------------------------------------------------------------------------------
+
+\NewDocumentCommand{\xDeclareMathOperator}{mm}%
+{%
+    \expandafter\DeclareDocumentCommand\csname #1\endcsname{D<>{0}e{_}e{^}og}%
+    {%
+        \operatorname{#2}%
+        \IfValueT{##2}{_{##2}}\IfValueT{##3}{^{##3}}%
+        \IfValueT{##4}{\xbrack<##1>{##4}}%
+        \IfValueT{##5}{\xparen<##1>{##5}}%
+    }%
+}%
+
+\xDeclareMathOperator{Obj}{\textnormal{Obj}}
+\xDeclareMathOperator{Hom}{\textnormal{Hom}}
+\xDeclareMathOperator{Ann}{\textnormal{Ann}}
+
+\xDeclareMathOperator{Ker}{\textnormal{Ker}}
+\xDeclareMathOperator{Dom}{\textnormal{Dom}}
+\xDeclareMathOperator{CoDom}{\textnormal{CoDom}}
+\xDeclareMathOperator{Img}{\textnormal{Im}}
+
+\xDeclareMathOperator{Mat}{\textnormal{Mat}}
+\xDeclareMathOperator{GL}{\textnormal{GL}}
