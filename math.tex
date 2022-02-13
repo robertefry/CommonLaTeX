@@ -42,16 +42,8 @@
 % Proof Symbols
 \newcommand{\contradiction}{ \ensuremath{\lightning} }
 
-% ------------------------------------------------------------------------------
-%   Math Commands
-% ------------------------------------------------------------------------------
-
-% Vector Commands
-\usepackage[g]{esvect}
-\NewDocumentCommand{\xv}{m}{ \vv{#1} }
-
-% Matrix Commands
-\NewDocumentCommand{\xm}{O{p}m}{ \begin{#1matrix} #2 \end{#1matrix} }
+% Partial Derivatives
+\NewDocumentCommand{\pd}{O{}m}{\partial^{#1} #2}
 
 % ------------------------------------------------------------------------------
 %   Math Enclosures
@@ -98,14 +90,18 @@
 \NewDocumentCommand{\xceil} {D<>{0}m}{ \xgroup<#1>[F]{#2} }
 \NewDocumentCommand{\xround}{D<>{0}m}{ \xgroup<#1>[r]{#2} }
 
-% Math Function Enclosures
+% Math Functions
 \NewDocumentCommand{\xf}{D<>{0}O{p}mm}%
 {%
     #3\xgroup<#1>[#2]{#4}
 }%
 
-% Partial Derivatives
-\NewDocumentCommand{\pd}{O{}m}{\partial^{#1} #2}
+% Math Vector
+\usepackage[g]{esvect}
+\NewDocumentCommand{\xv}{m}{ \vv{#1} }
+
+% Math Matrix
+\NewDocumentCommand{\xm}{O{p}m}{ \begin{#1matrix} #2 \end{#1matrix} }
 
 % ------------------------------------------------------------------------------
 %   Math Operators
