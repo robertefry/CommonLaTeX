@@ -65,6 +65,30 @@
 \setlength{\parindent}{0pt}%
 
 % ------------------------------------------------------------------------------
+%   Lists
+% ------------------------------------------------------------------------------
+
+% Multi-Column Lists
+\NewDocumentEnvironment{multicol-itemize}{m}%
+{%
+    \ifne{#1}{1}{\begin{multicols}{#1}}%
+    \begin{itemize}%
+}{%
+    \end{itemize}%
+    \ifne{#1}{1}{\end{multicols}}%
+    \vspace{-1\parskip}%
+}%
+\NewDocumentEnvironment{multicol-enumerate}{m}%
+{%
+    \ifne{#1}{1}{\begin{multicols}{#1}}%
+    \begin{enumerate}%
+}{%
+    \end{enumerate}%
+    \ifne{#1}{1}{\end{multicols}}%
+    \vspace{-1\parskip}%
+}%
+
+% ------------------------------------------------------------------------------
 %   Common Commands
 % ------------------------------------------------------------------------------
 
