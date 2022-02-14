@@ -109,12 +109,10 @@
 
 \NewDocumentCommand{\xDeclareMathOperator}{mm}%
 {%
-    \expandafter\DeclareDocumentCommand\csname #1\endcsname{D<>{0}e{_}e{^}og}%
+    \expandafter\DeclareDocumentCommand\csname #1\endcsname{e{_^}D<>{0}O{p}g}%
     {%
-        \operatorname{#2}%
-        \IfValueT{##2}{_{##2}}\IfValueT{##3}{^{##3}}%
-        \IfValueT{##4}{\xbrack<##1>{##4}}%
-        \IfValueT{##5}{\xparen<##1>{##5}}%
+        \operatorname{#2}\IfValueT{##1}{_{##1}}\IfValueT{##2}{^{##2}}%
+        \IfValueT{##5}{\xgroup<##3>[##4]{##5}}%
     }%
 }%
 
