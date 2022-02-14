@@ -123,15 +123,15 @@
     ##1\ ##2\ \textnormal{(##3)}\theorem@separator}\hbox{\strut}}}]}%
 \makeatother%
 
+\ProvideDocumentCommand{\majorcounter}{}{section} % renew this command to change major-theorem counters
+\newtheorem{thm}{thm}[\majorcounter]
+
 {
     \theoremstyle{blockmajor}
     \theoremheaderfont{\normalfont\bfseries}
     \theorembodyfont{\slshape}
     \theoremseparator{.}
     \theoremsymbol{}
-
-    \ProvideDocumentCommand{\majorcounter}{}{section} % renew this command to change major-theorem counters
-    \newtheorem{thm}{thm}[\majorcounter]
 
     \MakeMajorTheorem{definition}[thm]{Definition}
     \MakeMajorTheorem{postulate}[thm]{Postulate}
