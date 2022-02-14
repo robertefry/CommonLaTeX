@@ -33,13 +33,16 @@
 % ------------------------------------------------------------------------------
 
 % Fonts
-\usepackage{libertine}
+\usepackage{anyfontsize}
+\usepackage{lmodern}
 
 % Page Formatting
 \usepackage[many]{tcolorbox}
 \usepackage{vwcol}
 \usepackage{multicol}
 \usepackage{wrapfig}
+
+\setlength\multicolsep{0.5\baselineskip}
 
 % Text Formatting
 \usepackage{exercise}
@@ -62,3 +65,36 @@
 % Paragraph Formatting
 \setlength{\parskip}{0.5\baselineskip}%
 \setlength{\parindent}{0pt}%
+
+% ------------------------------------------------------------------------------
+%   Lists
+% ------------------------------------------------------------------------------
+
+% List Formatting
+\setlist{topsep=0pt}
+
+% Multi-Column Lists
+\NewDocumentEnvironment{multicol-itemize}{m}%
+{%
+    \ifne{#1}{1}{\begin{multicols}{#1}}%
+    \begin{itemize}%
+}{%
+    \end{itemize}%
+    \ifne{#1}{1}{\end{multicols}}%
+    \vspace{-1\parskip}%
+}%
+\NewDocumentEnvironment{multicol-enumerate}{m}%
+{%
+    \ifne{#1}{1}{\begin{multicols}{#1}}%
+    \begin{enumerate}%
+}{%
+    \end{enumerate}%
+    \ifne{#1}{1}{\end{multicols}}%
+    \vspace{-1\parskip}%
+}%
+
+% ------------------------------------------------------------------------------
+%   Common Commands
+% ------------------------------------------------------------------------------
+
+\newcommand{\ul}[1]{\underline{#1}}
