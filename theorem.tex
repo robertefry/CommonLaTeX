@@ -117,8 +117,10 @@
 }%
 
 \makeatletter\newtheoremstyle{blockmajor}%
-    {\item[\theorem@headerfont\hskip \labelsep ##1\ ##2\theorem@separator]}%
-    {\item[\theorem@headerfont\hskip \labelsep ##1\ ##2\ \textnormal{(##3)}\theorem@separator]}%
+    {\item[\hskip\labelsep {\theorem@headerfont ##1\ ##2}%
+        {\theorem@headerfont\theorem@separator}]}%
+    {\item[\hskip\labelsep {\theorem@headerfont ##1\ ##2}{\normalfont\ (##3)}%
+        {\theorem@headerfont\theorem@separator}]}%
 \makeatother%
 
 \ProvideDocumentCommand{\majorcounter}{}{section} % renew this command to change major-theorem counters
