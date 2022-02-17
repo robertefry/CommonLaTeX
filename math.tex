@@ -91,9 +91,12 @@
 \NewDocumentCommand{\xround}{D<>{0}m}{ \xgroup<#1>[r]{#2} }
 
 % Math Functions
-\NewDocumentCommand{\xf}{D<>{0}O{p}mm}%
+\NewDocumentCommand{\xf}{D<>{0}m O{p}g O{p}g O{p}g}%
 {%
-    #3\xgroup<#1>[#2]{#4}
+    #2%
+    \IfValueT{#4}{\xgroup<#1>[#3]{#4}}%
+    \IfValueT{#6}{\xgroup<#1>[#5]{#6}}%
+    \IfValueT{#8}{\xgroup<#1>[#7]{#8}}%
 }%
 
 % Math Vector
