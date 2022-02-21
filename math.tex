@@ -122,7 +122,9 @@
 {%
     \expandafter\DeclareDocumentCommand\csname #1\endcsname{e{_^}D<>{0}O{p}g}%
     {%
-        \operatorname{#2}\IfValueT{##1}{_{##1}}\IfValueT{##2}{^{##2}}%
+        \operatorname{#2}%
+            \IfValueT{##1}{_{##1}}%
+            \IfValueT{##2}{^{##2}}%
         \IfValueT{##5}{\xgroup<##3>[##4]{##5}}%
     }%
 }%
