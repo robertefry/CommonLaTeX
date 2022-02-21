@@ -53,20 +53,20 @@
 % ------------------------------------------------------------------------------
 
 % Math Enclosures
-\NewDocumentCommand{\xenclose}{D<>{0}mmm}%
+\NewDocumentCommand{\xenclose}{D<>{}mmm}%
 {%
     \begin{switch}{#1}%
-        \xcase{0}{ \left#2 #4 \right#3 }%
+        \xcase{}{ \left#2 #4 \right#3 }%
+        \xcase{0}{ #2 #4 #3 }%
         \xcase{1}{ \bigl#2 #4 \bigr#3 }%
         \xcase{2}{ \Bigl#2 #4 \Bigr#3 }%
         \xcase{3}{ \biggl#2 #4 \biggr#3 }%
         \xcase{4}{ \Biggl#2 #4 \Biggr#3 }%
-        \xcase{-1}{ #2 #4 #3 }%
     \end{switch}%
 }%
 
 % Math Enclosure Groups
-\NewDocumentCommand{\xgroup}{D<>{0}O{.}m}%
+\NewDocumentCommand{\xgroup}{D<>{}O{.}m}%
 {%
     \begin{switch}{#2}%
         \xcase{} { \xenclose<#1>{.}{.}{#3} }             % default
@@ -84,7 +84,7 @@
 }%
 
 % Interval Groups
-\NewDocumentCommand{\xinterval}{D<>{0}mm}%
+\NewDocumentCommand{\xinterval}{D<>{}mm}%
 {%
     \begin{switch}{#2}%
         \xcase{o} { \xenclose<#1>{(}{)}{#3} }%
@@ -97,18 +97,18 @@
 }%
 
 % Named Enclosure Groups
-\NewDocumentCommand{\xparen}{D<>{0}m}{ \xgroup<#1>[p]{#2} }
-\NewDocumentCommand{\xbrack}{D<>{0}m}{ \xgroup<#1>[b]{#2} }
-\NewDocumentCommand{\xbrace}{D<>{0}m}{ \xgroup<#1>[B]{#2} }
-\NewDocumentCommand{\xchevn}{D<>{0}m}{ \xgroup<#1>[c]{#2} }
-\NewDocumentCommand{\xabs}  {D<>{0}m}{ \xgroup<#1>[v]{#2} }
-\NewDocumentCommand{\xnorm} {D<>{0}m}{ \xgroup<#1>[V]{#2} }
-\NewDocumentCommand{\xfloor}{D<>{0}m}{ \xgroup<#1>[f]{#2} }
-\NewDocumentCommand{\xceil} {D<>{0}m}{ \xgroup<#1>[F]{#2} }
-\NewDocumentCommand{\xround}{D<>{0}m}{ \xgroup<#1>[r]{#2} }
+\NewDocumentCommand{\xparen}{D<>{}m}{ \xgroup<#1>[p]{#2} }
+\NewDocumentCommand{\xbrack}{D<>{}m}{ \xgroup<#1>[b]{#2} }
+\NewDocumentCommand{\xbrace}{D<>{}m}{ \xgroup<#1>[B]{#2} }
+\NewDocumentCommand{\xchevn}{D<>{}m}{ \xgroup<#1>[c]{#2} }
+\NewDocumentCommand{\xabs}  {D<>{}m}{ \xgroup<#1>[v]{#2} }
+\NewDocumentCommand{\xnorm} {D<>{}m}{ \xgroup<#1>[V]{#2} }
+\NewDocumentCommand{\xfloor}{D<>{}m}{ \xgroup<#1>[f]{#2} }
+\NewDocumentCommand{\xceil} {D<>{}m}{ \xgroup<#1>[F]{#2} }
+\NewDocumentCommand{\xround}{D<>{}m}{ \xgroup<#1>[r]{#2} }
 
 % Math Function
-\NewDocumentCommand{\xf}{D<>{0} e{_^}me{_^}}%
+\NewDocumentCommand{\xf}{D<>{} e{_^}me{_^}}%
 {%
     \prescript%
         {\IfValueT{#3}{#3}}%
@@ -118,7 +118,7 @@
         \IfValueT{#6}{^{#6}}%
     \xfarg<#1>%
 }%
-\NewDocumentCommand{\xfarg}{D<>{0} d<>O{p}ge{_^}}%
+\NewDocumentCommand{\xfarg}{D<>{} d<>O{p}ge{_^}}%
 {%
     \IfValueT{#4}%
     {%
@@ -143,7 +143,7 @@
 
 \NewDocumentCommand{\xDeclareMathOperator}{mm}%
 {%
-    \expandafter\DeclareDocumentCommand\csname #1\endcsname{e{_^}D<>{0}O{p}g}%
+    \expandafter\DeclareDocumentCommand\csname #1\endcsname{e{_^}D<>{}O{p}g}%
     {%
         \operatorname{#2}%
             \IfValueT{##1}{_{##1}}%
