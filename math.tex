@@ -83,6 +83,19 @@
     \end{switch}%
 }%
 
+% Interval Groups
+\NewDocumentCommand{\xinterval}{D<>{0}mm}%
+{%
+    \begin{switch}{#2}%
+        \xcase{o} { \xenclose<#1>{(}{)}{#3} }%
+        \xcase{c} { \xenclose<#1>{[}{]}{#3} }%
+        \xcase{oo}{ \xenclose<#1>{(}{)}{#3} }%
+        \xcase{cc}{ \xenclose<#1>{[}{]}{#3} }%
+        \xcase{oc}{ \xenclose<#1>{(}{]}{#3} }%
+        \xcase{co}{ \xenclose<#1>{[}{)}{#3} }%
+    \end{switch}%
+}%
+
 % Named Enclosure Groups
 \NewDocumentCommand{\xparen}{D<>{0}m}{ \xgroup<#1>[p]{#2} }
 \NewDocumentCommand{\xbrack}{D<>{0}m}{ \xgroup<#1>[b]{#2} }
