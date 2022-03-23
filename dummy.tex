@@ -3,3 +3,19 @@
 \usepackage[english]{babel}
 \usepackage{lipsum}
 \usepackage{blindtext}
+
+\usepackage{tcolorbox}
+\newtcolorbox{crossout}%
+{%
+    breakable,%
+    enhanced jigsaw,%
+    opacityback=0,%
+    boxrule=0mm,%
+    top=0mm,bottom=0pt,left=0pt,right=0pt,%
+    boxsep=0pt,%
+    frame hidden,%
+    finish={%
+        \draw[thick,red] (frame.north east)--(frame.south west);%
+        \draw[thick,red] (frame.south east)--(frame.north west);%
+    }%
+}%
