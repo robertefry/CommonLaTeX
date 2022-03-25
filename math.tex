@@ -110,10 +110,15 @@
 % Math Function
 \NewDocumentCommand{\xf}{D<>{} e{_^}me{_^}}%
 {%
-    \prescript%
-        {\IfValueT{#3}{#3}}%
-        {\IfValueT{#2}{#2}}%
-    {#4}%
+    \ifel{\IfValueT{#2}{.}\IfValueT{#3}{.}}{}%
+    {%
+        {#4}%
+    }{%
+        \prescript%
+            {\IfValueT{#3}{#3}}%
+            {\IfValueT{#2}{#2}}%
+        {#4}%
+    }%
         \IfValueT{#5}{_{#5}}%
         \IfValueT{#6}{^{#6}}%
     \xfarg<#1>%
