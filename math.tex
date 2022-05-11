@@ -75,30 +75,31 @@
 \NewDocumentCommand{\xround}{D<>{}m}{ \xgroup<#1>[r]{#2} }
 
 % Math Function
-\NewDocumentCommand{\xf}{D<>{} e{_^}me{_^}}%
+\NewDocumentCommand{\xf}{e{_^} d<>O{.}me{_^}}%
 {%
-    \ifel{\IfValueT{#2}{.}\IfValueT{#3}{.}}{}%
+    \ifel{\IfValueT{#1}{.}\IfValueT{#2}{.}}{}%
     {%
-        {#4}%
+        \xgroup<#3>[#4]{#5}%
     }{%
         \prescript%
-            {\IfValueT{#3}{#3}}%
             {\IfValueT{#2}{#2}}%
-        {#4}%
+            {\IfValueT{#1}{#1}}%
+        {\xgroup<#3>[#4]{#5}}%
     }%
-        \IfValueT{#5}{_{#5}}%
-        \IfValueT{#6}{^{#6}}%
-    \xfarg<#1>%
+        \IfValueT{#6}{_{#6}}%
+        \IfValueT{#7}{^{#7}}%
+    %
+    \xfarg%     % recursive step
 }%
-\NewDocumentCommand{\xfarg}{D<>{} d<>O{p}ge{_^}}%
+\NewDocumentCommand{\xfarg}{d<>O{p}ge{_^}}%
 {%
-    \IfValueT{#4}%
+    \IfValueT{#3}%
     {%
-        \xgroup<\IfValueTF{#2}{#2}{#1}>[#3]{#4}%
-            \IfValueT{#5}{_{#5}}%
-            \IfValueT{#6}{^{#6}}%
+        \xgroup<#1>[#2]{#3}%
+            \IfValueT{#4}{_{#4}}%
+            \IfValueT{#5}{^{#5}}%
         %
-        \xfarg<#1>%     % recursive step
+        \xfarg%     % recursive step
     }%
 }%
 
