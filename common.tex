@@ -28,6 +28,13 @@
 }%
 \makeatother%
 
+% Mark an alignment symbol for the `aligned' environment
+\newcommand{\crel}[1]{%
+    \global\setbox1=\hbox{$#1$}%
+    \global\dimen1=0.5\wd1%
+    \mathrel{\hbox to\dimen1{$#1$\hss}}&\mathrel{\mspace{-\thickmuskip}\hbox to\dimen1{}}%
+}%
+
 % ------------------------------------------------------------------------------
 %   Page Formatting
 % ------------------------------------------------------------------------------
