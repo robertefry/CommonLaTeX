@@ -89,7 +89,7 @@
         \IfValueT{#6}{_{#6}}%
         \IfValueT{#7}{^{#7}}%
     %
-    \xfarg%     % recursive step
+    \xfarg%         % recursive step
 }%
 \NewDocumentCommand{\xfarg}{d<>O{p}ge{_^}}%
 {%
@@ -117,15 +117,12 @@
 %   Math Operators
 % ------------------------------------------------------------------------------
 
-\NewDocumentCommand{\xDeclareMathOperator}{mm}%
+\NewDocumentCommand{\xDeclareMathOperator}{m d<>O{.}m}%
 {%
-    \expandafter\DeclareDocumentCommand\csname #1\endcsname{e{_^}D<>{}O{p}g}%
-    {\ensuremath{%
-        \operatorname{#2}%
-            \IfValueT{##1}{_{##1}}%
-            \IfValueT{##2}{^{##2}}%
-        \IfValueT{##5}{\xgroup<##3>[##4]{##5}}%
-    }}%
+    \expandafter\DeclareDocumentCommand\csname #1\endcsname{e{_^}}%
+    {%
+        \xf<#2>[#3]{#4}_{##1}^{##2}%
+    }%
 }%
 
 \xDeclareMathOperator{op}{\textnormal{op}}          % opposite
