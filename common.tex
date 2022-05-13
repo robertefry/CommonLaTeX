@@ -36,7 +36,7 @@
 }%
 
 % ------------------------------------------------------------------------------
-%   Page Formatting
+%   Formatting
 % ------------------------------------------------------------------------------
 
 % Fonts
@@ -51,7 +51,9 @@
 
 \setlength{\multicolsep}{0.5\baselineskip}
 
-% Text Formatting
+\newcommand{\ul}[1]{\underline{#1}}
+
+% Environments
 \usepackage{exercise}
 \usepackage[inline,shortlabels]{enumitem}
 \usepackage{listings}
@@ -100,9 +102,3 @@
     \ifne{#1}{1}{\end{multicols}}%
     \vspace{-1\parskip}%
 }%
-
-% ------------------------------------------------------------------------------
-%   Common Commands
-% ------------------------------------------------------------------------------
-
-\newcommand{\ul}[1]{\underline{#1}}
