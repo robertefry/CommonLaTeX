@@ -5,8 +5,13 @@
 
 % Using Resources
 \usepackage{graphicx} % images
-\usepackage{framed}
 \usepackage{animate}
+\usepackage{framed}
+
+% Renew `framed' environment for adjustable width
+\renewenvironment{framed}[1][\hsize]
+    {\MakeFramed{\hsize#1\advance\hsize-\width \FrameRestore}}%
+    {\endMakeFramed}
 
 % Tikz Picture
 \usepackage{tikz,tkz-euclide} % tikz images
