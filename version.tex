@@ -1,4 +1,7 @@
 
 \makeatletter
-\NewDocumentCommand{\version}{mO{0}O{0}}{\edef\@version{#1.#2.#3}}
+\NewDocumentCommand{\version}{mO{0}O{0}D<>{}}%
+{%
+    \edef\@version{#1.#2.#3\ifx\relax#4\relax\else-\fi#4}%
+}%
 \makeatother
