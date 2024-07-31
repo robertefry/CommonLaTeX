@@ -11,6 +11,18 @@
 }%
 \makeatother
 
+\makeatletter
+\edef\@supervisors{}
+\NewDocumentCommand{\supervisor}{m}%
+{%
+    \ifx\@supervisors\empty%
+        \def\@supervisors{#1}%
+    \else%
+        \g@addto@macro\@supervisors{, #1}%
+    \fi%
+}%
+\makeatother
+
 \makeatletter\renewcommand\maketitle{
 \begin{center}
 
@@ -24,6 +36,7 @@
         \sc
         \begin{minipage}[t]{0.55\textwidth}\raggedright
             Author: \@author\\
+            \ifx\@supervisors\empty\else{Supervisors: \@supervisors\\}\fi
         \end{minipage}
         \hfill
         \begin{minipage}[t]{0.4\textwidth}\raggedleft
