@@ -1,11 +1,26 @@
 
-% Custom \maketitle command
+\usepackage{newpxtext}
+
 \makeatletter\renewcommand\maketitle{
 \begin{center}
+
     \line(1,0){\textwidth}\\[2ex]
-    {\Large\sc\bfseries\@title}\\
+    {
+        \Large\sc\bfseries\@title
+    }
     \line(1,0){\textwidth}\\[2ex]
-    {\sc\@author\hfill\@date}
+
+    {
+        \sc
+        \begin{minipage}[t]{0.55\textwidth}\raggedright
+            Author: \@author\\
+        \end{minipage}
+        \hfill
+        \begin{minipage}[t]{0.4\textwidth}\raggedleft
+            \today\\
+        \end{minipage}
+    }
     \\[8ex]
+
 \end{center}
 }\makeatother
