@@ -1,5 +1,6 @@
 
 \usepackage{newpxtext}
+\usepackage{setspace}
 
 \makeatletter
 \newif\if@version@set\@version@setfalse
@@ -24,14 +25,24 @@
 \makeatother
 
 \makeatletter\renewcommand\maketitle{
-\begin{center}
+\begin{titlepage}\centering
 
-    \line(1,0){\textwidth}\\[2ex]
+    \hrule width \hsize height 0.4mm
+    \kern 0.8mm
+    \hrule width \hsize height 0.2mm
+    \kern -2.0mm
     {
-        \Large\sc\bfseries\@title
+        \vspace*{5mm}
+        \Huge\sc\textbf\@title
+        \vspace*{5mm}
     }
-    \line(1,0){\textwidth}\\[2ex]
+    \hrule width \hsize height 0.2mm
+    \kern 0.8mm
+    \hrule width \hsize height 0.4mm
 
+    \kern 1cm
+
+    \begin{spacing}{1.5}
     {
         \sc
         \begin{minipage}[t]{0.55\textwidth}\raggedright
@@ -44,7 +55,7 @@
             \if@version@set{Version: \@version\\}\fi
         \end{minipage}
     }
-    \\[8ex]
+    \end{spacing}
 
-\end{center}
+\end{titlepage}
 }\makeatother
