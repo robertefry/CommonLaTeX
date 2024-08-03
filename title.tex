@@ -3,6 +3,14 @@
 \usepackage{setspace}
 
 \makeatletter
+\edef\@subtitle{}
+\NewDocumentCommand{\subtitle}{m}%
+{%
+    \def\@subtitle{#1}%
+}%
+\makeatother
+
+\makeatletter
 \newif\if@version@set\@version@setfalse
 \edef\@version{1.0.0}
 \NewDocumentCommand{\version}{mO{0}O{0}D<>{}}%
@@ -34,6 +42,7 @@
     {
         \vspace*{5mm}
         \Huge\sc\textbf\@title
+        \ifx\@subtitle\empty\else{\par\vspace*{2mm}\Large\sc\@subtitle}\fi
         \vspace*{5mm}
     }
     \hrule width \hsize height 0.2mm
