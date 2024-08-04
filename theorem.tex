@@ -162,5 +162,19 @@
     \MakeMajorTheorem{lemma}[thm]{Lemma}
     \MakeMajorTheorem{theorem}[thm]{Theorem}
     \MakeMajorTheorem{corollary}[thm]{Corollary}
+}
+
+% ~ Titled Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\makeatletter\newtheoremstyle{blocktitle}%
+    {\item[\rlap{\vbox{\hbox{\hskip\labelsep\theorem@headerfont ##1\ ##2\theorem@separator}\hbox{\strut}}}]}%
+    {\item[\rlap{\vbox{\hbox{\hskip\labelsep\theorem@headerfont ##1\ ##2{\normalfont\ (##3)}\theorem@separator}\hbox{\strut}}}]}%
+\makeatother%
+
+{
+    \theoremstyle{blocktitle}
+    \theoremheaderfont{\normalfont\bfseries}
+    \theorembodyfont{\upshape}
+
     \MakeMajorTheorem{example}[thm]{Example}
 }
