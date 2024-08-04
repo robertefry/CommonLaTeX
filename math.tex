@@ -63,7 +63,7 @@
     \end{switch}%
 }%
 
-% Math Enclosure Groups
+% Math Enclosed Group
 \NewDocumentCommand{\xgroup}{D<>{0}O{.}m}%
 {%
     \begin{switch}{#2}%
@@ -78,6 +78,12 @@
         \xcase{F}{ \xenclose<#1>{\lceil}{\rceil}{#3} }   % ceil
         \xcase{r}{ \xenclose<#1>{\lfloor}{\rceil}{#3} }  % round
     \end{switch}%
+}%
+
+% Boxed Enclosure Group
+\NewDocumentCommand{\xboxed}{D<>{0}O{.}m}%
+{%
+    \boxed{ \xgroup<#1>[#2]{#3} }%
 }%
 
 % Named Enclosure Groups
