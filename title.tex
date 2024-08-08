@@ -35,35 +35,37 @@
 \makeatletter\renewcommand\maketitle{
 \begin{titlepage}\centering
 
-    \hrule width \hsize height 0.4mm
+    \setlength{\parskip}{0pt}
+    \setlength{\parindent}{0pt}
+
+    \hrule width \hsize height 0.5mm
     \kern 0.8mm
-    \hrule width \hsize height 0.2mm
-    \kern -2.0mm
+    \hrule width \hsize height 0.3mm
+    \vspace{5mm}
     {
-        \vspace*{5mm}
-        \Huge\sc\textbf\@title
-        \ifx\@subtitle\empty\else{\par\vspace*{2mm}\Large\sc\@subtitle}\fi
-        \vspace*{5mm}
+        \Huge\sc\bfseries\vphantom{Q}\smash{\@title}
+        \ifx\@subtitle\empty\else{\par\vspace{3mm}\Large\sc\itshape\@subtitle}\fi
     }
-    \hrule width \hsize height 0.2mm
+    \vspace{5mm}
+    \hrule width \hsize height 0.3mm
     \kern 0.8mm
-    \hrule width \hsize height 0.4mm
+    \hrule width \hsize height 0.5mm
 
     \kern 1cm
 
     \begin{spacing}{1.5}
-    {
-        \sc
-        \begin{minipage}[t]{0.55\textwidth}\raggedright
-            Author: \@author\\
-            \ifx\@supervisors\empty\else{Supervisors: \@supervisors\\}\fi
-        \end{minipage}
-        \hfill
-        \begin{minipage}[t]{0.4\textwidth}\raggedleft
-            \today\\
-            \if@version@set{Version: \@version\\}\fi
-        \end{minipage}
-    }
+        {
+            \sc
+            \begin{minipage}[t]{0.55\textwidth}\raggedright
+                Author: \@author\\
+                \ifx\@supervisors\empty\else{Supervisors: \@supervisors\\}\fi
+            \end{minipage}
+            \hfill
+            \begin{minipage}[t]{0.4\textwidth}\raggedleft
+                \today\\
+                \if@version@set{Version: \@version\\}\fi
+            \end{minipage}
+        }
     \end{spacing}
 
 \end{titlepage}
