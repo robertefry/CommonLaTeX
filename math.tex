@@ -29,24 +29,24 @@
     \end{switch}%
 }%
 
-% Math Enclosed Group
+% Math Enclosure Groups
 \NewDocumentCommand{\xgroup}{D<>{0}O{.}m}%
 {%
     \begin{switch}{#2}%
-        \xcase{.}{ \xenclose<#1>{.}{.}{#3} }             % default
-        \xcase{p}{ \xenclose<#1>{(}{)}{#3} }             % parenthesis
-        \xcase{b}{ \xenclose<#1>{[}{]}{#3} }             % brackets
-        \xcase{B}{ \xenclose<#1>{\{}{\}}{#3} }           % braces
-        \xcase{c}{ \xenclose<#1>{\langle}{\rangle}{#3} } % chevrons
-        \xcase{v}{ \xenclose<#1>{\vert}{\vert}{#3} }     % absolute
-        \xcase{V}{ \xenclose<#1>{\Vert}{\Vert}{#3} }     % normal
-        \xcase{f}{ \xenclose<#1>{\lfloor}{\rfloor}{#3} } % floor
-        \xcase{F}{ \xenclose<#1>{\lceil}{\rceil}{#3} }   % ceil
-        \xcase{r}{ \xenclose<#1>{\lfloor}{\rceil}{#3} }  % round
+        \xcase{.}{ \xenclose<#1>{.}{.}{#3} }                % default
+        \xcase{p}{ \xenclose<#1>{(}{)}{#3} }                % parenthesis
+        \xcase{b}{ \xenclose<#1>{[}{]}{#3} }                % brackets
+        \xcase{B}{ \xenclose<#1>{\{}{\}}{#3} }              % braces
+        \xcase{c}{ \xenclose<#1>{\langle}{\rangle}{#3} }    % chevrons
+        \xcase{v}{ \xenclose<#1>{\vert}{\vert}{#3} }        % absolute
+        \xcase{V}{ \xenclose<#1>{\Vert}{\Vert}{#3} }        % normal
+        \xcase{f}{ \xenclose<#1>{\lfloor}{\rfloor}{#3} }    % floor
+        \xcase{F}{ \xenclose<#1>{\lceil}{\rceil}{#3} }      % ceil
+        \xcase{r}{ \xenclose<#1>{\lfloor}{\rceil}{#3} }     % round
     \end{switch}%
 }%
 
-% Boxed Enclosure Group
+% Boxed Enclosure Groups
 \NewDocumentCommand{\xboxed}{D<>{0}O{.}m}%
 {%
     \boxed{ \xgroup<#1>[#2]{#3} }%
@@ -73,11 +73,11 @@
     #3\xgroup<#1>[#2]{#4}
 }%
 
-% Math Vector
+% Math Vectors
 \usepackage[g]{esvect}
 \NewDocumentCommand{\xv}{m}{ \vv{#1} }
 
-% Math Matrix
+% Math Matrices
 \NewDocumentCommand{\xm}{O{p}m}{ \begin{#1matrix} #2 \end{#1matrix} }
 
 % ------------------------------------------------------------------------------
