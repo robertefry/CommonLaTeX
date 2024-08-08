@@ -13,41 +13,6 @@
 \usepackage{amsfonts}
 
 % ------------------------------------------------------------------------------
-%   Math Symbols
-% ------------------------------------------------------------------------------
-
-% Noun Symbols
-\newcommand{\LHS}{\mbox{LHS}}
-\newcommand{\RHS}{\mbox{RHS}}
-\renewcommand{\emptyset}{\varnothing}
-
-\newcommand{\xlet}{\qq*{Let}}
-
-% Mapping Arrows
-\newcommand{\nmapsfrom}{ \;\cancel{\mapsfrom}\; }
-\newcommand{\nmapsto}{ \;\cancel{\mapsto}\; }
-\newcommand{\mapto}{ \rightarrow }
-\newcommand{\longmapto}{ \longrightarrow }
-\newcommand{\mapfrom}{ \leftarrow }
-\newcommand{\longmapfrom}{ \longleftarrow }
-\newcommand{\nmapto}{ \nrightarrow }
-\newcommand{\nmapfrom}{ \nleftarrow }
-
-% Relation Symbols
-\newcommand{\divs}{ \;\big\vert\; }
-\newcommand{\ndivs}{ \;\cancel{\big\vert}\; }
-% \newcommand{\nequiv}{ \;\cancel{\equiv}\; }
-
-% Logic Symbols
-\newcommand{\lxor}{\;\underline{\lor}\;}
-
-% Proof Symbols
-\newcommand{\contradiction}{ \ensuremath{\lightning} }
-
-% Partial Derivatives
-\NewDocumentCommand{\pd}{O{}m}{\partial^{#1} #2}
-
-% ------------------------------------------------------------------------------
 %   Math Enclosures
 % ------------------------------------------------------------------------------
 
@@ -110,6 +75,41 @@
 
 % Math Matrix
 \NewDocumentCommand{\xm}{O{p}m}{ \begin{#1matrix} #2 \end{#1matrix} }
+
+% ------------------------------------------------------------------------------
+%   Math Symbols
+% ------------------------------------------------------------------------------
+
+% Noun Symbols
+\newcommand{\LHS}{\mbox{LHS}}
+\newcommand{\RHS}{\mbox{RHS}}
+\renewcommand{\emptyset}{\varnothing}
+
+\newcommand{\xlet}{\qq*{Let}}
+
+% Mapping Arrows
+\newcommand{\nmapsfrom}{ \;\cancel{\mapsfrom}\; }
+\newcommand{\nmapsto}{ \;\cancel{\mapsto}\; }
+\newcommand{\mapto}{ \rightarrow }
+\newcommand{\longmapto}{ \longrightarrow }
+\newcommand{\mapfrom}{ \leftarrow }
+\newcommand{\longmapfrom}{ \longleftarrow }
+\newcommand{\nmapto}{ \nrightarrow }
+\newcommand{\nmapfrom}{ \nleftarrow }
+
+% Relation Symbols
+\newcommand{\divs}{ \;\big\vert\; }
+\newcommand{\ndivs}{ \;\cancel{\big\vert}\; }
+% \newcommand{\nequiv}{ \;\cancel{\equiv}\; }
+
+% Logic Symbols
+\newcommand{\lxor}{\;\underline{\lor}\;}
+
+% Proof Symbols
+\newcommand{\contradiction}{ \ensuremath{\lightning} }
+
+% Partial Derivatives
+\NewDocumentCommand{\pd}{O{}m}{\partial^{#1} #2}
 
 % ------------------------------------------------------------------------------
 %   Math Operators
