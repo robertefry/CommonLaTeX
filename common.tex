@@ -18,15 +18,15 @@
 \NewDocumentEnvironment{switch}{m}{\renewcommand{\xcase}{\ifeq{#1}}}{}
 
 % Repeat a String N Times
-\makeatletter%
-\newcount\x@repeat@count%
-\newcommand{\xrepeat}[2]{%%
-  \begingroup%
-  \x@repeat@count=\z@%
-  \@whilenum\x@repeat@count<#1\do{#2\advance\x@repeat@count\@ne}%%
-  \endgroup%
+\makeatletter\newcount\x@repeat@count
+\newcommand{\xrepeat}[2]%
+{%
+    \begingroup%
+    \x@repeat@count=\z@%
+    \@whilenum\x@repeat@count<#1\do{#2\advance\x@repeat@count\@ne}%
+    \endgroup%
 }%
-\makeatother%
+\makeatother
 
 % ------------------------------------------------------------------------------
 %   Page Formatting
@@ -71,8 +71,8 @@
 \newcommand{\subsubsectionbreak}{\goodbreak}
 
 % Paragraph Formatting
-\setlength{\parskip}{0.5\baselineskip}%
-\setlength{\parindent}{0pt}%
+\setlength{\parskip}{0.5\baselineskip}
+\setlength{\parindent}{0pt}
 
 % ------------------------------------------------------------------------------
 %   Lists
