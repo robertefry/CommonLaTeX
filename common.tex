@@ -22,6 +22,7 @@
 \newcommand{\NewMap}[1]{\pgfkeys{/hashmap/#1/.is family, /hashmap/#1/.initial}}
 \newcommand{\MapSet}[3]{\pgfkeyssetvalue{/hashmap/#1/#2}{#3}}
 \newcommand{\MapGet}[2]{\pgfkeysvalueof{/hashmap/#1/#2}}
+\newcommand{\MapHas}[2]{\pgfkeysifdefined{/hashmap/#1/#2}{true}{false}}
 
 % Repeat a String N Times
 \makeatletter\newcount\x@repeat@count
