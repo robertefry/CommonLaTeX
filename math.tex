@@ -75,10 +75,6 @@
 \let\xDeclareNamedEnclosure\undefined
 %
 
-% ------------------------------------------------------------------------------
-%   Commands
-% ------------------------------------------------------------------------------
-
 % Math Functions
 \NewDocumentCommand{\xf}{D<>{0}O{p}mm}%
 {%
@@ -96,14 +92,10 @@
 %   Symbols
 % ------------------------------------------------------------------------------
 
-% Noun Symbols
 \newcommand{\LHS}{\mbox{LHS}}
 \newcommand{\RHS}{\mbox{RHS}}
 \renewcommand{\emptyset}{\varnothing}
 
-\newcommand{\xlet}{\qq*{Let}}
-
-% Mapping Arrows
 \newcommand{\nmapsfrom}{ \;\cancel{\mapsfrom}\; }
 \newcommand{\nmapsto}{ \;\cancel{\mapsto}\; }
 \newcommand{\mapto}{ \rightarrow }
@@ -113,23 +105,19 @@
 \newcommand{\nmapto}{ \nrightarrow }
 \newcommand{\nmapfrom}{ \nleftarrow }
 
-% Relation Symbols
 \newcommand{\divs}{ \;\big\vert\; }
 \newcommand{\ndivs}{ \;\cancel{\big\vert}\; }
-% \newcommand{\nequiv}{ \;\cancel{\equiv}\; }
+\newcommand{\nequiv}{ \;\cancel{\equiv}\; }
 
-% Logic Symbols
 \newcommand{\lxor}{\;\underline{\lor}\;}
 
-% Proof Symbols
 \newcommand{\contradiction}{ \ensuremath{\lightning} }
-
-% Partial Derivatives
-\NewDocumentCommand{\pd}{O{}m}{\partial^{#1} #2}
 
 % ------------------------------------------------------------------------------
 %   Operators
 % ------------------------------------------------------------------------------
+
+\NewDocumentCommand{\pd}{O{}m}{\partial^{#1} #2}
 
 \NewDocumentCommand{\xDeclareMathOperator}{mm}%
 {%
