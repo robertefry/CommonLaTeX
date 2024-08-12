@@ -94,9 +94,33 @@
 }%
 
 % Functions
-\NewDocumentCommand{\xf}{D<>{0}O{p}mm}%
+\NewDocumentCommand{\xf}{E{_^}{} D<>{0}O{.}mE{_^}{}}%
 {%
-    #3\xgroup<#1>[#2]{#4}
+    \ifel{\IfValueT{#1}{.}\IfValueT{#2}{.}}{}%
+    {%
+        \xgroup<#3>[#4]{#5}%
+    }{%
+        \prescript%
+            {\IfValueT{#2}{#2}}%
+            {\IfValueT{#1}{#1}}%
+        {\xgroup<#3>[#4]{#5}}%
+    }%
+        \IfValueT{#6}{_{#6}}%
+        \IfValueT{#7}{^{#7}}%
+    %
+    \xfrecurse%     % recursive step
+}%
+\NewDocumentCommand{\xfrecurse}{D<>{0}O{p}ge{_^}}%
+{%
+    \IfValueT{#3}%
+    {%
+        % \let\close%
+        \xgroup<#1>[#2]{#3}%
+            \IfValueT{#4}{_{#4}}%
+            \IfValueT{#5}{^{#5}}%
+        %
+        \xfrecurse%     % recursive step
+    }%
 }%
 
 % ------------------------------------------------------------------------------
