@@ -78,7 +78,7 @@
 \NewDocumentCommand{\xv}{m}{ \vv{#1} }
 
 % Math Matrices
-\NewDocumentCommand{\xm}{O{p}m}{ \begin{#1matrix} #2 \end{#1matrix} }
+\NewDocumentCommand{\xm}{O{p}m}{ \xgroup[#1]{\begin{matrix}#2\end{matrix}} }
 
 % ------------------------------------------------------------------------------
 %   Operators
