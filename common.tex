@@ -29,7 +29,7 @@
 \makeatother
 
 % ------------------------------------------------------------------------------
-%   Page Formatting
+%   Formatting
 % ------------------------------------------------------------------------------
 
 \def\greymode{ \pagecolor[rgb]{0.17,0.17,0.17} \color[rgb]{0.9,0.9,0.9} }
@@ -76,14 +76,14 @@
 \setlength{\parskip}{\the\baselineskip plus \baselineskip minus 0.5\baselineskip}
 \setlength{\parindent}{0pt}
 
-% ------------------------------------------------------------------------------
-%   Lists
-% ------------------------------------------------------------------------------
-
 % List Formatting
 \usepackage[inline,shortlabels]{enumitem}
 \usepackage{listings}
 \setlist{topsep=0pt}
+
+% ------------------------------------------------------------------------------
+%   Commands & Environments
+% ------------------------------------------------------------------------------
 
 % Multi-Column Lists
 \NewDocumentEnvironment{multicol-itemize}{m}%
@@ -104,9 +104,5 @@
     \ifne{#1}{1}{\end{multicols}}%
     \vspace{-1\parskip}%
 }%
-
-% ------------------------------------------------------------------------------
-%   Common Commands
-% ------------------------------------------------------------------------------
 
 \newcommand{\ul}[1]{\underline{#1}}
