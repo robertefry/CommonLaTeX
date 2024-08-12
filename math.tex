@@ -24,7 +24,7 @@
         \xcase{2}{ \Bigl#2 #4 \Bigr#3 }%
         \xcase{3}{ \biggl#2 #4 \biggr#3 }%
         \xcase{4}{ \Biggl#2 #4 \Biggr#3 }%
-        \xcase{-1}{ #2 #4 #3 }%
+        \xcase{}{ #2 #4 #3 }%
     \end{switch}%
 }%
 
@@ -35,6 +35,9 @@
 
 % ~ Named Enclosures ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+\NewMap{xopeners} \MapSet{xopeners}{.}{.}
+\NewMap{xclosers} \MapSet{xclosers}{.}{.}
+
 \NewDocumentCommand{\DeclareNamedEnclosure}{>{\SplitList{,}}m mm}
 {
     \newcommand{\DefineThisNamedEnclosure}[1]
@@ -43,6 +46,8 @@
         {%
             \xenclose<####1>{#2}{#3}{####2}%
         }%
+        \MapSet{xopeners}{##1}{#2}
+        \MapSet{xclosers}{##1}{#3}
     }
     \ProcessList{#1}{\DefineThisNamedEnclosure}
     \let\DefineThisNamedEnclosure\undefined
@@ -81,9 +86,11 @@
 
 % ~ Other Enclosures ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\NewDocumentCommand{\xgroup}{D<>{0}om}%
+% TODO: Fix D<>{0} argument parsing for \xgroup
+
+\NewDocumentCommand{\xgroup}{D<>{0}O{.}m}%
 {%
-    \IfValueTF{#2}{\csname x#2\endcsname<#1>{#3}}{#3}
+    \xenclose<#1>{\MapGet{xopeners}{#2}}{\MapGet{xclosers}{#2}}{#3}%
 }%
 
 % Functions
