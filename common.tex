@@ -17,6 +17,12 @@
 \newcommand{\xcase}[2]{#1 #2} % Dummy, so \renewcommand has something to overwrite...
 \NewDocumentEnvironment{switch}{m}{\renewcommand{\xcase}{\ifeq{#1}}}{}
 
+% MAP Data Structure
+\usepackage{pgfkeys}
+\newcommand{\NewMap}[1]{\pgfkeys{/hashmap/#1/.is family, /hashmap/#1/.initial}}
+\newcommand{\MapSet}[3]{\pgfkeyssetvalue{/hashmap/#1/#2}{#3}}
+\newcommand{\MapGet}[2]{\pgfkeysvalueof{/hashmap/#1/#2}}
+
 % Repeat a String N Times
 \makeatletter\newcount\x@repeat@count
 \newcommand{\xrepeat}[2]%
