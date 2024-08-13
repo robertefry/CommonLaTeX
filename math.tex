@@ -138,25 +138,37 @@
 %   Operators
 % ------------------------------------------------------------------------------
 
-\NewDocumentCommand{\xDeclareMathOperator}{mm}%
+\renewcommand{\DeclareMathOperator}[2]%
 {%
-    \expandafter\DeclareDocumentCommand\csname #1\endcsname{e{_^}D<>{0}O{p}g}%
+    \expandafter\DeclareDocumentCommand{#1}{e{_^}D<>{0}O{p}g}%
     {%
-        \operatorname{#2}\IfValueT{##1}{_{##1}}\IfValueT{##2}{^{##2}}%
+        \operatorname{\textnormal{#2}}\IfValueT{##1}{_{##1}}\IfValueT{##2}{^{##2}}%
         \IfValueT{##5}{\xgroup<##3>[##4]{##5}}%
     }%
 }%
 
-\xDeclareMathOperator{Obj}{\textnormal{Obj}}
-\xDeclareMathOperator{Hom}{\textnormal{Hom}}
-\xDeclareMathOperator{Ann}{\textnormal{Ann}}
+\DeclareMathOperator{\Id}{Id}           % identity
 
-\xDeclareMathOperator{Ker}{\textnormal{Ker}}
-\xDeclareMathOperator{Dom}{\textnormal{Dom}}
-\xDeclareMathOperator{CoDom}{\textnormal{CoDom}}
-\xDeclareMathOperator{Img}{\textnormal{Im}}
+\DeclareMathOperator{\Hom}{Hom}         % homomorphism
+\DeclareMathOperator{\Iso}{Iso}         % isomorphism
+\DeclareMathOperator{\Aut}{Aut}         % automorphism
+\DeclareMathOperator{\Mon}{Mon}         % monomorphism
+\DeclareMathOperator{\Epi}{Epi}         % epimorphism
 
-\xDeclareMathOperator{Mat}{\textnormal{Mat}}
-\xDeclareMathOperator{GL}{\textnormal{GL}}
+\DeclareMathOperator{\Ker}{Ker}         % kernel
+\DeclareMathOperator{\Dom}{Dom}         % domain
+\DeclareMathOperator{\CoDom}{CoDom}     % co-domain
+\DeclareMathOperator{\Img}{Im}          % image
+\DeclareMathOperator{\Ann}{Ann}         % annihilator
 
-\xDeclareMathOperator{Id}{\textnormal{Id}}
+\DeclareMathOperator{\Mat}{Mat}         % matrix
+\DeclareMathOperator{\GL}{GL}           % general linear group
+
+\DeclareMathOperator{\Cat}{Cat}         % category
+\DeclareMathOperator{\Set}{Set}         % set
+\DeclareMathOperator{\Grp}{Grp}         % group
+\DeclareMathOperator{\Ring}{Ring}       % ring
+\DeclareMathOperator{\Top}{Top}         % topology
+\DeclareMathOperator{\Met}{Met}         % metric space
+\DeclareMathOperator{\Vect}{Vect}       % vector space
+\DeclareMathOperator{\Mod}{Mod}         % module
