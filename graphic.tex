@@ -20,17 +20,11 @@
 \NewDocumentEnvironment{ctikzpicture}{}{\begin{center}\begin{tikzpicture}}{\end{tikzpicture}\end{center}}
 \NewDocumentEnvironment{ctikzcd}{}{\begin{center}\begin{tikzcd}}{\end{tikzcd}\end{center}}
 
-\tikzstyle{flow_startstop} = [rectangle,rounded corners,
-minimum width=3cm,minimum height=1cm,text centered,draw=black]
-\tikzstyle{flow_inout} = [trapezium,trapezium left angle=70,trapezium right angle=110,
-minimum width=3cm,minimum height=1cm,text centered,draw=black]
-\tikzstyle{flow_process} = [rectangle,
-minimum width=3cm,minimum height=1cm,text centered,draw=black]
-\tikzstyle{flow_decision} = [diamond,
-minimum width=3cm,minimum height=1cm,text centered,draw=black]
-
-\tikzstyle{arrow} = [thick,->,>=stealth]
-\tikzstyle{process} = [rectangle,minimum width=3cm,minimum height=1cm,text centered,draw=black]
+\tikzstyle{flow_startstop}  = [text centered, draw=black, minimum width=3cm, minimum height=1cm, rectangle, rounded corners]
+\tikzstyle{flow_inout}      = [text centered, draw=black, minimum width=3cm, minimum height=1cm, trapezium, trapezium left angle=70, trapezium right angle=110]
+\tikzstyle{flow_process}    = [text centered, draw=black, minimum width=3cm, minimum height=1cm, rectangle]
+\tikzstyle{flow_decision}   = [text centered, draw=black, minimum width=3cm, minimum height=1cm, diamond]
+\tikzstyle{flow_arrow}      = [thick, ->, >=stealth]
 
 \tikzset%
 {%
