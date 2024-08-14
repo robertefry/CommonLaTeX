@@ -80,17 +80,24 @@
 \newcommand{\contradiction}{\ensuremath{\lightning}}
 
 % Markers
-\NewDocumentCommand{\marktodo}{}%
+\NewDocumentCommand{\markfix}{}%
 {%
     \begin{center}%
         \color{red}%
+        \textbf{\textit{======\underline{FIX}======}}%
+    \end{center}%
+}%
+\NewDocumentCommand{\marktodo}{}%
+{%
+    \begin{center}%
+        \color{blue}%
         \textbf{\textit{======\underline{TODO}======}}%
     \end{center}%
 }%
 \NewDocumentCommand{\markreview}{}%
 {%
     \begin{center}%
-        \color{blue}%
+        \color{violet}%
         \textbf{\textit{=====\underline{REVIEW}=====}}%
     \end{center}%
 }%
