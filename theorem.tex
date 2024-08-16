@@ -15,34 +15,35 @@
 % [#2] Style of the block.              (optional, default 'm')
 % [#3] Title or label for the block.    (optional)
 %
+%  - Style 'm': Minimal block with blanker style
+%  - Style 'M': Minimal block with sharp corners and visible border
+%  - Style 't': Title block with blanker style
+%  - Style 'T': Title block with sharp corners and visible border
+%  - Style 's': Titled box with sharp corners and visible border
+%
 \NewDocumentEnvironment{block}{D<>{0em}O{m}o}%
 {%
     \begin{center}%
-    % Style 'm': Minimal block with blanker style
     \ifeq{#2}{m}%
     {%
         \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,blanker]%
         \IfValueT{#3}{\textsl{\underline{#3:}\ }}%
     }%
-    % Style 'M': Minimal block with sharp corners and visible border
     \ifeq{#2}{M}%
     {%
         \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]%
         \IfValueT{#3}{\textsl{\underline{#3:}\ }}%
     }%
-    % Style 't': Title block with blanker style
     \ifeq{#2}{t}%
     {%
         \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,blanker]%
         \IfValueT{#3}{\textbf{#3}\xbreakline}%
     }%
-    % Style 'T': Title block with sharp corners and visible border
     \ifeq{#2}{T}%
     {%
         \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]%
         \IfValueT{#3}{\textbf{#3}\xbreakline}%
     }%
-    % Style 's': Titled box with sharp corners and visible border
     \ifeq{#2}{s}%
     {%
         \IfValueTF{#3}%
