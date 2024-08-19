@@ -4,17 +4,6 @@
 \usepackage{etoolbox}
 \usepackage{patchcmd}
 
-% ------------------------------------------------------------------------------
-%   Document Configuration
-% ------------------------------------------------------------------------------
-
-\usepackage[T1]{fontenc}
-\usepackage{slantsc}
-
-\usepackage{newpxtext}      % use the palatino font for text
-\usepackage{newpxmath}      % use the palatino font for math
-\usepackage{anyfontsize}    % typeset speciffic font sizes
-
 % add an blank page at the end of the document
 \def\lastpageblank{\AtEndDocument
 {
@@ -23,11 +12,24 @@
     \vspace*{\fill}\[\mathbb{EMPTY}\]\vspace*{\fill}
 }}
 
-% ~ Document Styles ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% ------------------------------------------------------------------------------
+%   Look And Feel
+% ------------------------------------------------------------------------------
+
+% ~ Fonts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage[T1]{fontenc}
+\usepackage{slantsc}
+
+\usepackage{newpxtext}      % use the palatino font for text
+\usepackage{newpxmath}      % use the palatino font for math
+\usepackage{anyfontsize}    % typeset speciffic font sizes
+
+% ~ Titles ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \usepackage[explicit]{titlesec}     % typeset section titles
 
-% force a goodbreak between sections
+% force a good break between sections
 \newcommand{\sectionbreak}{\goodbreak}
 \newcommand{\subsectionbreak}{\goodbreak}
 \newcommand{\subsubsectionbreak}{\goodbreak}
@@ -35,40 +37,22 @@
 % prevent footnotes from breaking across pages
 \makeatletter\interfootnotelinepenalty=\@M\makeatother
 
-% Paragraph Formatting
+% configure paragraphs
 \setlength{\parskip}{0.8\baselineskip plus 0.2\baselineskip minus 0.3\baselineskip}
 \setlength{\parindent}{0pt}
-
-% ~ Math Mode Styles ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-\usepackage{mleftright}     % typeset math in a more natural way
-
-% use subformula delimiters from the mleftright package
-\mleftright
-
-% ~ Document Content ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 % require table of contents be on its own page
 \patchcommand{\tableofcontents}{\clearpage}{\clearpage}
 
-\usepackage{imakeidx}       % typeset an index
-\usepackage{endnotes}       % typeset endnotes
-\usepackage[toc]{glossaries}     % typeset a glossary
-
-% prepare the index
-\makeindex[intoc, columns=3, columnseprule=true]
-
-% command to prepare and print the glossary
-\renewcommand{\makeglossary}{\makenoidxglossaries}
-\renewcommand{\makeglossaries}{\makenoidxglossaries}
-\renewcommand{\printglossary}{\printnoidxglossaries}
-\renewcommand{\printglossaries}{\printnoidxglossaries}
+% ------------------------------------------------------------------------------
+%   Content
+% ------------------------------------------------------------------------------
 
 \usepackage{multicol}       % typeset multiple columns of equal width
 \usepackage{float}          % enable placement options for figures and tables
 \usepackage{wrapfig}        % enable text wrapping around figures and tables
 
-% retain paragraph separation under multicol environments (broken in the multicol package)
+% retain paragraph separation in multi-columns
 \setlength{\multicolsep}{0pt}
 \BeforeBeginEnvironment{multicols}{\vskip\parskip}
 
@@ -76,6 +60,20 @@
 
 % configure spacing for list environments
 \setlist{topsep=0pt, partopsep=0pt, parsep=\parskip, itemsep=0pt}
+
+% ~ Index and Glossaries ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage{imakeidx}       % typeset an index
+\usepackage{endnotes}       % typeset endnotes
+\usepackage[toc,postdot,style=indexgroup]{glossaries-extra} % typeset a glossary
+
+% configure the index
+\makeindex[intoc, columns=3, columnseprule=true]
+
+% ~ PDF Hyperlinks ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage[pdfusetitle,frenchlinks,hidelinks]{hyperref}
+\urlstyle{same}
 
 % ------------------------------------------------------------------------------
 %   Common Commands and Environments
