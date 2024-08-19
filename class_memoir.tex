@@ -1,0 +1,108 @@
+
+% ------------------------------------------------------------------------------
+%   Stock Layout
+% ------------------------------------------------------------------------------
+
+% set the page layout for a printed book
+\newcommand{\bookstyleHartshorne}
+{
+    \settrimmedsize{9.250in}{6.125in}{*}
+    \settypeblocksize{7.6875in}{4.5625in}{*}
+    \settrims
+        {\dimexpr(\stockheight-\paperheight)/2\relax}
+        {\dimexpr\stockwidth-\paperwidth\relax}
+    \setbinding{0.25in}
+    \setlrmargins{*}{*}{2}
+    \setulmargins{*}{*}{1}
+    \checkandfixthelayout
+}
+
+% set the page layout for a desktop pdf
+\newcommand{\pdfstyleHartshorne}
+{
+    \settrimmedsize{9.250in}{6.125in}{*}
+    \settypeblocksize{7.6875in}{4.5625in}{*}
+    \settrims
+        {\dimexpr(\stockheight-\paperheight)/2\relax}
+        {\dimexpr(\stockwidth-\paperwidth)/2\relax}
+    \setbinding{0in}
+    \setlrmargins{*}{*}{1}
+    \setulmargins{*}{*}{1}
+    \checkandfixthelayout
+}
+
+% Load the default page layout
+\bookstyleHartshorne
+
+% ------------------------------------------------------------------------------
+%   Document Styling
+% ------------------------------------------------------------------------------
+
+\usepackage[bottom]{footmisc}
+\usepackage{anyfontsize}
+
+% ~ Page Style ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+% \renewcommand{\footruleskip}{\baselineskip}
+\renewcommand{\footnoterule}{\hrule width 0.5\hsize height \normalrulethickness}
+
+\makepagestyle{robertfry}
+\makeevenhead{robertfry}{\small\thepage}{}{\small\scshape\leftmark}
+\makeoddhead{robertfry}{\small\itshape\rightmark}{}{\small\thepage}
+\makeevenfoot{robertfry}{}{\small\thepage}{}
+\makeoddfoot{robertfry}{}{\small\thepage}{}
+\makeheadrule{robertfry}{\hsize}{\normalrulethickness}
+\makefootrule{robertfry}{\hsize}{\normalrulethickness}{\footruleskip}
+
+\makeatletter\makepsmarks{robertfry}{
+    \nouppercaseheads
+    \createmark{chapter}      {both} {shownumber}{\@chapapp\space}{.\hskip 1em}
+    \createmark{section}      {right}{shownumber}{}{\hskip 1em}
+    \createplainmark{toc}     {both}{\contentsname}
+    \createplainmark{lof}     {both}{\listfigurename}
+    \createplainmark{lot}     {both}{\listtablename}
+    \createplainmark{bib}     {both}{\bibname}
+    \createplainmark{index}   {both}{\indexname}
+    \createplainmark{glossary}{both}{\glossaryname}
+    \setsecnumdepth{subsection}
+}\makeatother
+
+\pagestyle{robertfry}
+
+% ~ Chapter Style ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\makeatletter\newcommand{\scalefont}[1]{{
+    \fontsize{\dimexpr#1\f@size\relax}{#1\baselineskip}\selectfont
+}}\makeatother
+
+\makeatletter\newcommand{\chapterrule}{
+    \par\nobreak \vskip 0.25\baselineskip
+    \hrule height \normalrulethickness \vrule width \normalrulethickness height 2mm
+    \vskip \dimexpr - 0.4em - 2mm + \midchapskip \relax
+}\makeatother
+
+\makeatletter\makechapterstyle{robertfry}
+{
+    \setlength{\beforechapskip}{0.1\textheight}
+    \setlength{\midchapskip}{1.5\baselineskip}
+    \setlength{\afterchapskip}{0.05\textheight}
+    \renewcommand*{\chapnamefont}{\hfill\normalfont\Large\scshape}
+    \renewcommand*{\chapnumfont}{\normalfont\HUGE\bfseries\scshape\sffamily}
+    \renewcommand*{\chaptitlefont}{\hfill\normalfont\HUGE\bfseries}
+    \renewcommand*{\chapternamenum}{\chapnumfont\space}
+    \renewcommand*{\afterchapternum}{\normalfont\chapterrule}
+    \renewcommand*{\printchapternonum}{\normalfont\chapterrule}
+    \renewcommand*{\printchaptername}{\chapnamefont \@chapapp}
+    \renewcommand*{\printchapternum}{\chapnumfont {\scalefont{2}$\mathbb{\thechapter}$}}
+    \renewcommand*{\printchaptertitle}{\chaptitlefont}
+}\makeatother
+\chapterstyle{robertfry}
+
+% ~ Section Style ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\maxsecnumdepth{subsection}
+\maxtocdepth{subsection}
+
+\setsecheadstyle{\Large\bfseries\scshape\raggedright}
+\setsubsecheadstyle{\large\bfseries\scshape\raggedright}
+\setsubsubsecheadstyle{\bfseries\scshape\raggedright}

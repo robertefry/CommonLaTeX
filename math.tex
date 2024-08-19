@@ -1,174 +1,176 @@
 
-% Physics Packages
-% \usepackage{siunitx} % broken with physics package
-\usepackage{physics}
-\usepackage{physics2}
-\usepackage{physconst}
 
-% Math Packages
-\usepackage{mathtools}
-\usepackage{amsmath}
-% \usepackage{amsthm} (replaced with theorem::ntheorem)
-\usepackage{amssymb}
-\usepackage{amsfonts}
+\usepackage{xparse}
+\usepackage{xifthen}
+
+% ------------------------------------------------------------------------------
+%   Mathematics
+% ------------------------------------------------------------------------------
+
+\usepackage{amsmath}        % typeset mathematics
+\usepackage{mathtools}      % typeset mathematics symbols
+\usepackage{derivative}     % typeset derivatives
+
+% ------------------------------------------------------------------------------
+%   Physics
+% ------------------------------------------------------------------------------
+
+\usepackage{physics}        % typeset physics
+\usepackage{physconst}      % typeset physics constants
+% todo: look into using physics2 (and siunitx)
 
 % ------------------------------------------------------------------------------
 %   Enclosures
 % ------------------------------------------------------------------------------
 
-\NewDocumentCommand{\xenclose}{D<>{0}mmm}%
-{%
-    \begin{switch}{#1}%
-        \xcase{0}{ \left#2 #4 \right#3 }%
-        \xcase{1}{ \bigl#2 #4 \bigr#3 }%
-        \xcase{2}{ \Bigl#2 #4 \Bigr#3 }%
-        \xcase{3}{ \biggl#2 #4 \biggr#3 }%
-        \xcase{4}{ \Biggl#2 #4 \Biggr#3 }%
-        \xcase{}{ #2 #4 #3 }%
-    \end{switch}%
-}%
+% Enclose content with specified delimiters and optional size
+%
+%  <#1>: the enclosure size (optional) (integer 0 to 6) (default: 0)
+%  {#2}: the left delimiter
+%  {#3}: the right delimiter
+%  {#4}: the content to be enclosed
+%
+\NewDocumentCommand{\xenclose}{D<>{0}mmm}
+{
+    \ifthenelse{\equal{#1}{0}}{ \left#2 #4 \right#3 }{}
+    \ifthenelse{\equal{#1}{1}}{ \bigl#2 #4 \bigr#3 }{}
+    \ifthenelse{\equal{#1}{2}}{ \Bigl#2 #4 \Bigr#3 }{}
+    \ifthenelse{\equal{#1}{3}}{ \biggl#2 #4 \biggr#3 }{}
+    \ifthenelse{\equal{#1}{4}}{ \Biggl#2 #4 \Biggr#3 }{}
+    \ifthenelse{\equal{#1}{5}}{ \bigggl#2 #4 \bigggr#3 }{}
+    \ifthenelse{\equal{#1}{6}}{ \Bigggl#2 #4 \Bigggr#3 }{}
+    \ifthenelse{\equal{#1}{}}{ #2 #4 #3 }{}
+}
 
-\NewDocumentCommand{\xboxed}{D<>{0}m}%
-{%
-    \boxed{ \xenclose<#1>{.}{.}{#2} }%
-}%
+% Enclose content in a box with optional size
+%
+%  <#1>: the enclosure size (optional) (integer 0 to 6) (default: 0)
+%  {#2}: the content to be enclosed in a box
+%
+\NewDocumentCommand{\xboxed}{D<>{0}m}
+{
+    \boxed{ \xenclose<#1>{.}{.}{#2} }
+}
 
 % ~ Named Enclosures ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\NewMap{xopeners} \MapSet{xopeners}{.}{.}
-\NewMap{xclosers} \MapSet{xclosers}{.}{.}
+\makeatletter\newcommand{\xenclosures@namemap@get}[1]{
+    \csname\csname xenclosures@namemap@data@#1\endcsname\endcsname
+}\makeatother
 
-\NewDocumentCommand{\DeclareNamedEnclosure}{>{\SplitList{,}}m mm}
+\makeatletter\newcommand{\xenclosures@namemap@set}[2]{
+    \expandafter\xdef\csname xenclosures@namemap@data@#1\endcsname{#2}
+}\makeatother
+
+% Defines new named enclosure commands for the given list of commands with the
+% specified opener and closer symbols.
+%
+%  {#1}: the command name
+%  [#2]: comma-separated list of aliases (optional)
+%  {#3}: the opening symbol
+%  {#4}: the closing symbol
+%
+% Any aliases are stored in a global name map for future use in more complex
+% enclosures.
+%
+\makeatletter\NewDocumentCommand{\DeclareNamedEnclosure}{m >{\SplitList{,}}o mm}
 {
-    \newcommand{\DefineThisNamedEnclosure}[1]
+    \expandafter\DeclareDocumentCommand{#1}{D<>{0}m}
     {
-        \expandafter\DeclareDocumentCommand\csname x##1\endcsname{D<>{0}m}%
-        {%
-            \xenclose<####1>{#2}{#3}{####2}%
-        }%
-        \MapSet{xopeners}{##1}{#2}
-        \MapSet{xclosers}{##1}{#3}
+        \xenclose<##1>{#3}{#4}{##2}
     }
-    \ProcessList{#1}{\DefineThisNamedEnclosure}
-    \let\DefineThisNamedEnclosure\undefined
+    \newcommand{\AddEnclosureAliasesToNameMap}[1]{
+        \xenclosures@namemap@set{##1}{\expandafter\@gobble\string#1}
+    }\ProcessList{#2}{\AddEnclosureAliasesToNameMap}
+    \let\AddEnclosureAliasesToNameMap\undefined
 }
+\makeatother
 
-\DeclareNamedEnclosure{p,paren}     {(}{)}
-\DeclareNamedEnclosure{b,brack}     {[}{]}
-\DeclareNamedEnclosure{s,brace,set} {\{}{\}}
-\DeclareNamedEnclosure{g,chev,gen}  {\langle}{\rangle}
-\DeclareNamedEnclosure{a,abs}       {\vert}{\vert}
-\DeclareNamedEnclosure{n,norm}      {\Vert}{\Vert}
-\DeclareNamedEnclosure{  floor}     {\lfloor}{\rfloor}
-\DeclareNamedEnclosure{  ceil}      {\lceil}{\rceil}
-\DeclareNamedEnclosure{  round}     {\lfloor}{\rceil}
+\DeclareNamedEnclosure{\paren}[p,  paren    ]{(      }{)      }
+\DeclareNamedEnclosure{\brack}[b,  brack    ]{[      }{]      }
+\DeclareNamedEnclosure{\brace}[s,B,brace,set]{\{     }{\}     }
+\DeclareNamedEnclosure{\chev }[g,  chev ,gen]{\langle}{\rangle}
+\DeclareNamedEnclosure{\abs  }[a,v,abs      ]{\vert  }{\vert  }
+\DeclareNamedEnclosure{\norm }[n,V,norm     ]{\Vert  }{\Vert  }
+\DeclareNamedEnclosure{\floor}[l,  floor    ]{\lfloor}{\rfloor}
+\DeclareNamedEnclosure{\ceil }[u,  ceil     ]{\lceil }{\rceil }
+\DeclareNamedEnclosure{\round}[r,  round    ]{\lfloor}{\rceil }
 
-% ~ Interval Enclosure ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\DeclareNamedEnclosure{\ivoo}[oo,o,open      ]{(}{)}
+\DeclareNamedEnclosure{\ivcc}[cc,c,closed    ]{[}{]}
+\DeclareNamedEnclosure{\ivoc}[oc, ,semiopen  ]{(}{]}
+\DeclareNamedEnclosure{\ivco}[co, ,semiclosed]{[}{)}
 
-\NewDocumentCommand{\xinterval}{D<>{0}mm}%
-{%
-    \begin{switch}{#2}%
-        \xcase{o} { \xenclose<#1>{(}{)}{#3} }%
-        \xcase{c} { \xenclose<#1>{[}{]}{#3} }%
-        \xcase{oo}{ \xenclose<#1>{(}{)}{#3} }%
-        \xcase{cc}{ \xenclose<#1>{[}{]}{#3} }%
-        \xcase{oc}{ \xenclose<#1>{(}{]}{#3} }%
-        \xcase{co}{ \xenclose<#1>{[}{)}{#3} }%
-    \end{switch}%
-}%
+\DeclareNamedEnclosure{\bra  }[bra          ]{\langle}{\vert  }
+\DeclareNamedEnclosure{\ket  }[ket          ]{\vert  }{\rangle}
 
-\NewDocumentCommand{\xio}{D<>{0}m}{ \xinterval<#1>{o}{#2} }
-\NewDocumentCommand{\xic}{D<>{0}m}{ \xinterval<#1>{c}{#2} }
-\NewDocumentCommand{\xioo}{D<>{0}m}{ \xinterval<#1>{oo}{#2} }
-\NewDocumentCommand{\xioc}{D<>{0}m}{ \xinterval<#1>{oc}{#2} }
-\NewDocumentCommand{\xico}{D<>{0}m}{ \xinterval<#1>{co}{#2} }
-\NewDocumentCommand{\xicc}{D<>{0}m}{ \xinterval<#1>{cc}{#2} }
+\newcommand{\xp}{\paren}
+\newcommand{\xb}{\brack}
+\newcommand{\xs}{\brace}
+\newcommand{\xg}{\chev }
+\newcommand{\xa}{\abs  }
+\newcommand{\xn}{\norm }
+\newcommand{\xl}{\floor}
+\newcommand{\xu}{\ceil }
+\newcommand{\xr}{\round}
 
-% ~ Other Enclosures ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\newcommand{\io}{\ivoo}
+\newcommand{\ic}{\ivcc}
 
-% TODO: Fix D<>{0} argument parsing for \xgroup
+% ~ Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\NewDocumentCommand{\xgroup}{D<>{0}O{.}m}%
-{%
-    \xenclose<#1>{\MapGet{xopeners}{#2}}{\MapGet{xclosers}{#2}}{#3}%
-}%
-
-% Functions
-\NewDocumentCommand{\xf}{E{_^}{} D<>{0}O{.}mE{_^}{}}%
-{%
-    \ifel{\IfValueT{#1}{.}\IfValueT{#2}{.}}{}%
-    {%
-        \xgroup<#3>[#4]{#5}%
-    }{%
-        \prescript%
-            {\IfValueT{#2}{#2}}%
-            {\IfValueT{#1}{#1}}%
-        {\xgroup<#3>[#4]{#5}}%
-    }%
-        \IfValueT{#6}{_{#6}}%
-        \IfValueT{#7}{^{#7}}%
-    %
-    \xfrecurse%     % recursive step
-}%
-\NewDocumentCommand{\xfrecurse}{D<>{0}O{p}ge{_^}}%
-{%
-    \IfValueT{#3}%
-    {%
-        % \let\close%
-        \xgroup<#1>[#2]{#3}%
-            \IfValueT{#4}{_{#4}}%
-            \IfValueT{#5}{^{#5}}%
-        %
-        \xfrecurse%     % recursive step
-    }%
-}%
+\makeatletter\NewDocumentCommand{\xf}{E{_^}{} D<>{0}omE{_^}{}}
+{
+    \def\the@enclosure{\IfValueTF{#4}{\xenclosures@namemap@get{#4}<#3>{#5}}{#5}}
+    \ifthenelse{\equal{\IfValueT{#1}{.}\IfValueT{#2}{.}}{}}
+    {
+        \the@enclosure
+            \IfValueT{#6}{_{#6}}
+            \IfValueT{#7}{^{#7}}
+    }{
+        \prescript
+            {\IfValueT{#2}{#2}}
+            {\IfValueT{#1}{#1}}
+        {\the@enclosure}
+            \IfValueT{#6}{_{#6}}
+            \IfValueT{#7}{^{#7}}
+    }
+    \xf@recurse
+}
+\NewDocumentCommand{\xf@recurse}{D<>{0}O{p}ge{_^}}
+{
+    \IfValueT{#3}
+    {
+        \xenclosures@namemap@get{#2}<#1>{#3}
+            \IfValueT{#4}{_{#4}}
+            \IfValueT{#5}{^{#5}}
+        \xf@recurse
+    }
+}
+\makeatother
 
 % ------------------------------------------------------------------------------
-%   Symbols
+%   Miscalaneous
 % ------------------------------------------------------------------------------
 
-\usepackage[g]{esvect}
-\NewDocumentCommand{\xv}{m}{ \vv{#1} }
+% vectors
+\newcommand{\xv}{\vec}
 
-\NewDocumentCommand{\xm}{O{p}m}{ \xgroup[#1]{\begin{matrix}#2\end{matrix}} }
-
-\NewDocumentCommand{\pd}{O{}m}{\partial^{#1} #2}
+% matrices
+\makeatletter\NewDocumentCommand{\xm}{O{p}m}
+{
+    \ifthenelse{\equal{#1}{.}}
+        { \begin{matrix} #2 \end{matrix} }
+        { \xenclosures@namemap@get{#1}{ \xm[.]{#2} } }
+}
+\makeatother
 
 % ------------------------------------------------------------------------------
 %   Operators
 % ------------------------------------------------------------------------------
 
-\renewcommand{\DeclareMathOperator}[2]%
-{%
-    \expandafter\DeclareDocumentCommand{#1}{e{_^}D<>{0}O{p}g}%
-    {%
-        \operatorname{\textnormal{#2}}\IfValueT{##1}{_{##1}}\IfValueT{##2}{^{##2}}%
-        \IfValueT{##5}{\xgroup<##3>[##4]{##5}}%
-    }%
-}%
-
-\DeclareMathOperator{\Id}{Id}           % identity
-
-\DeclareMathOperator{\Hom}{Hom}         % homomorphism
-\DeclareMathOperator{\Iso}{Iso}         % isomorphism
-\DeclareMathOperator{\Aut}{Aut}         % automorphism
-\DeclareMathOperator{\Mon}{Mon}         % monomorphism
-\DeclareMathOperator{\Epi}{Epi}         % epimorphism
-
-\DeclareMathOperator{\Ker}{Ker}         % kernel
 \DeclareMathOperator{\Dom}{Dom}         % domain
 \DeclareMathOperator{\CoDom}{CoDom}     % co-domain
 \DeclareMathOperator{\Img}{Im}          % image
-\DeclareMathOperator{\Ann}{Ann}         % annihilator
-
-\DeclareMathOperator{\Mat}{Mat}         % matrix
-\DeclareMathOperator{\GL}{GL}           % general linear group
-
-\DeclareMathOperator{\Cat}{Cat}         % category
-\DeclareMathOperator{\Set}{Set}         % set
-\DeclareMathOperator{\Grp}{Grp}         % group
-\DeclareMathOperator{\Ring}{Ring}       % ring
-\DeclareMathOperator{\Top}{Top}         % topology
-\DeclareMathOperator{\Met}{Met}         % metric space
-\DeclareMathOperator{\Vect}{Vect}       % vector space
-\DeclareMathOperator{\Mod}{Mod}         % module
+\DeclareMathOperator{\PreIm}{PreIm}     % pre-image
+\DeclareMathOperator{\Ker}{Ker}         % kernel

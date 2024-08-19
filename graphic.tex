@@ -1,5 +1,119 @@
 
-% Tikz Picture
+\usepackage{patchcmd}
+
+% ------------------------------------------------------------------------------
+%   Colours
+% ------------------------------------------------------------------------------
+
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+
+% Sets up a dark mode color scheme for PDF documents
+%
+% This command sets the page color to a dark gray (17% white, 83% black)
+% and the text color to a light gray (90% white, 10% black)
+% It uses the \setglobalcolors command to apply these colors globally
+%
+\newcommand{\pdfdarkmode}
+{
+    \pagecolor{white!17!black}
+    \color{white!90!black}
+
+    \tcbset{
+        , colback=white!17!black
+        , colframe=white!50!black
+        , colbacktitle=white!33!black
+        , coltitle=white!90!black
+        , coltext=white!90!black
+    }
+    \lstset{
+        , basicstyle=\small\ttfamily\color{white!90!black}
+        , commentstyle=\itshape\color{Red!75!Orange}
+        , keywordstyle=\color{DeepSkyBlue}
+        , stringstyle =\color{YellowGreen}
+        , backgroundcolor=\color{white!17!black}
+        , rulecolor=\color{white!50!black}
+    }
+}
+
+% ------------------------------------------------------------------------------
+%   Verbatim Listings
+% ------------------------------------------------------------------------------
+
+\usepackage{listings}
+
+% require list of listings be added to the table of contents
+\patchcommand{\lstlistoflistings}{\addcontentsline{toc}{chapter}{List of Listings}}{}
+
+% use the adobe source-code-pro tele-type font
+\usepackage{sourcecodepro}
+
+% enable automatic trimming of leading whitespace
+\usepackage{lstautogobble}
+
+\lstset{
+    , basicstyle=\small\ttfamily
+    , commentstyle=\itshape\color{Red}
+    , keywordstyle=\color{Blue}
+    , stringstyle =\color{Green}
+    , breakatwhitespace=false
+    , breaklines=true
+    , showtabs=false
+    , tabsize=4
+    , autogobble=true
+    , numbers=left
+    , numberstyle=\scriptsize
+    , numbersep=5mm
+    , xleftmargin=\dimexpr 0.5mm + 5mm + 2em \relax
+    , xrightmargin=\dimexpr 0.5mm \relax
+    , frame=single
+    , framerule=0.5mm
+    , framesep=0.5\baselineskip
+    , framexleftmargin=\dimexpr -0.5\baselineskip + 5mm + 2em \relax
+    , framexrightmargin=\dimexpr -0.5\baselineskip \relax
+    , framextopmargin=0.5mm
+    , aboveskip=0.7\baselineskip plus 0.3\baselineskip minus 0.2\baselineskip
+    , belowskip=-0.3\baselineskip plus 0.3\baselineskip minus 0.2\baselineskip
+    , backgroundcolor=\color{white!95!black}
+    , rulecolor=\color{white!30!black}
+}
+
+% ------------------------------------------------------------------------------
+%   Box Graphics
+% ------------------------------------------------------------------------------
+
+\usepackage{tcolorbox}
+\tcbuselibrary{hooks,external,raster,magazine}
+\tcbuselibrary{breakable,fitting,poster,skins}
+\tcbuselibrary{listings}
+
+\lstdefinestyle{tcblisting}{
+    , frame=single
+}
+\tcbset{
+    , enhanced, breakable
+    , fonttitle=\scshape\bfseries
+    , colback=white!95!black
+    , colframe=white!30!black
+    , arc=0mm
+    , outer arc=0mm
+    , sharpish corners
+    , boxrule=0.5mm
+    , boxsep=0.25\baselineskip
+    , left=1em, right=1em
+    , top=0.25\baselineskip, middle=0.25\baselineskip, bottom=0.25\baselineskip
+    , listing only
+    , listing options pre={
+        , frame=none
+        , xleftmargin=\dimexpr 0.5mm + 5mm + 2em - 1em - 0.5\baselineskip \relax
+        , aboveskip=0mm
+        , belowskip=0mm
+    }
+}
+
+% ------------------------------------------------------------------------------
+%   Tikz Pictures
+% ------------------------------------------------------------------------------
+
 \usepackage{tikz}
 \usepackage{tikz-cd}
 \usepackage{circuitikz}
@@ -9,16 +123,7 @@
 \usetikzlibrary{angles,quotes}
 \usetikzlibrary{shapes.geometric,arrows}
 
-% Graph Plotting
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.17}
-
-% ------------------------------------------------------------------------------
-%   Tikz Styles
-% ------------------------------------------------------------------------------
-
-\NewDocumentEnvironment{ctikzpicture}{}{\begin{center}\begin{tikzpicture}}{\end{tikzpicture}\end{center}}
-\NewDocumentEnvironment{ctikzcd}{}{\begin{center}\begin{tikzcd}}{\end{tikzcd}\end{center}}
+% ~ Tikz Flowchart Styles ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \tikzstyle{flow_startstop}  = [text centered, draw=black, minimum width=3cm, minimum height=1cm, rectangle, rounded corners]
 \tikzstyle{flow_inout}      = [text centered, draw=black, minimum width=3cm, minimum height=1cm, trapezium, trapezium left angle=70, trapezium right angle=110]
@@ -26,7 +131,28 @@
 \tikzstyle{flow_decision}   = [text centered, draw=black, minimum width=3cm, minimum height=1cm, diamond]
 \tikzstyle{flow_arrow}      = [thick, ->, >=stealth]
 
-\tikzset%
-{%
-    ,baseline={([yshift=-0.5ex]current bounding box.center)}%
-}%
+% ------------------------------------------------------------------------------
+%   Graph Plotting
+% ------------------------------------------------------------------------------
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+
+% ------------------------------------------------------------------------------
+%   Exercises
+% ------------------------------------------------------------------------------
+
+\usepackage[exercisedelayed,answerdelayed]{exercise}
+
+\def\shipoutexercises{\shipoutExercise}
+\def\shipoutanswers{\shipoutAnswer}
+
+\makeatletter\renewcommand{\ExerciseHeader}{
+    \colorbox{white!33!black}{\color{white}\Large\ExerciseName\space\ExerciseHeaderNB}
+    \color{white!33!black} \hrule height 0.5mm
+}\makeatother
+
+\makeatletter\renewcommand{\AnswerHeader}{
+    \noindent\bfseries\itshape
+    \AnswerName\space\ExerciseHeaderNB, page \pageref{\AnswerRef}\smallskip
+}\makeatother

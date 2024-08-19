@@ -6,96 +6,43 @@
 \ProvideDocumentCommand{\thmcounter}{}{section}
 
 % ------------------------------------------------------------------------------
-%   Block Environment
-% ------------------------------------------------------------------------------
-
-% Define a new document environment called 'block'
-%
-% <#1> Indentation from the margins.    (optional, default 0em)
-% [#2] Style of the block.              (optional, default 'm')
-% [#3] Title or label for the block.    (optional)
-%
-%  - Style 'm': Minimal block with blanker style
-%  - Style 'M': Minimal block with sharp corners and visible border
-%  - Style 't': Title block with blanker style
-%  - Style 'T': Title block with sharp corners and visible border
-%  - Style 's': Titled box with sharp corners and visible border
-%
-\NewDocumentEnvironment{block}{D<>{0em}O{m}o}%
-{%
-    \begin{center}%
-    \ifeq{#2}{m}%
-    {%
-        \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,blanker]%
-        \IfValueT{#3}{\textsl{\underline{#3:}\ }}%
-    }%
-    \ifeq{#2}{M}%
-    {%
-        \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]%
-        \IfValueT{#3}{\textsl{\underline{#3:}\ }}%
-    }%
-    \ifeq{#2}{t}%
-    {%
-        \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,blanker]%
-        \IfValueT{#3}{\textbf{#3}\xbreakline}%
-    }%
-    \ifeq{#2}{T}%
-    {%
-        \begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]%
-        \IfValueT{#3}{\textbf{#3}\xbreakline}%
-    }%
-    \ifeq{#2}{s}%
-    {%
-        \IfValueTF{#3}%
-            {\begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt,title=\textbf{#3}]}%
-            {\begin{tcolorbox}[breakable,enhanced,width=\linewidth-#1,sharp corners,boxrule=1pt]}%
-    }%
-}{%
-    \end{tcolorbox}%
-    \end{center}%
-}%
-
-% Block Lists
-\NewDocumentEnvironment{*itemize}{}{\begin{itemize}}{\end{itemize}}
-\NewDocumentEnvironment{*itemize*}{}{\begin{block}<3em>\begin{itemize*}}{\end{itemize*}\end{block}}
-\NewDocumentEnvironment{*enumerate}{}{\begin{enumerate}}{\end{enumerate}}
-\NewDocumentEnvironment{*enumerate*}{}{\begin{block}<3em>\begin{enumerate*}}{\end{enumerate*}\end{block}}
-
-% ------------------------------------------------------------------------------
 %   Theorem Environments
 % ------------------------------------------------------------------------------
 
-\theoreminframepreskip{0pt}
-\theoreminframepostskip{0pt}
-\NewDocumentCommand{\qedhere}{O{\proofSymbol}}{\hfill#1}
-
 % This command creates a new theorem environment.
-% It also creates a starred version of the environment that is unnumbered and wrapped in a 'block' environment.
 %
 % {#1}: Name of the new theorem environment.    (mandatory)
 % [#2]: Name of a shared counter.               (optional)
 % {#3}: Theorem title.                          (optional, defaults to #1 if not provided)
 % [#4]: Name of a parent counter.               (optional)
 %
-\NewDocumentCommand{\MakeNewTheorem}{momo}%
-{%
+\NewDocumentCommand{\MakeNewTheorem}{momo}
+{
     \IfValueTF{#4}
-    {%
-        \newtheorem{#1}{#3}[#4]%
-    }{%
-    \IfValueTF{#2}%
-    {%
-        \newtheorem{#1}[#2]{#3}%
-    }{%
-        \newtheorem{#1}{#3}%
-    }}%
-    % Create a starred version of the theorem environment.
-    % This version is unnumbered and wrapped in a 'block' environment.
-    \NewDocumentEnvironment{*#1}{}{\begin{block}[M]\begin{#1}}{\end{#1}\end{block}}
-}%
+    {
+        \newtheorem{#1}{#3}[#4]
+    }{
+    \IfValueTF{#2}
+    {
+        \newtheorem{#1}[#2]{#3}
+    }{
+        \newtheorem{#1}{#3}
+    }}
+}
 
+% todo: indent the theorem counter to match the chapter, section, etc.
+%  * append code to the \chapter, \section, \subsection, \subsubsection commands
+%  * to avoid theorems and sections with the same number, the section counter
+%    should inherit from the theorem counter
+%  * define the \endsection, \endsubsection, etc. commands which revert the
+%    counters.
+%
 % A dummy environment so the actual theorems can use the same `thm' counter.
 \newtheorem{thm}{thm}[\thmcounter]
+
+\theoreminframepreskip{0pt}
+\theoreminframepostskip{0pt}
+\NewDocumentCommand{\qedhere}{O{\proofSymbol}}{\hfill#1}
 
 % ~ Proof Environment ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -111,16 +58,16 @@
 
 % ~ Minor Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\makeatletter\newtheoremstyle{blockminor}%
-    {\item[\hskip\labelsep\theorem@headerfont\underline{##1}\theorem@separator]}%
-    {\item[\hskip\labelsep\theorem@headerfont\underline{##1}\ (##3)\theorem@separator]}%
-\makeatother%
+\makeatletter\newtheoremstyle{blockminor}
+    {\item[\hskip\labelsep\theorem@headerfont##1\theorem@separator]}
+    {\item[\hskip\labelsep\theorem@headerfont##1\ (##3)\theorem@separator]}
+\makeatother
 
 {
     \theoremstyle{blockminor}
-    \theoremheaderfont{\itshape}
+    \theoremheaderfont{\bfseries\scshape}
     \theorembodyfont{\upshape}
-    \theoremseparator{;}
+    \theoremseparator{:}
     \theoremsymbol{}
 
     \MakeNewTheorem{claim}{Claim}
@@ -137,17 +84,17 @@
 
 % ~ Major Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\NewDocumentCommand{\MakeMajorTheorem}{momo}%
-{%
-    \MakeNewTheorem{#1}[#2]{#3}[#4]%
-    \BeforeBeginEnvironment{#1}{\penalty-500}%
-    \BeforeBeginEnvironment{#1*}{\penalty-500}%
-}%
+\NewDocumentCommand{\MakeMajorTheorem}{momo}
+{
+    \MakeNewTheorem{#1}[#2]{#3}[#4]
+    \BeforeBeginEnvironment{#1}{\penalty-500}
+    \BeforeBeginEnvironment{#1*}{\penalty-500}
+}
 
-\makeatletter\newtheoremstyle{blockmajor}%
-    {\item[\hskip\labelsep\theorem@headerfont ##1\ ##2\theorem@separator]}%
-    {\item[\hskip\labelsep\theorem@headerfont ##1\ ##2{\normalfont\ (##3)}\theorem@separator]}%
-\makeatother%
+\makeatletter\newtheoremstyle{blockmajor}
+    {\item[\hskip\labelsep\theorem@headerfont ##1\ ##2\theorem@separator]}
+    {\item[\hskip\labelsep\theorem@headerfont ##1\ ##2{\normalfont\ (##3)}\theorem@separator]}
+\makeatother
 
 {
     \theoremstyle{blockmajor}
@@ -166,10 +113,10 @@
 
 % ~ Titled Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\makeatletter\newtheoremstyle{blocktitle}%
-    {\item[\rlap{\vbox{\hbox{\hskip\labelsep\theorem@headerfont ##1\ ##2\theorem@separator}\hbox{\strut}}}]}%
-    {\item[\rlap{\vbox{\hbox{\hskip\labelsep\theorem@headerfont ##1\ ##2{\normalfont\ (##3)}\theorem@separator}\hbox{\strut}}}]}%
-\makeatother%
+\makeatletter\newtheoremstyle{blocktitle}
+    {\item[\rlap{\vbox{\hbox{\hskip\labelsep\theorem@headerfont ##1\ ##2\theorem@separator}\hbox{\strut}}}]}
+    {\item[\rlap{\vbox{\hbox{\hskip\labelsep\theorem@headerfont ##1\ ##2{\normalfont\ (##3)}\theorem@separator}\hbox{\strut}}}]}
+\makeatother
 
 {
     \theoremstyle{blockmajor}

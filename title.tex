@@ -1,77 +1,76 @@
 
-\usepackage{geometry}
-\usepackage{newpxtext}
-\usepackage{setspace}
+% ~ Additional Variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+% subtitle
 \makeatletter
 \edef\@subtitle{}
-\NewDocumentCommand{\subtitle}{m}%
-{%
-    \def\@subtitle{#1}%
-}%
+\NewDocumentCommand{\subtitle}{m}
+{
+    \def\@subtitle{#1}
+}
 \makeatother
 
+% version number
 \makeatletter
 \newif\if@version@set\@version@setfalse
 \edef\@version{1.0.0}
-\NewDocumentCommand{\version}{mO{0}O{0}D<>{}}%
-{%
-    \edef\@version{#1.#2.#3\ifx\relax#4\relax\else-\fi#4}%
-    \@version@settrue%
-}%
+\NewDocumentCommand{\version}{mO{0}O{0}D<>{}}
+{
+    \edef\@version{#1.#2.#3\ifx\relax#4\relax\else-\fi#4}
+    \@version@settrue
+}
 \makeatother
 
+% supervisors
 \makeatletter
 \edef\@supervisors{}
-\NewDocumentCommand{\supervisor}{m}%
-{%
-    \ifx\@supervisors\empty%
-        \def\@supervisors{#1}%
-    \else%
-        \g@addto@macro\@supervisors{, #1}%
-    \fi%
-}%
+\NewDocumentCommand{\supervisor}{m}
+{
+    \ifx\@supervisors\empty
+        \def\@supervisors{#1}
+    \else
+        \g@addto@macro\@supervisors{, #1}
+    \fi
+}
 \makeatother
 
-\makeatletter\renewcommand\maketitle{
-\begin{titlepage}\centering
+% ~ The \maketitle Command ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    \newgeometry{hmargin=\dimexpr\paperwidth-\textwidth\relax/2}
+\makeatletter\renewcommand\maketitle{
+{
+    \thispagestyle{empty}
 
     \setlength{\parskip}{0pt}
     \setlength{\parindent}{0pt}
 
+    \normalfont\large\scshape
+{
+    \centering
+
     \hrule width \hsize height 0.5mm
     \kern 0.8mm
     \hrule width \hsize height 0.3mm
-    \vspace{5mm}
+    \vskip 16pt
     {
-        \Huge\sc\bfseries\vphantom{Q}\smash{\@title}
-        \ifx\@subtitle\empty\else{\par\vspace{3mm}\Large\sc\itshape\@subtitle}\fi
+        {\Huge\bfseries\vphantom{Q}\smash{\@title}}
+        {\ifx\@subtitle\empty\else\par\vskip0.75\baselineskip\Large\itshape\@subtitle\fi}
     }
-    \vspace{5mm}
+    \vskip 16pt
     \hrule width \hsize height 0.3mm
     \kern 0.8mm
     \hrule width \hsize height 0.5mm
 
-    \kern 1cm
+    \vskip 0.2\baselineskip
+    \if@version@set{\hfill Version: \@version}\fi
+}
+    \vskip 0.5in
 
-    \begin{spacing}{1.5}
-        {
-            \sc
-            \begin{minipage}[t]{0.55\textwidth}\raggedright
-                Author: \@author\\
-                \ifx\@supervisors\empty\else{Supervisors: \@supervisors\\}\fi
-            \end{minipage}
-            \hfill
-            \begin{minipage}[t]{0.4\textwidth}\raggedleft
-                \today\\
-                \if@version@set{Version: \@version\\}\fi
-            \end{minipage}
-        }
-    \end{spacing}
+    Author: \@author \hfill \@date
 
-    \restoregeometry
+    \vskip \baselineskip
+    \ifx\@supervisors\empty\else{Supervisors: \@supervisors}\fi
 
-\end{titlepage}
+    \cleardoublepage
+
+}
 }\makeatother

@@ -1,18 +1,24 @@
 
-% Extra Fonts
-\usepackage[notext]{stix}
-% \usepackage{bm}
-% \usepackage{bbold}
+\usepackage[notext,lcgreekalpha,upint]{stix}    % use a complete set of symbols
+\usepackage{cancel}                             % typeset cancelation symbols
+\usepackage{stackrel}                           % typeset stacked symbols
+\usepackage{scalerel}                           % typeset scaled symbols
+\usepackage{color}                              % typeset symbol colors
 
-% Math Formatting
-\usepackage{stackrel}
+% ------------------------------------------------------------------------------
+%   Symbol Formatting
+% ------------------------------------------------------------------------------
 
-% Symbol Packages
-\usepackage{cancel}
-% \usepackage{wasysym}
-% \usepackage{stmaryrd}
+% braced overset and underset
+\NewDocumentCommand{\usb}{mm}{\underset{#1}{\underbrace{#2}}}
+\NewDocumentCommand{\osb}{mm}{\overset{#1}{\overbrace{#2}}}
 
-% Un-named Greek Symbols
+% ------------------------------------------------------------------------------
+%   Greek Symbols
+% ------------------------------------------------------------------------------
+
+% ~ Un-Named Greek Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 \newcommand{\omicron}{o}
 \newcommand{\Alpha}  {\mathcal{A}}
 \newcommand{\Beta}   {\mathcal{B}}
@@ -28,8 +34,8 @@
 \newcommand{\Tau}    {\mathcal{T}}
 \newcommand{\Chi}    {\mathcal{X}}
 
-% Large-Scale Greek Symbols
-\usepackage{scalerel}
+% ~ Large Greek Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 \newcommand{\bigalpha}  {\scalerel*{\alpha}  {X}}
 \newcommand{\bigbeta}   {\scalerel*{\beta}   {X}}
 \newcommand{\biggamma}  {\scalerel*{\gamma}  {X}}
@@ -55,15 +61,23 @@
 \newcommand{\bigpsi}    {\scalerel*{\psi}    {X}}
 \newcommand{\bigomega}  {\scalerel*{\omega}  {X}}
 
-% Shorthand Symbols
-\newcommand{\vhi}{\varphi}
+% ------------------------------------------------------------------------------
+%   Miscalaneous Symbols
+% ------------------------------------------------------------------------------
 
-% Object Symbols
+% ~ Shorthand Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\newcommand{\vhi}{\varphi}
+\newcommand{\pd}{\partial}
+
+% ~ Objects ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 \newcommand{\LHS}{\mbox{LHS}}
 \newcommand{\RHS}{\mbox{RHS}}
 \renewcommand{\emptyset}{\varnothing}
 
-% Set Symbols
+% ~ Set Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 \newcommand{\nmapsfrom}{\;\cancel{\mapsfrom}\;}
 \newcommand{\nmapsto}{\;\cancel{\mapsto}\;}
 \newcommand{\mapto}{\rightarrow}
@@ -73,41 +87,44 @@
 \newcommand{\nmapto}{\nrightarrow}
 \newcommand{\nmapfrom}{\nleftarrow}
 
-% Logic Symbols
+% ~ Logic Symbols ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 \newcommand{\divs}{\;\big\vert\;}
 \newcommand{\ndivs}{\;\cancel{\big\vert}\;}
 \newcommand{\lxor}{\;\underline{\lor}\;}
 \newcommand{\contradiction}{\ensuremath{\lightning}}
 
-% Markers
-\NewDocumentCommand{\markfix}{}%
-{%
-    \begin{center}%
-        \color[rgb]{0.9,0.1,0.1}%
-        \textbf{\textit{======\underline{FIX}======}}%
-    \end{center}%
-}%
-\NewDocumentCommand{\marktodo}{}%
-{%
-    \begin{center}%
-        \color[rgb]{0.3,0.6,0.9}%
-        \textbf{\textit{======\underline{TODO}======}}%
-    \end{center}%
-}%
-\NewDocumentCommand{\markreview}{}%
-{%
-    \begin{center}%
-        \color[rgb]{0.6,0.3,0.9}%
-        \textbf{\textit{=====\underline{REVIEW}=====}}%
-    \end{center}%
-}%
+% ~ Scientiffic Notation ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-% Formatting Commands
-\NewDocumentCommand{\usb}{mm}{\underset{#1}{\underbrace{#2}}}
-\NewDocumentCommand{\osb}{mm}{\overset{#1}{\overbrace{#2}}}
+\NewDocumentCommand{\xe}{O{10}m}
+{
+    \scaleobj{0.67}{\times\textnormal{#1}}^{#2}
+}
 
-% Scientific Notation
-\NewDocumentCommand{\xe}{O{10}m}%
-{%
-    \scaleobj{0.67}{\times\textnormal{#1}}^{#2}%
-}%
+% ------------------------------------------------------------------------------
+%   Draft Markers
+% ------------------------------------------------------------------------------
+
+\NewDocumentCommand{\markfix}{}
+{
+    \begin{center}
+        \color[rgb]{0.9,0.1,0.1}
+        \textbf{\textit{======\underline{FIX}======}}
+    \end{center}
+}
+
+\NewDocumentCommand{\marktodo}{}
+{
+    \begin{center}
+        \color[rgb]{0.3,0.6,0.9}
+        \textbf{\textit{======\underline{TODO}======}}
+    \end{center}
+}
+
+\NewDocumentCommand{\markreview}{}
+{
+    \begin{center}
+        \color[rgb]{0.6,0.3,0.9}
+        \textbf{\textit{=====\underline{REVIEW}=====}}
+    \end{center}
+}

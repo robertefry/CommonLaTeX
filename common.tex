@@ -1,119 +1,85 @@
 
-% ------------------------------------------------------------------------------
-%   Programming
-% ------------------------------------------------------------------------------
-
 \usepackage{import}
 \usepackage{xparse}
 \usepackage{etoolbox}
-
-% IF Statement
-\usepackage{xifthen}
-\newcommand{\ifeq}[3]{\ifthenelse{\equal{#1}{#2}}{#3}{  }}
-\newcommand{\ifne}[3]{\ifthenelse{\equal{#1}{#2}}{  }{#3}}
-\newcommand{\ifel}[4]{\ifthenelse{\equal{#1}{#2}}{#3}{#4}}
-
-% SWITCH Statement
-\newcommand{\xcase}[2]{#1 #2} % Dummy, so \renewcommand has something to overwrite...
-\NewDocumentEnvironment{switch}{m}{\renewcommand{\xcase}{\ifeq{#1}}}{}
-
-% MAP Data Structure
-\usepackage{pgfkeys}
-\newcommand{\NewMap}[1]{\pgfkeys{/hashmap/#1/.is family, /hashmap/#1/.initial}}
-\newcommand{\MapSet}[3]{\pgfkeyssetvalue{/hashmap/#1/#2}{#3}}
-\newcommand{\MapGet}[2]{\pgfkeysvalueof{/hashmap/#1/#2}}
-\newcommand{\MapHas}[2]{\pgfkeysifdefined{/hashmap/#1/#2}{true}{false}}
-
-% Repeat a String N Times
-\makeatletter\newcount\x@repeat@count
-\newcommand{\xrepeat}[2]%
-{%
-    \begingroup%
-    \x@repeat@count=\z@%
-    \@whilenum\x@repeat@count<#1\do{#2\advance\x@repeat@count\@ne}%
-    \endgroup%
-}%
-\makeatother
+\usepackage{patchcmd}
 
 % ------------------------------------------------------------------------------
-%   Formatting
+%   Document Configuration
 % ------------------------------------------------------------------------------
 
-% Document
-\usepackage{imakeidx}\makeindex
+\usepackage[T1]{fontenc}
+\usepackage{slantsc}
 
-\def\greymode{ \pagecolor[rgb]{0.17,0.17,0.17} \color[rgb]{0.9,0.9,0.9} }
-\def\lastpageblank{ \AtEndDocument{\clearpage\null} }
+\usepackage{newpxtext}      % use the palatino font for text
+\usepackage{newpxmath}      % use the palatino font for math
+\usepackage{anyfontsize}    % typeset speciffic font sizes
 
-% Fonts
-\usepackage{anyfontsize}
-\usepackage{lmodern}
-\usepackage{newpxtext}
+% add an blank page at the end of the document
+\def\lastpageblank{\AtEndDocument
+{
+    \clearpage\Huge\scshape\centering
+    \vspace*{\fill}\[\mathbb{EMPTY}\]\vspace*{\fill}
+    \vspace*{\fill}\[\mathbb{EMPTY}\]\vspace*{\fill}
+}}
 
-% Page Formatting
-\usepackage[many]{tcolorbox}
-\usepackage{vwcol}
-\usepackage{multicol}
-\usepackage{wrapfig}
-\usepackage{setspace}
-\usepackage{float}
+% ~ Document Styles ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\setlength\multicolsep{0.5\baselineskip}
+\usepackage[explicit]{titlesec}     % typeset section titles
 
-\makeatletter
-\interfootnotelinepenalty=\@M
-\makeatother
-
-% Table of Contents Formatting
-\usepackage{tocloft}
-\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
-
-% Text Formatting
-\usepackage{exercise}
-\usepackage{xcolor}
-
-% Break Commands
-\newcommand{\forcebreakpage}{\mbox{}\newpage}
-\newcommand{\forcebreakparg}{\mbox{}\par}
-\newcommand{\forcebreakline}{\mbox{}\newline}
-
-% Force GoodBreak Between Sections (redundant?)
-\usepackage[explicit]{titlesec}
+% force a goodbreak between sections
 \newcommand{\sectionbreak}{\goodbreak}
 \newcommand{\subsectionbreak}{\goodbreak}
 \newcommand{\subsubsectionbreak}{\goodbreak}
 
+% prevent footnotes from breaking across pages
+\makeatletter\interfootnotelinepenalty=\@M\makeatother
+
 % Paragraph Formatting
-\setlength{\parskip}{\the\baselineskip plus \baselineskip minus 0.5\baselineskip}
+\setlength{\parskip}{0.8\baselineskip plus 0.2\baselineskip minus 0.3\baselineskip}
 \setlength{\parindent}{0pt}
 
-% List Formatting
-\usepackage[inline,shortlabels]{enumitem}
-\usepackage{listings}
-\setlist{topsep=0pt}
+% ~ Math Mode Styles ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage{mleftright}     % typeset math in a more natural way
+
+% use subformula delimiters from the mleftright package
+\mleftright
+
+% ~ Document Content ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+% require table of contents be on its own page
+\patchcommand{\tableofcontents}{\clearpage}{\clearpage}
+
+\usepackage{imakeidx}       % typeset an index
+\usepackage{endnotes}       % typeset endnotes
+\usepackage[toc]{glossaries}     % typeset a glossary
+
+% prepare the index
+\makeindex[intoc, columns=3, columnseprule=true]
+
+% command to prepare and print the glossary
+\renewcommand{\makeglossary}{\makenoidxglossaries}
+\renewcommand{\makeglossaries}{\makenoidxglossaries}
+\renewcommand{\printglossary}{\printnoidxglossaries}
+\renewcommand{\printglossaries}{\printnoidxglossaries}
+
+\usepackage{multicol}       % typeset multiple columns of equal width
+\usepackage{float}          % enable placement options for figures and tables
+\usepackage{wrapfig}        % enable text wrapping around figures and tables
+
+% retain paragraph separation under multicol environments (broken in the multicol package)
+\setlength{\multicolsep}{0pt}
+\BeforeBeginEnvironment{multicols}{\vskip\parskip}
+
+\usepackage[inline,shortlabels]{enumitem}   % typeset the list environments
+
+% configure spacing for list environments
+\setlist{topsep=0pt, partopsep=0pt, parsep=\parskip, itemsep=0pt}
 
 % ------------------------------------------------------------------------------
-%   Commands & Environments
+%   Common Commands and Environments
 % ------------------------------------------------------------------------------
 
-% Multi-Column Lists
-\NewDocumentEnvironment{multicol-itemize}{m}%
-{%
-    \ifne{#1}{1}{\begin{multicols}{#1}}%
-    \begin{itemize}%
-}{%
-    \end{itemize}%
-    \ifne{#1}{1}{\end{multicols}}%
-    \vspace{-1\parskip}%
-}%
-\NewDocumentEnvironment{multicol-enumerate}{m}%
-{%
-    \ifne{#1}{1}{\begin{multicols}{#1}}%
-    \begin{enumerate}%
-}{%
-    \end{enumerate}%
-    \ifne{#1}{1}{\end{multicols}}%
-    \vspace{-1\parskip}%
-}%
-
+% shorthand command to underline text
 \newcommand{\ul}[1]{\underline{#1}}
