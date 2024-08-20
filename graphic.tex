@@ -148,11 +148,11 @@
 \def\shipoutanswers{\shipoutAnswer}
 
 \makeatletter\renewcommand{\ExerciseHeader}{
-    \colorbox{white!33!black}{\color{white}\Large\ExerciseName\space\ExerciseHeaderNB}
+    \colorbox{white!33!black}{\color{white}\Large\ExerciseName\space\ExerciseHeaderNB\space\ExerciseHeaderDifficulty}
     \color{white!33!black} \hrule height 0.5mm
 }\makeatother
 
 \makeatletter\renewcommand{\AnswerHeader}{
     \noindent\bfseries\itshape
-    \AnswerName\space\ExerciseHeaderNB, page \pageref{\AnswerRef}\smallskip
+    \AnswerName\space\ExerciseHeaderNB\ExerciseHeaderDifficulty, page \pageref{\AnswerRef}\smallskip
 }\makeatother
