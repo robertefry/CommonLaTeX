@@ -43,6 +43,17 @@
 }
 \makeatother
 
+% title graphic
+\makeatletter
+\newsavebox{\@titlegraphic}
+\newenvironment{titlegraphic}
+    {\begin{lrbox}{\@titlegraphic}\begin{minipage}{\textwidth}\centering}
+    {\end{minipage}\end{lrbox}\global\setbox\@titlegraphic\box\@titlegraphic}
+\makeatother
+\makeatletter\newcommand{\printtitlegraphic}{
+    \usebox{\@titlegraphic}
+}\makeatother
+
 % ~ The \maketitle Command ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \makeatletter\renewcommand\maketitle{
@@ -78,6 +89,9 @@
 
     \vskip \baselineskip
     \ifx\@supervisors\empty\else{Supervisors: \@supervisors}\fi
+
+    \vskip 1in
+    \printtitlegraphic
 
     \cleardoublepage
 
