@@ -1,6 +1,15 @@
 
 % ~ Additional Variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+% author
+\makeatletter
+\edef\@author{}
+\RenewDocumentCommand{\author}{m}
+{
+    \def\@author{#1}
+}
+\makeatother
+
 % subtitle
 \makeatletter
 \edef\@subtitle{}
@@ -65,7 +74,7 @@
 }
     \vskip 0.5in
 
-    Author: \@author \hfill \@date
+    \ifx\@author\empty\else{Author: \@author}\fi \hfill \@date
 
     \vskip \baselineskip
     \ifx\@supervisors\empty\else{Supervisors: \@supervisors}\fi
