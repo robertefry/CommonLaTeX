@@ -10,8 +10,8 @@
 % ------------------------------------------------------------------------------
 
 % braced overset and underset
-\NewDocumentCommand{\usb}{mm}{\underset{#1}{\underbrace{#2}}}
-\NewDocumentCommand{\osb}{mm}{\overset{#1}{\overbrace{#2}}}
+\NewDocumentCommand{\usb}{mm}{\underbracket[\fontdimen8\textfont3]{\:#2\:}_{\text{#1}}}
+\NewDocumentCommand{\osb}{mm}{\overbracket[\fontdimen8\textfont3]{\:#2\:}_{\text{#1}}}
 
 % ------------------------------------------------------------------------------
 %   Greek Symbols
