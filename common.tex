@@ -16,6 +16,9 @@
 % add an blank page at the end of the document
 \def\lastpageblank{\AtEndDocument{\blankpage}}
 
+% number sections like chapters
+\def\numberwithoutchapters{\counterwithout{section}{chapter}}
+
 % ------------------------------------------------------------------------------
 %   Look And Feel
 % ------------------------------------------------------------------------------
