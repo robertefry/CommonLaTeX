@@ -86,5 +86,13 @@
 %   Common Commands and Environments
 % ------------------------------------------------------------------------------
 
-% shorthand command to underline text
-\newcommand{\ul}[1]{\underline{#1}}
+\usepackage{pagecolor}          % access the page background color
+\usepackage{contour}            % typeset colored contours around text
+\usepackage[normalem]{ulem}     % typeset underlined text
+
+\renewcommand{\ULdepth}{1.8pt}
+\contourlength{0.8pt}
+
+% nicely underlined text
+\newcommand{\ul}[1]{\uline{\phantom{#1}}\llap{\contour{\thepagecolor}{#1}}}
+\renewcommand{\underline}{\ul}
