@@ -87,6 +87,8 @@
 \NewDocumentCommand{\MakeMajorTheorem}{momo}
 {
     \MakeNewTheorem{#1}[#2]{#3}[#4]
+
+    % discourage page breaking during major theorems
     \BeforeBeginEnvironment{#1}{\penalty-500}
     \BeforeBeginEnvironment{#1*}{\penalty-500}
 }
