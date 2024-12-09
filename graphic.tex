@@ -76,6 +76,22 @@
 }
 
 % ------------------------------------------------------------------------------
+%   Page Graphics
+% ------------------------------------------------------------------------------
+
+% insert an blank page
+\newcommand{\blankpage}
+{{
+    \clearpage\Huge\scshape\centering
+    \vspace*{\fill}\[\mathbb{EMPTY}\]\vspace*{\fill}
+    \vspace*{\fill}\[\mathbb{EMPTY}\]\vspace*{\fill}
+    \clearpage
+}}
+
+% add an blank page at the end of the document
+\def\lastpageblank{\AtEndDocument{\blankpage}}
+
+% ------------------------------------------------------------------------------
 %   Box Graphics
 % ------------------------------------------------------------------------------
 
