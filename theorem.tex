@@ -7,36 +7,8 @@
 %   Theorem Environments
 % ------------------------------------------------------------------------------
 
-% This command creates a new theorem environment.
-%
-% {#1}: Name of the new theorem environment.    (mandatory)
-% [#2]: Name of a shared counter.               (optional)
-% {#3}: Theorem title.                          (optional, defaults to #1 if not provided)
-% [#4]: Name of a parent counter.               (optional)
-%
-\NewDocumentCommand{\MakeNewTheorem}{momo}
-{
-    \IfValueTF{#4}
-    {
-        \newtheorem{#1}{#3}[#4]
-    }{
-    \IfValueTF{#2}
-    {
-        \newtheorem{#1}[#2]{#3}
-    }{
-        \newtheorem{#1}{#3}
-    }}
-}
-
-% todo: indent the theorem counter to match the chapter, section, etc.
-%  * append code to the \chapter, \section, \subsection, \subsubsection commands
-%  * to avoid theorems and sections with the same number, the section counter
-%    should inherit from the theorem counter
-%  * define the \endsection, \endsubsection, etc. commands which revert the
-%    counters.
-%
-% A dummy environment so the actual theorems can use the same `thm' counter.
-\newtheorem{thm}{thm}[\thmcounter]
+% Define a counter for theorems.
+\newtheorem{thm}{thm}[section]
 
 \theoreminframepreskip{0pt}
 \theoreminframepostskip{0pt}
@@ -51,7 +23,7 @@
     \theoremseparator{.}
     \theoremsymbol{\ensuremath{\square}}
 
-    \MakeNewTheorem{proof}{Proof}
+    \newtheorem{proof}{Proof}
 }
 
 % ~ Minor Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -68,31 +40,31 @@
     \theoremseparator{:}
     \theoremsymbol{}
 
-    \MakeNewTheorem{claim}{Claim}
-    \MakeNewTheorem{condition}{Condition}
-    \MakeNewTheorem{case}{Case}
-    \MakeNewTheorem{remark}{Remark}
-    \MakeNewTheorem{thatis}{That is}
-    \MakeNewTheorem{exempli}{Example}
-    \MakeNewTheorem{note}{Note}
-    \MakeNewTheorem{notice}{Notice}
-    \MakeNewTheorem{hint}{Hint}
+    \newtheorem{claim}{Claim}
+    \newtheorem{condition}{Condition}
+    \newtheorem{case}{Case}
+    \newtheorem{remark}{Remark}
+    \newtheorem{thatis}{That is}
+    \newtheorem{exempli}{Example}
+    \newtheorem{note}{Note}
+    \newtheorem{notice}{Notice}
+    \newtheorem{hint}{Hint}
 
     \theorembodyfont{\upshape\color{MaterialBlue}}
-    \MakeNewTheorem{todo}{TODO}
+    \newtheorem{todo}{TODO}
 
     \theorembodyfont{\upshape\color{MaterialDeepOrange}}
-    \MakeNewTheorem{fixme}{FIXME}
+    \newtheorem{fixme}{FIXME}
 
     \theorembodyfont{\upshape\color{MaterialPurple400}}
-    \MakeNewTheorem{review}{REVIEW}
+    \newtheorem{review}{REVIEW}
 }
 
 % ~ Major Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\NewDocumentCommand{\MakeMajorTheorem}{momo}
+\NewDocumentCommand{\NewMajorTheorem}{mm}
 {
-    \MakeNewTheorem{#1}[#2]{#3}[#4]
+    \newtheorem{#1}[thm]{#2}
 
     % discourage page breaking during major theorems
     \BeforeBeginEnvironment{#1}{\penalty-500}
@@ -111,12 +83,12 @@
     \theoremseparator{.}
     \theoremsymbol{}
 
-    \MakeMajorTheorem{definition}[thm]{Definition}
-    \MakeMajorTheorem{proposition}[thm]{Proposition}
-    \MakeMajorTheorem{postulate}[thm]{Postulate}
-    \MakeMajorTheorem{lemma}[thm]{Lemma}
-    \MakeMajorTheorem{theorem}[thm]{Theorem}
-    \MakeMajorTheorem{corollary}[thm]{Corollary}
+    \NewMajorTheorem{definition}{Definition}
+    \NewMajorTheorem{proposition}{Proposition}
+    \NewMajorTheorem{postulate}{Postulate}
+    \NewMajorTheorem{lemma}{Lemma}
+    \NewMajorTheorem{theorem}{Theorem}
+    \NewMajorTheorem{corollary}{Corollary}
 }
 
 % ~ Titled Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -131,5 +103,5 @@
     \theoremheaderfont{\normalfont\bfseries}
     \theorembodyfont{\upshape}
 
-    \MakeMajorTheorem{example}[thm]{Example}
+    \NewMajorTheorem{example}{Example}
 }
