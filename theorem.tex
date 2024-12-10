@@ -8,7 +8,8 @@
 % ------------------------------------------------------------------------------
 
 % Define a counter for theorems.
-\newtheorem{thm}{thm}[section]
+\newcounter{thm}[section]
+\counterwithin{thm}{section}    % add a similar line to your main.tex to change the counter
 
 \theoreminframepreskip{0pt}
 \theoreminframepostskip{0pt}
