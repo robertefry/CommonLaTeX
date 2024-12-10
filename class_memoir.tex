@@ -3,47 +3,63 @@
 %   Stock Layout
 % ------------------------------------------------------------------------------
 
-\newcommand{\bookstyleHartshorne}
-{
-    \settrimmedsize{9.250in}{6.125in}{*}
-    \settypeblocksize{7.6875in}{4.5625in}{*}
+% Sets the dimensions for book-style bound pages.
+%
+% {#1}: The trimmed height of the page. (mandatory)
+% {#2}: The trimmed width of the page.  (mandatory)
+% {#3}: The width of the binding.       (mandatory)
+%
+\makeatletter\newcommand{\setbookdimensions}[3]{
+    \settrimmedsize{#1}{\dimexpr#2+#3\relax}{*}
     \settrims
         {\dimexpr(\stockheight-\paperheight)/2\relax}
         {\dimexpr\stockwidth-\paperwidth\relax}
-    \setbinding{0.25in}
+    \setbinding{#3}
+    \settypeblocksize{\dimexpr#1-1in\relax}{#2}{*}
+    \setlrmargins{*}{*}{1}
+    \setulmargins{*}{*}{1}
+    \checkandfixthelayout
+}\makeatother
+
+% Sets the dimensions for pdf-style unbound pages.
+%
+% {#1}: The trimmed height of the page. (mandatory)
+% {#2}: The trimmed width of the page.  (mandatory)
+%
+\makeatletter\newcommand{\setpdfdimensions}[2]{
+    \settrimmedsize{#1}{#2}{*}
+    \settrims
+        {\dimexpr(\stockheight-\paperheight)/2\relax}
+        {\dimexpr(\stockwidth-\paperwidth)/2\relax}
+    \setbinding{0in}
+    \settypeblocksize{\dimexpr#1-1in\relax}{#2}{*}
+    \setlrmargins{*}{*}{1}
+    \setulmargins{*}{*}{1}
+    \checkandfixthelayout
+}\makeatother
+
+% ~ Concrete Layouts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\newcommand{\layoutHartshornePdf}
+{
+    \setpdfdimensions{9.250in}{6.125in}
+    \settypeblocksize{7.6875in}{4.5625in}{*}
+    \setlrmargins{*}{*}{1}
+    \setulmargins{*}{*}{1}
+    \checkandfixthelayout
+}
+
+\newcommand{\layoutHartshorneBook}
+{
+    \setbookdimensions{9.250in}{6.125in}{0.3in}
+    \settypeblocksize{7.6875in}{4.5625in}{*}
     \setlrmargins{*}{*}{2}
     \setulmargins{*}{*}{1}
     \checkandfixthelayout
 }
 
-\newcommand{\pdfstyleHartshorne}
-{
-    \settrimmedsize{9.250in}{6.125in}{*}
-    \settypeblocksize{7.6875in}{4.5625in}{*}
-    \settrims
-        {\dimexpr(\stockheight-\paperheight)/2\relax}
-        {\dimexpr(\stockwidth-\paperwidth)/2\relax}
-    \setbinding{0in}
-    \setlrmargins{*}{*}{1}
-    \setulmargins{*}{*}{1}
-    \checkandfixthelayout
-}
-
-\newcommand{\pdfArticle}
-{
-    \settrimmedsize{11in}{8in}{*}
-    \settypeblocksize{9in}{6.5in}{*}
-    \settrims
-        {\dimexpr(\stockheight-\paperheight)/2\relax}
-        {\dimexpr(\stockwidth-\paperwidth)/2\relax}
-    \setbinding{0in}
-    \setlrmargins{*}{*}{1}
-    \setulmargins{*}{*}{1}
-    \checkandfixthelayout
-}
-
 % Load the default page layout
-\bookstyleHartshorne
+\layoutHartshorneBook
 
 % ------------------------------------------------------------------------------
 %   Document Styling
