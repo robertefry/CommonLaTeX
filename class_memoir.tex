@@ -40,6 +40,24 @@
 
 % ~ Concrete Layouts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+\newcommand{\layoutInternationalPdf}
+{
+    \setpdfdimensions{10in}{7in}
+    \settypeblocksize{8.5in}{6.0in}{*}
+    \setlrmargins{*}{*}{1}
+    \setulmargins{*}{*}{1}
+    \checkandfixthelayout
+}
+
+\newcommand{\layoutInternationalBook}
+{
+    \setbookdimensions{10in}{7in}{0.3in}
+    \settypeblocksize{8.5in}{6.0in}{*}
+    \setlrmargins{*}{*}{1}
+    \setulmargins{*}{*}{1}
+    \checkandfixthelayout
+}
+
 \newcommand{\layoutHartshornePdf}
 {
     \setpdfdimensions{9.250in}{6.125in}
@@ -59,7 +77,7 @@
 }
 
 % Load the default page layout
-\layoutHartshorneBook
+\layoutInternationalPdf
 
 % ------------------------------------------------------------------------------
 %   Document Styling
