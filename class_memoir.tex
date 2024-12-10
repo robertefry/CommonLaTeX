@@ -3,7 +3,6 @@
 %   Stock Layout
 % ------------------------------------------------------------------------------
 
-% set the page layout for a printed book
 \newcommand{\bookstyleHartshorne}
 {
     \settrimmedsize{9.250in}{6.125in}{*}
@@ -17,11 +16,23 @@
     \checkandfixthelayout
 }
 
-% set the page layout for a desktop pdf
 \newcommand{\pdfstyleHartshorne}
 {
     \settrimmedsize{9.250in}{6.125in}{*}
     \settypeblocksize{7.6875in}{4.5625in}{*}
+    \settrims
+        {\dimexpr(\stockheight-\paperheight)/2\relax}
+        {\dimexpr(\stockwidth-\paperwidth)/2\relax}
+    \setbinding{0in}
+    \setlrmargins{*}{*}{1}
+    \setulmargins{*}{*}{1}
+    \checkandfixthelayout
+}
+
+\newcommand{\pdfArticle}
+{
+    \settrimmedsize{11in}{8in}{*}
+    \settypeblocksize{9in}{6.5in}{*}
     \settrims
         {\dimexpr(\stockheight-\paperheight)/2\relax}
         {\dimexpr(\stockwidth-\paperwidth)/2\relax}
