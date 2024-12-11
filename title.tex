@@ -5,7 +5,7 @@
 \edef\@titlebreak{\cleardoublepage}
 \newcommand{\titlesamepage}
 {
-    \def\@titlebreak{\hrule}
+    \def\@titlebreak{\hrule\vskip\dimexpr\headsep-\baselineskip\relax}
 }
 \makeatother
 
