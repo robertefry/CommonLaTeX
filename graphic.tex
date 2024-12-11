@@ -83,8 +83,10 @@
 \newcommand{\blankpage}
 {{
     \clearpage\Huge\scshape\centering
-    \vspace*{\fill}\[\mathbb{EMPTY}\]\vspace*{\fill}
-    \vspace*{\fill}\[\mathbb{EMPTY}\]\vspace*{\fill}
+    \begin{minipage}[c][\textheight][c]{\textwidth}
+        \vspace*{\fill}\[\mathbb{EMPTY}\]\vspace*{\fill}
+        \vspace*{\fill}\[\mathbb{EMPTY}\]\vspace*{\fill}
+    \end{minipage}
     \clearpage
 }}
 
