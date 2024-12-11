@@ -1,6 +1,14 @@
 
 % ~ Additional Variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+\makeatletter
+\edef\@titlebreak{\cleardoublepage}
+\newcommand{\titlesamepage}
+{
+    \def\@titlebreak{\hrule}
+}
+\makeatother
+
 % author
 \makeatletter
 \edef\@author{}
@@ -92,7 +100,7 @@
     \vskip 0.03\textwidth
     \printtitlegraphic
 
-    \cleardoublepage
+    \@titlebreak
 
 }
 }\makeatother
