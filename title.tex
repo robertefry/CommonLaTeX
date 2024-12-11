@@ -66,16 +66,17 @@
     \normalfont\large\scshape
 {
     \centering
+    \vspace*{1.3mm-\baselineskip}
 
     \hrule width \hsize height 0.5mm
     \kern 0.8mm
     \hrule width \hsize height 0.3mm
-    \vskip 16pt
+    \vskip \baselineskip
     {
-        {\Huge\bfseries\vphantom{Q}\smash{\@title}}
-        {\ifx\@subtitle\empty\else\par\vskip0.75\baselineskip\Large\itshape\@subtitle\fi}
+        {\Huge\bfseries\@title}%
+        {\ifx\@subtitle\empty\else\par\vskip0.75\baselineskip\Large\itshape\@subtitle\fi}%
     }
-    \vskip 16pt
+    \vskip \baselineskip
     \hrule width \hsize height 0.3mm
     \kern 0.8mm
     \hrule width \hsize height 0.5mm
@@ -83,14 +84,12 @@
     \vskip 0.2\baselineskip
     \if@version@set{\hfill Version: \@version}\fi
 }
-    \vskip 0.5in
+    \vskip 0.03\textwidth
 
     \ifx\@author\empty\else{Author: \@author}\fi \hfill \@date
+    \ifx\@supervisors\empty\else{\\Supervisors: \@supervisors}\fi
 
-    \vskip \baselineskip
-    \ifx\@supervisors\empty\else{Supervisors: \@supervisors}\fi
-
-    \vskip 1in
+    \vskip 0.03\textwidth
     \printtitlegraphic
 
     \cleardoublepage
