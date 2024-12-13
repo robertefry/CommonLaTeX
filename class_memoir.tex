@@ -121,14 +121,12 @@
 }}\makeatother
 
 \makeatletter\newcommand{\chapterrule}{
-    \goodbreak
     \par\nobreak \vskip 0.25\baselineskip
     \hrule height \normalrulethickness \vrule width \normalrulethickness height 2mm
     \vskip \dimexpr - 0.4em - 2mm + \midchapskip \relax
 }\makeatother
 
-\makeatletter\makechapterstyle{robertfry}
-{
+\makeatletter\makechapterstyle{robertfry}{
     \setlength{\beforechapskip}{0.1\textheight}
     \setlength{\midchapskip}{1.0\baselineskip}
     \setlength{\afterchapskip}{3.0\baselineskip}
@@ -137,11 +135,13 @@
     \renewcommand*{\chaptitlefont}{\hfill\normalfont\Huge\bfseries}
     \renewcommand*{\chapternamenum}{\chapnumfont\space}
     \renewcommand*{\afterchapternum}{\normalfont\chapterrule}
-    \renewcommand*{\printchapternonum}{\vspace*{-\beforechapskip-\baselineskip}\normalfont\chapterrule}
+    \renewcommand*{\printchapternonum}{\vspace*{-\baselineskip-0.5mm}\normalfont\chapterrule}
     \renewcommand*{\printchaptername}{\chapnamefont \@chapapp}
     \renewcommand*{\printchapternum}{\chapnumfont {\scalefont{2}$\mathbb{\thechapter}$}}
     \renewcommand*{\printchaptertitle}{\chaptitlefont}
+    \renewcommand*{\chapterheadstart}{\par{\Huge\needspace{8\baselineskip}}\vspace{\beforechapskip}}
 }\makeatother
+
 \chapterstyle{robertfry}
 
 % ~ Section Style ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
