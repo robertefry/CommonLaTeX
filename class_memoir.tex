@@ -130,14 +130,14 @@
 \makeatletter\makechapterstyle{robertfry}
 {
     \setlength{\beforechapskip}{0.1\textheight}
-    \setlength{\midchapskip}{1.5\baselineskip}
-    \setlength{\afterchapskip}{0.05\textheight}
+    \setlength{\midchapskip}{1.0\baselineskip}
+    \setlength{\afterchapskip}{3.0\baselineskip}
     \renewcommand*{\chapnamefont}{\hfill\normalfont\Large\scshape}
     \renewcommand*{\chapnumfont}{\normalfont\HUGE\bfseries\scshape\sffamily}
     \renewcommand*{\chaptitlefont}{\hfill\normalfont\HUGE\bfseries}
     \renewcommand*{\chapternamenum}{\chapnumfont\space}
     \renewcommand*{\afterchapternum}{\normalfont\chapterrule}
-    \renewcommand*{\printchapternonum}{\normalfont\chapterrule}
+    \renewcommand*{\printchapternonum}{\vspace*{-\beforechapskip-\baselineskip}\normalfont\chapterrule}
     \renewcommand*{\printchaptername}{\chapnamefont \@chapapp}
     \renewcommand*{\printchapternum}{\chapnumfont {\scalefont{2}$\mathbb{\thechapter}$}}
     \renewcommand*{\printchaptertitle}{\chaptitlefont}
