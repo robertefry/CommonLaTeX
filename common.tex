@@ -60,6 +60,29 @@
 % configure spacing for list environments
 \setlist{topsep=0pt, partopsep=0pt, parsep=\parskip, itemsep=0pt}
 
+% ~ Bibliography ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage[style=alphabetic]{biblatex}       % typeset a bibliography
+\usepackage{csquotes}       % enable context-sensitive quotation facilities
+
+\makeatletter\defbibenvironment{bibliography}
+{
+    \list{\bfseries\itshape\printfield[labelalphawidth]{labelalpha}}
+    {
+        \setlength{\leftmargin}{1em}
+        \setlength{\labelwidth}{\labelalphawidth}
+        \setlength{\labelsep}{\biblabelsep}
+        \setlength{\itemindent}{0pt}
+        \addtolength{\itemindent}{\labelwidth}
+        \addtolength{\itemindent}{\labelsep}
+        \addtolength{\itemindent}{-\leftmargin}
+        \setlength{\itemsep}{\bibitemsep}
+        \setlength{\parsep}{\bibparsep}
+    }
+    \renewcommand*{\makelabel}[1]{\hss##1}
+}
+{\endlist}{\item}\makeatother
+
 % ~ Index and Glossaries ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \usepackage{imakeidx}       % typeset an index
