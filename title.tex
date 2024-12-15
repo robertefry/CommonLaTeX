@@ -1,13 +1,33 @@
 
-% ~ Additional Variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% ~ Title Placement ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \makeatletter
-\edef\@titlebreak{\cleardoublepage}
-\newcommand{\titlesamepage}
-{
-    \def\@titlebreak{\hrule\vskip\dimexpr\headsep-\baselineskip\relax}
-}
+    \def\title@placement@ownpage{ownpage}       % title is printed on it's own leaf
+    \def\title@placement@ownside{ownside}       % title is printed on it's own side of a leaf
+    \def\title@placement@fullwidth{fullwidth}   % title is printed on the same side as the main matter, striping the page
+    \def\title@placement@inline{inline}         % title is printed on the same side as the main matter, in the text column
 \makeatother
+
+\makeatletter\newcommand{\titleownpage}{
+    \edef\title@placement{\title@placement@ownpage}
+}\makeatother
+
+\makeatletter\newcommand{\titleownside}{
+    \edef\title@placement{\title@placement@ownside}
+}\makeatother
+
+\makeatletter\newcommand{\titlefullwidth}{
+    \edef\title@placement{\title@placement@fullwidth}
+}\makeatother
+
+\makeatletter\newcommand{\titleinline}{
+    \edef\title@placement{\title@placement@inline}
+}\makeatother
+
+% by default the title is printed striping the full page
+\titlefullwidth
+
+% ~ Title Variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 % author
 \makeatletter
@@ -64,7 +84,9 @@
 
 % ~ The \maketitle Command ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\makeatletter\renewcommand\maketitle{
+\usepackage{cuted}
+
+\makeatletter\newcommand{\printtitle}{
 {
     \thispagestyle{empty}
 
@@ -100,7 +122,23 @@
     \vskip 0.03\textwidth
     \printtitlegraphic
 
-    \@titlebreak
-
 }
+}\makeatother
+
+\makeatletter\newcommand{\placetitle}{
+    \ifx\title@placement\title@placement@ownpage    \begin{strip}\printtitle\end{strip}\fi
+    \ifx\title@placement\title@placement@ownside    \begin{strip}\printtitle\end{strip}\fi
+    \ifx\title@placement\title@placement@fullwidth  \begin{strip}\printtitle\end{strip}\fi
+    \ifx\title@placement\title@placement@inline     \printtitle\fi
+}\makeatother
+
+\makeatletter\newcommand{\placetitlesep}{
+    \ifx\title@placement\title@placement@ownpage    \mbox{}\cleardoublepage\fi
+    \ifx\title@placement\title@placement@ownside    \mbox{}\clearpage\fi
+    \ifx\title@placement\title@placement@fullwidth  \fi
+    \ifx\title@placement\title@placement@inline     \hrule\vskip\dimexpr\headsep-\baselineskip\relax\fi
+}\makeatother
+
+\makeatletter\renewcommand{\maketitle}{
+    \placetitle\placetitlesep
 }\makeatother
