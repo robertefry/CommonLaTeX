@@ -76,6 +76,17 @@
     \checkandfixthelayout
 }
 
+\NewDocumentCommand{\layoutMaximalPdf}{O{0.3in}O{0.3in}}
+{
+    \setpdfdimensions{\stockheight}{\stockwidth}
+    \setlrmarginsandblock{#1}{#1}{*}
+    \setulmarginsandblock{#2}{#2}{*}
+    \setheadfoot{\baselineskip}{9pt}
+    \setlength{\headsep}{0pt}
+    \setlength{\topskip}{0pt}
+    \checkandfixthelayout
+}
+
 % Load the default page layout
 \layoutInternationalPdf
 
