@@ -102,7 +102,7 @@
 % ~ PDF Hyperlinks ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \usepackage[pdfusetitle,frenchlinks,hidelinks]{hyperref}
-\urlstyle{same}
+\renewcommand{\url}[1]{\href{#1}{\underline{#1}}}
 
 % ------------------------------------------------------------------------------
 %   Common Commands and Environments
