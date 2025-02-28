@@ -1,0 +1,145 @@
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\pagestyle{plain}
+\pagenumbering{gobble}
+
+\titlespacing*{\section}
+    {0pt}                 % indentation
+    {0.5\baselineskip}    % vspace preceding
+    {0.0\baselineskip}    % vspace following
+
+\setcounter{secnumdepth}{0}
+
+% ~ The \maketitle Command ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\makeatletter\edef\resume@author@mobile{}
+\NewDocumentCommand{\authormobile}{m}{
+    \def\resume@author@mobile{#1}
+}\makeatother
+
+\makeatletter\edef\resume@author@email{}
+\NewDocumentCommand{\authoremail}{m}{
+    \def\resume@author@email{#1}
+}\makeatother
+
+\makeatletter\edef\resume@author@website{}
+\NewDocumentCommand{\authorwebsite}{m}{
+    \def\resume@author@website{#1}
+}\makeatother
+
+\makeatletter\edef\resume@author@github{}
+\NewDocumentCommand{\authorgithub}{m}{
+    \def\resume@author@github{#1}
+}\makeatother
+
+\newcommand{\ilnk}[3]{\href{#2#3}{#1\ #3}}
+
+\makeatletter\renewcommand{\maketitle}{{
+    \begin{tcolorbox}[top=0.3\baselineskip, bottom=0.3\baselineskip]
+        \LARGE\bfseries\scshape\centering \@author
+        \tcblower\large\hfill
+        \if\resume@author@email\empty\else{\ilnk{\faEnvelope}{mailto:}{\resume@author@email} \hfill}\fi
+        \if\resume@author@mobile\empty\else{\ilnk{\faMobile*}{tel:}{\resume@author@mobile}\hfill}\fi
+        \if\resume@author@website\empty\else{\ilnk{\faInternetExplorer}{https://}{\resume@author@website} \hfill}\fi
+        \if\resume@author@github\empty\else{\ilnk{\faGithub}{https://github.com/}{\resume@author@github} \hfill}\fi
+        \mbox{}\hfill
+    \end{tcolorbox}
+}}\makeatother
+
+% ~ Resume Sections ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage{tcolorbox}
+
+\makeatletter\NewDocumentCommand{\ResumeSection}{m}{
+    \begin{tcolorbox}
+        \section{\texorpdfstring{\centering #1}{#1}}
+    \end{tcolorbox}
+}\makeatother
+
+% ~ Resume Subsections ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage{pgfkeys}
+
+% Processes a list of key-value options common to every resume command.
+%
+% Key `company':    The company name.
+% Key `location':   The company location.
+% Key `start':      The start date.
+% Key `end':        The end date.
+% Key `link':       A link.
+%
+\makeatletter\newcommand{\ProcessResumeOptions}[1]{
+    \pgfkeys{
+        /resume/.is family,
+        /resume/company/.initial={},
+        /resume/location/.initial={},
+        /resume/start/.initial={},
+        /resume/end/.initial={Ongoing},
+        /resume/link/.initial={},
+    }
+    \pgfkeys{/resume,#1}
+    \def\@thecompany{\pgfkeysvalueof{/resume/company}}
+    \def\@thelocation{\pgfkeysvalueof{/resume/location}}
+    \def\@thestart{\pgfkeysvalueof{/resume/start}}
+    \def\@theend{\pgfkeysvalueof{/resume/end}}
+    \def\@thelink{\pgfkeysvalueof{/resume/link}}
+
+    \def\@datesep{\if\@thestart\empty\else\if\@theend\empty\else\ -\ \fi\fi}
+    \def\@thedate{\@thestart \@datesep \@theend}
+
+    \def\@infoskip{}
+    \if\@thecompany\empty\else\def\@infoskip{\\\mbox{}}\fi
+    \if\@thelocation\empty\else\def\@infoskip{\\\mbox{}}\fi
+
+    \def\@infosep{}
+    \if\@thelocation\empty\else\def\@infosep{\hfill}\fi
+
+    \def\@linktext{\if\@thelink\empty\else{(\url{\@thelink})}\fi}
+    \def\@linkskip{}
+    \if\@thelink\empty\else\def\@linkskip{\\\mbox{}}\fi
+
+    % Export the processed variables
+    %
+    \def\resume@company{\@thecompany}
+    \def\resume@location{\@thelocation}
+    \def\resume@date{\@thedate}
+    \def\resume@link{\@linktext}
+    \def\resume@infoskip{\@infoskip}
+    \def\resume@infosep{\@infosep}
+    \def\resume@linkskip{\@linkskip}
+
+}\makeatother
+
+% Formats resume history information.
+%
+% {#1}: The history title               (mandatory)
+% [#2]: The list of key=value options.
+%
+\makeatletter\NewDocumentCommand{\ResumeHistory}{mO{}}{\parbox{\textwidth}{
+    \ProcessResumeOptions{#2}
+    \bfseries #1 {\normalfont\itshape\resume@link} \hfill \resume@date
+    \resume@infoskip \resume@company \resume@infosep \resume@location
+    \vskip 0.5ex \hrule
+}}\makeatother
+
+% Formats resume role information.
+%
+% {#1}: The role title                  (mandatory)
+% [#2]: The list of key=value options.
+%
+\makeatletter\NewDocumentCommand{\ResumeRole}{mO{}}{\parbox{\textwidth}{
+    \ProcessResumeOptions{#2}
+    \bfseries #1 {\normalfont\itshape\resume@link}
+}}\makeatother
+
+% Formats university thesis information.
+%
+% {#1}: The thesis title                (mandatory)
+% [#2]: The list of key=value options.
+%
+\makeatletter\NewDocumentCommand{\ResumeThesis}{mmO{}}{\parbox{\textwidth}{
+    \ProcessResumeOptions{#3}
+    {\bfseries #1} {\normalfont\itshape\resume@link}
+    \\ {\scshape #2}
+}}\makeatother
