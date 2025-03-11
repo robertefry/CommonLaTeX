@@ -101,8 +101,15 @@
 
 % ~ PDF Hyperlinks ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\usepackage[pdfusetitle,frenchlinks,hidelinks]{hyperref}
-\renewcommand{\url}[1]{\href{#1}{\underline{#1}}}
+\usepackage{hyperref}
+
+\hypersetup{
+    frenchlinks,
+    hidelinks,
+    urlbordercolor=black,
+    pdfborderstyle={/S/U/W 1},
+}
+\renewcommand{\UrlFont}{\ttfamily\small}
 
 % ------------------------------------------------------------------------------
 %   Common Commands and Environments
