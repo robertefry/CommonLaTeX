@@ -51,7 +51,7 @@
 \makeatletter\renewcommand{\maketitle}{{
     \begin{tcolorbox}[top=0.3\baselineskip, bottom=0.3\baselineskip]
         \LARGE\bfseries\scshape\centering \@author
-        \tcblower\large\hfill
+        \tcblower\normalsize\hfill
         \if\resume@author@email\empty\else{\ilnk{\faEnvelope[regular]}{mailto:}{\resume@author@email} \hfill}\fi
         \if\resume@author@mobile\empty\else{\ilnk{\faMobile*}{tel:}{\resume@author@mobile}\hfill}\fi
         \if\resume@author@website\empty\else{\ilnk{\faInternetExplorer}{https://}{\resume@author@website} \hfill}\fi
