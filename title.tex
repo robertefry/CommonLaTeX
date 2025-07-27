@@ -84,51 +84,49 @@
 
 % ~ The \maketitle Command ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\usepackage{cuted}
-
-\makeatletter\newcommand{\printtitle}{
-{
+\makeatletter\newcommand{\printtitle}
+{{
+    % TODO: Maybe use my page style for inline/fullwidth titles?
     \thispagestyle{empty}
 
     \setlength{\parskip}{0pt}
     \setlength{\parindent}{0pt}
 
     \normalfont\large\scshape
-{
-    \centering
-    {\normalsize\vspace*{-\baselineskip}}
-
-    \hrule width \hsize height 0.5mm
-    \kern 0.8mm
-    \hrule width \hsize height 0.3mm
-    \vskip \baselineskip
     {
-        {\Huge\bfseries\@title}%
-        {\ifx\@subtitle\empty\else\par\vskip0.75\baselineskip\Large\itshape\@subtitle\fi}%
+        \centering
+        {\normalsize\vspace*{-\baselineskip}}
+
+        \hrule width \hsize height 0.5mm
+        \kern 0.8mm
+        \hrule width \hsize height 0.3mm
+        \vskip \baselineskip
+        {
+            {\Huge\bfseries\@title}
+            {\ifx\@subtitle\empty\else\par\vskip0.75\baselineskip\Large\itshape\@subtitle\fi}
+        }
+        \vskip \baselineskip
+        \hrule width \hsize height 0.3mm
+        \kern 0.8mm
+        \hrule width \hsize height 0.5mm
+
+        \if@version@set{\vskip 0.2\baselineskip\hfill Version: \@version}\fi
     }
     \vskip \baselineskip
-    \hrule width \hsize height 0.3mm
-    \kern 0.8mm
-    \hrule width \hsize height 0.5mm
-
-    \vskip 0.2\baselineskip
-    \if@version@set{\hfill Version: \@version}\fi
-}
-    \vskip 0.03\textwidth
 
     \ifx\@author\empty\else{Author: \@author}\fi \hfill \@date
     \ifx\@supervisors\empty\else{\\Supervisors: \@supervisors}\fi
 
-    \vskip 0.03\textwidth
     \printtitlegraphic
 
-}
-}\makeatother
+    \vskip \baselineskip
+}}
+\makeatother
 
 \makeatletter\newcommand{\placetitle}{
-    \ifx\title@placement\title@placement@ownpage    \begin{strip}\printtitle\end{strip}\fi
-    \ifx\title@placement\title@placement@ownside    \begin{strip}\printtitle\end{strip}\fi
-    \ifx\title@placement\title@placement@fullwidth  \begin{strip}\printtitle\end{strip}\fi
+    \ifx\title@placement\title@placement@ownpage    \if@twocolumn\twocolumn[\printtitle]\else\printtitle\fi\fi
+    \ifx\title@placement\title@placement@ownside    \if@twocolumn\twocolumn[\printtitle]\else\printtitle\fi\fi
+    \ifx\title@placement\title@placement@fullwidth  \if@twocolumn\twocolumn[\printtitle]\else\printtitle\fi\fi
     \ifx\title@placement\title@placement@inline     \printtitle\fi
 }\makeatother
 
@@ -136,7 +134,7 @@
     \ifx\title@placement\title@placement@ownpage    \mbox{}\cleardoublepage\fi
     \ifx\title@placement\title@placement@ownside    \mbox{}\clearpage\fi
     \ifx\title@placement\title@placement@fullwidth  \fi
-    \ifx\title@placement\title@placement@inline     \hrule\vskip\dimexpr\headsep-\baselineskip\relax\fi
+    \ifx\title@placement\title@placement@inline     \fi
 }\makeatother
 
 \makeatletter\renewcommand{\maketitle}{
