@@ -46,7 +46,9 @@
 \usepackage{listings}
 
 % require list of listings be added to the table of contents
-\patchcommand{\lstlistoflistings}{\addcontentsline{toc}{chapter}{List of Listings}}{}
+\apptocmd{\lstlistoflistings}{
+    \addcontentsline{toc}{chapter}{List of Listings}
+}{}{}
 
 % use the adobe source-code-pro tele-type font
 \usepackage{sourcecodepro}
