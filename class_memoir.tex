@@ -99,8 +99,8 @@
 
 % ~ Page Style ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-% \renewcommand{\footruleskip}{\baselineskip}
-\renewcommand{\footnoterule}{\hrule width 0.5\hsize height \normalrulethickness}
+\setlength{\skip\footins}{0.75\baselineskip plus 0.25\baselineskip minus 0.25\baselineskip}
+\renewcommand{\footnoterule}{\hrule width 0.5\hsize height \normalrulethickness \vskip0.5ex}
 
 \makepagestyle{robertfry}
 \makeevenhead{robertfry}{\small\thepage}{}{\small\scshape\leftmark}
