@@ -20,6 +20,12 @@
 % tag equations within the section
 \numberwithin{equation}{section}
 
+% shorthand to label and tag an equation
+\makeatletter\newcommand{\eqn}[1]{
+    \if@display\tag{\theequation}\stepcounter{equation}\fi
+    \label{#1}
+}\makeatother
+
 % use amsmath equation environments
 \makeatletter\newcommand{\equationdisplaymath}{
     \renewcommand{\[}{\begin{equation*}}
