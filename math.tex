@@ -17,6 +17,12 @@
 % use subformula delimiters from the mleftright package
 \mleftright
 
+% use amsmath equation environments
+\makeatletter\newcommand{\equationdisplaymath}{
+    \renewcommand{\[}{\begin{equation*}}
+    \renewcommand{\]}{\end{equation*}}
+}\makeatother
+
 % ------------------------------------------------------------------------------
 %   Physics
 % ------------------------------------------------------------------------------
