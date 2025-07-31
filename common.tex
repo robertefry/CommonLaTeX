@@ -3,6 +3,7 @@
 \usepackage{xparse}
 \usepackage{etoolbox}
 \usepackage{patchcmd}
+\usepackage{totcount}
 
 % ------------------------------------------------------------------------------
 %   Look And Feel
@@ -37,6 +38,29 @@
 % configure paragraphs
 \setlength{\parskip}{0.8\baselineskip plus 0.2\baselineskip minus 0.3\baselineskip}
 \setlength{\parindent}{0pt}
+
+% ~ Footnotes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage[stable,multiple,bottom]{footmisc}
+\usepackage{anyfontsize}
+
+\regtotcounter{footnote}
+
+\renewcommand{\footmarksep}{)}
+\newcommand{\footmarkfont}{\normalfont\footnotesize\ttfamily}
+
+\AtBeginDocument{
+    \settowidth{\footmarkwidth}{\footmarkfont\total{footnote}\footmarksep}
+}
+
+\makeatletter\renewcommand\@makefnmark{%
+    \hbox{\@textsuperscript{\footmarkfont\@thefnmark}}%
+}\makeatother
+
+\makeatletter\renewcommand\@makefntext[1]{
+    \noindent\makebox[\footmarkwidth][l]{\footmarkfont\@thefnmark\footmarksep}
+    #1\par
+}\makeatother
 
 % ------------------------------------------------------------------------------
 %   Content
