@@ -44,6 +44,12 @@
 \usepackage[stable,multiple,bottom]{footmisc}
 \usepackage{anyfontsize}
 
+% command to add a footnote without referencing it anywhere (use \footref{#1}).
+\makeatletter\newcommand{\footreftext}[2]{
+    \stepcounter{footnote}
+    \footnotetext[\value{footnote}]{\label{#1}#2}
+}\makeatother
+
 \regtotcounter{footnote}
 
 \renewcommand{\footmarksep}{)}
