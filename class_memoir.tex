@@ -131,23 +131,26 @@
 
 \makeatletter\newcommand{\chapterrule}{
     \par\nobreak \vskip 0.25\baselineskip
-    \hrule height \normalrulethickness \vrule width \normalrulethickness height 2mm
-    \vskip \dimexpr - 0.4em - 2mm + \midchapskip \relax
+    \hrule height \normalrulethickness
+    \hrule height 0.5\midchapskip width \normalrulethickness \vskip -0.5\midchapskip
+    \vskip \midchapskip
 }\makeatother
 
 \makeatletter\makechapterstyle{robertfry}{
     \setlength{\beforechapskip}{0.1\textheight}
     \setlength{\midchapskip}{1.0\baselineskip}
-    \setlength{\afterchapskip}{3.0\baselineskip}
-    \renewcommand*{\chapnamefont}{\hfill\normalfont\Large\scshape}
-    \renewcommand*{\chapnumfont}{\normalfont\Huge\bfseries\scshape\sffamily}
-    \renewcommand*{\chaptitlefont}{\hfill\normalfont\Huge\bfseries}
-    \renewcommand*{\chapternamenum}{\chapnumfont\space}
+    \@ifclasswith{memoir}{article}
+        {\setlength{\afterchapskip}{2.0\baselineskip}}
+        {\setlength{\afterchapskip}{4.0\baselineskip}}
+    \renewcommand*{\chapnamefont}{\normalfont\Large\scshape}
+    \renewcommand*{\chapnumfont}{\normalfont\Huge\bfseries}
+    \renewcommand*{\chaptitlefont}{\normalfont\huge\bfseries}
+    \renewcommand*{\chapternamenum}{\space}
     \renewcommand*{\afterchapternum}{\normalfont\chapterrule}
     \renewcommand*{\printchapternonum}{\vspace*{-\baselineskip-0.5mm}\normalfont\chapterrule}
-    \renewcommand*{\printchaptername}{\chapnamefont \@chapapp}
-    \renewcommand*{\printchapternum}{\chapnumfont {\scalefont{2}$\mathbb{\thechapter}$}}
-    \renewcommand*{\printchaptertitle}{\chaptitlefont}
+    \renewcommand*{\printchaptername}{\raggedleft\chapnamefont\@chapapp}
+    \renewcommand*{\printchapternum}{\raggedleft\chapnumfont{\scalefont{2}$\mathbb{\thechapter}$}}
+    \renewcommand*{\printchaptertitle}{\raggedleft\chaptitlefont}
     \renewcommand*{\chapterheadstart}{\par{\Huge\needspace{8\baselineskip}}\vspace{\beforechapskip}}
 }\makeatother
 
