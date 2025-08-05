@@ -136,6 +136,11 @@
     \vskip \midchapskip
 }\makeatother
 
+% renew this command to change the separation between chapters
+\makeatletter\newcommand{\chaptersep}{
+    \par
+}\makeatother
+
 \makeatletter\makechapterstyle{robertfry}{
     \setlength{\beforechapskip}{0.1\textheight}
     \setlength{\midchapskip}{1.0\baselineskip}
@@ -151,7 +156,7 @@
     \renewcommand*{\printchaptername}{\raggedleft\chapnamefont\@chapapp}
     \renewcommand*{\printchapternum}{\raggedleft\chapnumfont{\scalefont{2}$\mathbb{\thechapter}$}}
     \renewcommand*{\printchaptertitle}{\raggedleft\chaptitlefont}
-    \renewcommand*{\chapterheadstart}{\par{\Huge\needspace{8\baselineskip}}\vspace{\beforechapskip}}
+    \renewcommand*{\chapterheadstart}{\chaptersep\vspace{\beforechapskip}}
 }\makeatother
 
 \chapterstyle{robertfry}
