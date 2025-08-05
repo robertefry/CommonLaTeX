@@ -59,28 +59,13 @@
 \usepackage[stable,multiple,bottom]{footmisc}
 \usepackage{anyfontsize}
 
+% pre-parse to count the total number of footnotes
+\regtotcounter{footnote}
+
 % command to add a footnote without referencing it anywhere (use \footref{#1}).
 \makeatletter\newcommand{\footreftext}[2]{
     \stepcounter{footnote}
     \footnotetext[\value{footnote}]{\label{#1}#2}
-}\makeatother
-
-\regtotcounter{footnote}
-
-\renewcommand{\footmarksep}{)}
-\newcommand{\footmarkfont}{\normalfont\footnotesize\ttfamily}
-
-\AtBeginDocument{
-    \settowidth{\footmarkwidth}{\footmarkfont\total{footnote}\footmarksep}
-}
-
-\makeatletter\renewcommand\@makefnmark{%
-    \hbox{\@textsuperscript{\footmarkfont\@thefnmark}}%
-}\makeatother
-
-\makeatletter\renewcommand\@makefntext[1]{
-    \noindent\makebox[\footmarkwidth][l]{\footmarkfont\@thefnmark\footmarksep}
-    #1\par
 }\makeatother
 
 % ------------------------------------------------------------------------------

@@ -169,3 +169,21 @@
 \setsecheadstyle{\Large\bfseries\scshape\raggedright}
 \setsubsecheadstyle{\large\bfseries\scshape\raggedright}
 \setsubsubsecheadstyle{\bfseries\scshape\raggedright}
+
+% ~ Footnote Style ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\renewcommand{\footmarksep}{)}
+\newcommand{\footmarkfont}{\normalfont\footnotesize\ttfamily}
+
+\AtBeginDocument{
+    \settowidth{\footmarkwidth}{\footmarkfont\total{footnote}\footmarksep}
+}
+
+\makeatletter\renewcommand\@makefnmark{%
+    \hbox{\@textsuperscript{\footmarkfont\@thefnmark}}%
+}\makeatother
+
+\makeatletter\renewcommand\@makefntext[1]{
+    \noindent\makebox[\footmarkwidth][l]{\footmarkfont\@thefnmark\footmarksep}
+    #1\par
+}\makeatother
