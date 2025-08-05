@@ -81,19 +81,24 @@
     \NewMajorTheorem{lemma}{Lemma}
     \NewMajorTheorem{theorem}{Theorem}
     \NewMajorTheorem{corollary}{Corollary}
+    \NewMajorTheorem{example}{Example}
 }
 
 % ~ Titled Theorem Environments ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \makeatletter\newtheoremstyle{blocktitle}
-    {\item[\rlap{\vbox{\hbox{\hskip\labelsep\theorem@headerfont ##1\ ##2\theorem@separator}\hbox{\strut}}}]}
-    {\item[\rlap{\vbox{\hbox{\hskip\labelsep\theorem@headerfont ##1\ ##2{\normalfont\ (##3)}\theorem@separator}\hbox{\strut}}}]}
+    {\item[\rlap{\vbox{
+        \hbox{\hskip\labelsep\theorem@headerfont ##1\ ##2\theorem@separator}
+        \hbox{\strut}\vspace*{0.1\baselineskip}
+    }}]}
+    {\item[\rlap{\vbox{
+        \hbox{\hskip\labelsep\theorem@headerfont ##1\ ##2{\normalfont\ (##3)}\theorem@separator}
+        \hbox{\strut}\vspace*{0.1\baselineskip}
+    }}]}
 \makeatother
 
 {
-    \theoremstyle{blockmajor}
+    \theoremstyle{blocktitle}
     \theoremheaderfont{\normalfont\bfseries}
     \theorembodyfont{\upshape}
-
-    \NewMajorTheorem{example}{Example}
 }
