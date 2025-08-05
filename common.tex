@@ -5,6 +5,21 @@
 \usepackage{patchcmd}
 \usepackage{totcount}
 
+\makeatletter\newcommand{\bindcounter}[1]{
+    \expandafter\newcommand\csname bindcounter@#1\endcsname[1]
+    {
+        \ifcsdef{c@chapter}      {\counterwithout{#1}{chapter}      }{}
+        \ifcsdef{c@section}      {\counterwithout{#1}{section}      }{}
+        \ifcsdef{c@subsection}   {\counterwithout{#1}{subsection}   }{}
+        \ifcsdef{c@subsubsection}{\counterwithout{#1}{subsubsection}}{}
+        \counterwithin{#1}{##1}
+    }
+    \pretocmd{\chapter}      {\csname bindcounter@#1\endcsname{chapter}      }{}{}
+    \pretocmd{\section}      {\csname bindcounter@#1\endcsname{section}      }{}{}
+    \pretocmd{\subsection}   {\csname bindcounter@#1\endcsname{subsection}   }{}{}
+    \pretocmd{\subsubsection}{\csname bindcounter@#1\endcsname{subsubsection}}{}{}
+}\makeatother
+
 % ------------------------------------------------------------------------------
 %   Look And Feel
 % ------------------------------------------------------------------------------

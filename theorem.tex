@@ -7,21 +7,9 @@
 %   Theorem Environments
 % ------------------------------------------------------------------------------
 
-% Define a counter for theorems.
-\newcounter{thm}[section]
-
-\makeatletter\newcommand{\bindthmcounter}[1]{
-    \ifcsdef{c@chapter}      {\counterwithout{thm}{chapter}      }{}
-    \ifcsdef{c@section}      {\counterwithout{thm}{section}      }{}
-    \ifcsdef{c@subsection}   {\counterwithout{thm}{subsection}   }{}
-    \ifcsdef{c@subsubsection}{\counterwithout{thm}{subsubsection}}{}
-    \counterwithin{thm}{#1}
-}\makeatother
-
-\pretocmd{\chapter}{\bindthmcounter{chapter}}{}{}
-\pretocmd{\section}{\bindthmcounter{section}}{}{}
-\pretocmd{\subsection}{\bindthmcounter{subsection}}{}{}
-\pretocmd{\subsubsection}{\bindthmcounter{subsubsection}}{}{}
+% Define a theorem counter bound to the document structure.
+\newcounter{thm}
+\bindcounter{thm}
 
 \theoreminframepreskip{0pt}
 \theoreminframepostskip{0pt}

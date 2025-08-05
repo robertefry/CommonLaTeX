@@ -12,13 +12,13 @@
 \usepackage{derivative}     % typeset derivatives
 \usepackage{nicefrac}       % typeset nice fractions
 
+% bind the equation counter to the document structure
+\bindcounter{equation}
+
 \usepackage{mleftright}     % typeset math in a more natural way
 
 % use subformula delimiters from the mleftright package
 \mleftright
-
-% tag equations within the section
-\numberwithin{equation}{section}
 
 % shorthand to label and tag an equation
 \makeatletter\newcommand{\eqn}[1]{
