@@ -11,10 +11,10 @@
 \newcounter{thm}[section]
 
 \makeatletter\newcommand{\bindthmcounter}[1]{
-    \counterwithout{thm}{chapter}
-    \counterwithout{thm}{section}
-    \counterwithout{thm}{subsection}
-    \counterwithout{thm}{subsubsection}
+    \ifcsdef{c@chapter}      {\counterwithout{thm}{chapter}      }{}
+    \ifcsdef{c@section}      {\counterwithout{thm}{section}      }{}
+    \ifcsdef{c@subsection}   {\counterwithout{thm}{subsection}   }{}
+    \ifcsdef{c@subsubsection}{\counterwithout{thm}{subsubsection}}{}
     \counterwithin{thm}{#1}
 }\makeatother
 
