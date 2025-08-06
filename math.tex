@@ -44,34 +44,20 @@
 %   Enclosures
 % ------------------------------------------------------------------------------
 
-% Enclose content with specified delimiters and optional size
+% Force an enclosure to be of a specific minimum height.
 %
-%  <#1>: the enclosure size (optional) (integer 0 to 6) (default: 0)
-%  {#2}: the left delimiter
-%  {#3}: the right delimiter
-%  {#4}: the content to be enclosed
+% {#1}: The minimum height level desired.
 %
-\NewDocumentCommand{\xenclose}{D<>{0}mmm}
-{
-    \ifthenelse{\equal{#1}{0}}{ \left#2 #4 \right#3 }{}
-    \ifthenelse{\equal{#1}{1}}{ \bigl#2 #4 \bigr#3 }{}
-    \ifthenelse{\equal{#1}{2}}{ \Bigl#2 #4 \Bigr#3 }{}
-    \ifthenelse{\equal{#1}{3}}{ \biggl#2 #4 \biggr#3 }{}
-    \ifthenelse{\equal{#1}{4}}{ \Biggl#2 #4 \Biggr#3 }{}
-    \ifthenelse{\equal{#1}{5}}{ \bigggl#2 #4 \bigggr#3 }{}
-    \ifthenelse{\equal{#1}{6}}{ \Bigggl#2 #4 \Bigggr#3 }{}
-    \ifthenelse{\equal{#1}{}}{ #2 #4 #3 }{}
-}
+\makeatletter\newcommand{\phantomheight}[1]{
+    \ifthenelse{\equal{#1}{1}}{\vphantom{\bigl|}}{}
+    \ifthenelse{\equal{#1}{2}}{\vphantom{\Bigl|}}{}
+    \ifthenelse{\equal{#1}{3}}{\vphantom{\biggl|}}{}
+    \ifthenelse{\equal{#1}{4}}{\vphantom{\Biggl|}}{}
+    \ifthenelse{\equal{#1}{5}}{\vphantom{\bigggl|}}{}
+    \ifthenelse{\equal{#1}{6}}{\vphantom{\Bigggl|}}{}
+}\makeatother
 
-% Enclose content in a box with optional size
-%
-%  <#1>: the enclosure size (optional) (integer 0 to 6) (default: 0)
-%  {#2}: the content to be enclosed in a box
-%
-\NewDocumentCommand{\xboxed}{D<>{0}m}
-{
-    \boxed{ \xenclose<#1>{.}{.}{#2} }
-}
+\let\ph\phantomheight
 
 % ~ Named Enclosures ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -96,9 +82,9 @@
 %
 \makeatletter\NewDocumentCommand{\DeclareNamedEnclosure}{m >{\SplitList{,}}o mm}
 {
-    \expandafter\DeclareDocumentCommand{#1}{D<>{0}m}
+    \expandafter\DeclareDocumentCommand{#1}{m}
     {
-        \xenclose<##1>{#3}{#4}{##2}
+        \left#3 ##1 \right#4
     }
     \newcommand{\AddEnclosureAliasesToNameMap}[1]{
         \xenclosures@namemap@set{##1}{\expandafter\@gobble\string#1}
@@ -140,31 +126,31 @@
 
 % ~ Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\makeatletter\NewDocumentCommand{\xf}{E{_^}{} D<>{0}omE{_^}{}}
+\makeatletter\NewDocumentCommand{\xf}{E{_^}{} omE{_^}{}}
 {
-    \def\the@enclosure{\IfValueTF{#4}{\xenclosures@namemap@get{#4}<#3>{#5}}{#5}}
+    \def\the@enclosure{\IfValueTF{#3}{\xenclosures@namemap@get{#3}{#4}}{#4}}
     \ifthenelse{\equal{\IfValueT{#1}{.}\IfValueT{#2}{.}}{}}
     {
         \the@enclosure
-            \IfValueT{#6}{_{#6}}
-            \IfValueT{#7}{^{#7}}
+            \IfValueT{#5}{_{#5}}
+            \IfValueT{#6}{^{#6}}
     }{
         \prescript
             {\IfValueT{#2}{#2}}
             {\IfValueT{#1}{#1}}
         {\the@enclosure}
-            \IfValueT{#6}{_{#6}}
-            \IfValueT{#7}{^{#7}}
+            \IfValueT{#5}{_{#5}}
+            \IfValueT{#6}{^{#6}}
     }
     \xf@recurse
 }
-\NewDocumentCommand{\xf@recurse}{D<>{0}O{p}ge{_^}}
+\NewDocumentCommand{\xf@recurse}{O{p}ge{_^}}
 {
-    \IfValueT{#3}
+    \IfValueT{#2}
     {
-        \xenclosures@namemap@get{#2}<#1>{#3}
-            \IfValueT{#4}{_{#4}}
-            \IfValueT{#5}{^{#5}}
+        \xenclosures@namemap@get{#1}{#2}
+            \IfValueT{#3}{_{#3}}
+            \IfValueT{#4}{^{#4}}
         \xf@recurse
     }
 }
