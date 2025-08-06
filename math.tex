@@ -126,22 +126,11 @@
 
 % ~ Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\makeatletter\NewDocumentCommand{\xf}{E{_^}{} omE{_^}{}}
+\makeatletter\NewDocumentCommand{\xf}{omE{_^}{}}
 {
-    \def\the@enclosure{\IfValueTF{#3}{\xenclosures@namemap@get{#3}{#4}}{#4}}
-    \ifthenelse{\equal{\IfValueT{#1}{.}\IfValueT{#2}{.}}{}}
-    {
-        \the@enclosure
-            \IfValueT{#5}{_{#5}}
-            \IfValueT{#6}{^{#6}}
-    }{
-        \prescript
-            {\IfValueT{#2}{#2}}
-            {\IfValueT{#1}{#1}}
-        {\the@enclosure}
-            \IfValueT{#5}{_{#5}}
-            \IfValueT{#6}{^{#6}}
-    }
+    \IfValueTF{#1}{\xenclosures@namemap@get{#1}{#2}}{#2}
+        \IfValueT{#3}{_{#3}}
+        \IfValueT{#4}{^{#4}}
     \xf@recurse
 }
 \NewDocumentCommand{\xf@recurse}{O{p}ge{_^}}
