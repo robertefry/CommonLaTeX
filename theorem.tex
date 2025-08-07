@@ -7,12 +7,13 @@
 %   Theorem Environments
 % ------------------------------------------------------------------------------
 
-% Define a theorem counter bound to the document structure.
+% use common paragraph separation
+\theorempostskipamount=0pt
+
+% define the theorem counter, bound to the document structure.
 \newcounter{thm}
 \bindcounter{thm}
 
-\theoreminframepreskip{0pt}
-\theoreminframepostskip{0pt}
 \NewDocumentCommand{\qedhere}{O{\proofSymbol}}{\hfill#1}
 
 % ~ Proof Environment ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
