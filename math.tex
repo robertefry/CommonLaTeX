@@ -126,24 +126,33 @@
 
 % ~ Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\makeatletter\NewDocumentCommand{\xf}{omE{_^}{}}
-{
-    \IfValueTF{#1}{\xenclosures@namemap@get{#1}{#2}}{#2}
-        \IfValueT{#3}{_{#3}}
-        \IfValueT{#4}{^{#4}}
-    \xf@recurse
-}
-\NewDocumentCommand{\xf@recurse}{O{p}ge{_^}}
-{
-    \IfValueT{#2}
-    {
-        \xenclosures@namemap@get{#1}{#2}
-            \IfValueT{#3}{_{#3}}
-            \IfValueT{#4}{^{#4}}
-        \xf@recurse
-    }
-}
-\makeatother
+% Function to define and use a function specification.
+%
+% [#1]: The spec for the function name
+% {#2}: The spec for the function
+% [#3]: A comma separated spec for the function arguments
+% {#4}: The function arguments to be formatted as per the spec.
+%
+\makeatletter\NewDocumentCommand{\xf}{ om O{p} g }{
+    \IfValueTF{#1}{\xenclosures@namemap@get{\xf@spechead}{#2}}{#2}
+    \xfrecurse[#3]{#4}
+}\makeatother
+
+\makeatletter\NewDocumentCommand{\xfrecurse}{ >{\SplitList{,}}o m +g }{
+    \def\xf@spechead{}
+    \def\xf@spectail{}
+    \ProcessList{#1}{\xf@spec@procelem}
+    \IfValueT{#2}{ \ifx\xf@spechead\@empty#2\else\xenclosures@namemap@get{\xf@spechead}{#2}\fi }
+    \IfValueT{#3}{ \expandafter\xfrecurse\expandafter[\xf@spectail] #3 }
+}\makeatother
+
+\makeatletter\newcommand{\xf@spec@procelem}[1]{
+    \ifx\xf@spechead\@empty
+        \gdef\xf@spechead{#1}
+    \else
+        \xdef\xf@spectail{\ifx\xf@spectail\@empty\else\xf@spectail,\fi\detokenize{#1}}
+    \fi
+}\makeatother
 
 % ------------------------------------------------------------------------------
 %   Miscellaneous
