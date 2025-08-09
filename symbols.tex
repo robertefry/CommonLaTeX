@@ -109,24 +109,24 @@
     {\bfseries\scshape TODO:} {\upshape#1}
 }}
 
-\NewDocumentCommand{\markfix}{}
-{
-    \begin{center}
-        \color{MaterialDeepOrange}
-        \textbf{\textit{======\underline{FIX}======}}
-    \end{center}
-}
-
-\NewDocumentCommand{\fixme}{m}{{
-    \hskip\labelsep\color{MaterialDeepOrange}
-    {\bfseries\scshape FIXME:} {\upshape#1}
-}}
-
 \NewDocumentCommand{\marktodo}{}
 {
     \begin{center}
         \color{MaterialBlue}
         \textbf{\textit{======\underline{TODO}======}}
+    \end{center}
+}
+
+\NewDocumentCommand{\tofix}{m}{{
+    \hskip\labelsep\color{MaterialDeepOrange}
+    {\bfseries\scshape FIXME:} {\upshape#1}
+}}
+
+\NewDocumentCommand{\markfix}{}
+{
+    \begin{center}
+        \color{MaterialDeepOrange}
+        \textbf{\textit{======\underline{FIX}======}}
     \end{center}
 }
 
