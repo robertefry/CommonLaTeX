@@ -1,16 +1,16 @@
 
 \usepackage{tcolorbox}
 
+\hypersetup{
+    bookmarksdepth = 3,
+    bookmarksopen = true
+}
+
 \renewcommand{\familydefault}{\sfdefault}
 \renewcommand{\emph}[1]{{\bfseries #1}}
 
 \pagestyle{plain}
 \pagenumbering{gobble}
-
-\titlespacing*{\section}
-    {0pt}                 % indentation
-    {0.5\baselineskip}    % vspace preceding
-    {0.0\baselineskip}    % vspace following
 
 \setcounter{secnumdepth}{0}
 
@@ -60,15 +60,7 @@
     \end{tcolorbox}
 }}\makeatother
 
-% ~ Resume Sections ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-\makeatletter\NewDocumentCommand{\ResumeSection}{m}{
-    \begin{tcolorbox}[top=0.0em, bottom=0.0em]
-        \section{\texorpdfstring{\centering #1}{#1}}
-    \end{tcolorbox}
-}\makeatother
-
-% ~ Resume Subsections ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% ~ Resume Section Options ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \usepackage{pgfkeys}
 
@@ -122,6 +114,17 @@
 
 }\makeatother
 
+% ~ Resume Sections ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\makeatletter\NewDocumentCommand{\ResumeSection}{m}{
+    \begin{tcolorbox}[top=0.2\baselineskip, bottom=0.2\baselineskip]
+        \pdfbookmark[1]{#1}{#1}
+        \Large\bfseries\scshape\raggedright\centering #1
+    \end{tcolorbox}
+}\makeatother
+
+% ~ Resume Subsections ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 % Formats resume history information.
 %
 % {#1}: The history title               (mandatory)
@@ -129,10 +132,13 @@
 %
 \makeatletter\NewDocumentCommand{\ResumeHistory}{mO{}}{\parbox{\textwidth}{
     \ProcessResumeOptions{#2}
+    \pdfbookmark[2]{#1}{#1}
     \bfseries #1 {\normalfont\itshape\resume@link} \hfill \resume@date
     \resume@infoskip \resume@company \resume@infosep \resume@location
     \vskip 0.5ex \hrule
 }}\makeatother
+
+% ~ Resume Subsubsections ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 % Formats resume role information.
 %
@@ -141,6 +147,7 @@
 %
 \makeatletter\NewDocumentCommand{\ResumeRole}{mO{}}{\parbox{\textwidth}{
     \ProcessResumeOptions{#2}
+    \pdfbookmark[3]{#1}{#1}
     \bfseries #1 {\normalfont\itshape\resume@link}
 }}\makeatother
 
@@ -151,6 +158,7 @@
 %
 \makeatletter\NewDocumentCommand{\ResumeThesis}{mmO{}}{\parbox{\textwidth}{
     \ProcessResumeOptions{#3}
+    \pdfbookmark[3]{#1}{#1}
     {\bfseries #1} {\normalfont\itshape\resume@link}
     \\ {\scshape #2}
 }}\makeatother
