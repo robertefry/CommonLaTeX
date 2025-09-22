@@ -15,7 +15,7 @@
         {\dimexpr(\stockheight-\paperheight)/2\relax}
         {\dimexpr\stockwidth-\paperwidth\relax}
     \setbinding{#3}
-    \settypeblocksize{\dimexpr#1-1in\relax}{#2}{*}
+    \settypeblocksize{*}{#2}{1}
     \setlrmargins{*}{*}{1}
     \setulmargins{*}{*}{1}
     \checkandfixthelayout
@@ -32,7 +32,7 @@
         {\dimexpr(\stockheight-\paperheight)/2\relax}
         {\dimexpr(\stockwidth-\paperwidth)/2\relax}
     \setbinding{0in}
-    \settypeblocksize{\dimexpr#1-1in\relax}{#2}{*}
+    \settypeblocksize{*}{#2}{1}
     \setlrmargins{*}{*}{1}
     \setulmargins{*}{*}{1}
     \checkandfixthelayout
