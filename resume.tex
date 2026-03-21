@@ -75,18 +75,28 @@
 \makeatletter\newcommand{\ProcessResumeOptions}[1]{
     \pgfkeys{
         /resume/.is family,
+        /resume/name/.initial={},
+        /resume/position/.initial={},
         /resume/company/.initial={},
         /resume/location/.initial={},
         /resume/start/.initial={},
         /resume/end/.initial={Ongoing},
         /resume/link/.initial={},
+        /resume/email/.initial={},
+        /resume/phone/.initial={},
+        /resume/website/.initial={},
     }
     \pgfkeys{/resume,#1}
+    \def\@thename{\pgfkeysvalueof{/resume/name}}
+    \def\@theposition{\pgfkeysvalueof{/resume/position}}
     \def\@thecompany{\pgfkeysvalueof{/resume/company}}
     \def\@thelocation{\pgfkeysvalueof{/resume/location}}
     \def\@thestart{\pgfkeysvalueof{/resume/start}}
     \def\@theend{\pgfkeysvalueof{/resume/end}}
     \def\@thelink{\pgfkeysvalueof{/resume/link}}
+    \def\@theemail{\pgfkeysvalueof{/resume/email}}
+    \def\@thephone{\pgfkeysvalueof{/resume/phone}}
+    \def\@thewebsite{\pgfkeysvalueof{/resume/website}}
 
     \def\@datesep{\if\@thestart\empty\else\if\@theend\empty\else\ -\ \fi\fi}
     \def\@thedate{\@thestart \@datesep \@theend}
@@ -104,10 +114,16 @@
 
     % Export the processed variables
     %
+    \def\resume@name{\@thename}
+    \def\resume@position{\@theposition}
     \def\resume@company{\@thecompany}
     \def\resume@location{\@thelocation}
     \def\resume@date{\@thedate}
     \def\resume@link{\@linktext}
+    \def\resume@email{\@theemail}
+    \def\resume@phone{\@thephone}
+    \def\resume@website{\@thewebsite}
+
     \def\resume@infoskip{\@infoskip}
     \def\resume@infosep{\@infosep}
     \def\resume@linkskip{\@linkskip}
@@ -160,4 +176,13 @@
     \pdfbookmark[3]{#1}{#1}
     {\bfseries #1} {\normalfont\itshape\resume@link}
     \\ {\scshape #2}
+}}\makeatother
+
+\makeatletter\NewDocumentCommand{\ResumeReferee}{O{}}{\parbox{\linewidth}{
+    \ProcessResumeOptions{#1}
+    {\bfseries \resume@name}
+    \if\empty\resume@position\else\\\resume@position\fi
+    \if\empty\resume@email\else\\\makebox[3ex][c]{\faEnvelope[regular]} \resume@email\fi
+    \if\empty\resume@phone\else\\\makebox[3ex][c]{\faMobile*} \resume@phone\fi
+    \if\empty\resume@website\else\\\makebox[3ex][c]{\faExternalLink*} \resume@website\fi
 }}\makeatother
