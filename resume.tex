@@ -117,10 +117,10 @@
 % ~ Resume Sections ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \makeatletter\NewDocumentCommand{\ResumeSection}{m}{
-    \begin{tcolorbox}[top=0.2\baselineskip, bottom=0.2\baselineskip]
-        \pdfbookmark[1]{#1}{#1}
-        \Large\bfseries\scshape\raggedright\centering #1
-    \end{tcolorbox}
+    \vspace{\baselineskip}\goodbreak
+    \pdfbookmark[1]{#1}{#1}
+    {\Large\bfseries\scshape #1}
+    \vspace{0.2\baselineskip}\hrule\vspace{0.5\baselineskip}
 }\makeatother
 
 % ~ Resume Subsections ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -130,12 +130,11 @@
 % {#1}: The history title               (mandatory)
 % [#2]: The list of key=value options.
 %
-\makeatletter\NewDocumentCommand{\ResumeHistory}{mO{}}{\parbox{\textwidth}{
+\makeatletter\NewDocumentCommand{\ResumeHistory}{mO{}}{\parbox{\linewidth}{
     \ProcessResumeOptions{#2}
     \pdfbookmark[2]{#1}{#1}
     \bfseries #1 {\normalfont\itshape\resume@link} \hfill \resume@date
     \resume@infoskip \resume@company \resume@infosep \resume@location
-    \vskip 0.5ex \hrule
 }}\makeatother
 
 % ~ Resume Subsubsections ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -145,7 +144,7 @@
 % {#1}: The role title                  (mandatory)
 % [#2]: The list of key=value options.
 %
-\makeatletter\NewDocumentCommand{\ResumeRole}{mO{}}{\parbox{\textwidth}{
+\makeatletter\NewDocumentCommand{\ResumeRole}{mO{}}{\parbox{\linewidth}{
     \ProcessResumeOptions{#2}
     \pdfbookmark[3]{#1}{#1}
     \bfseries #1 {\normalfont\itshape\resume@link}
@@ -156,7 +155,7 @@
 % {#1}: The thesis title                (mandatory)
 % [#2]: The list of key=value options.
 %
-\makeatletter\NewDocumentCommand{\ResumeThesis}{mmO{}}{\parbox{\textwidth}{
+\makeatletter\NewDocumentCommand{\ResumeThesis}{mmO{}}{\parbox{\linewidth}{
     \ProcessResumeOptions{#3}
     \pdfbookmark[3]{#1}{#1}
     {\bfseries #1} {\normalfont\itshape\resume@link}
