@@ -81,8 +81,22 @@
 
 \usepackage[inline,shortlabels]{enumitem}   % typeset the list environments
 
+% configure tasks environment for better multicolumn itemisation
+\usepackage{tasks}
+\settasks{
+    label=\textbullet,
+    after-item-skip=0.15\baselineskip plus 0.15\baselineskip minus 0.15\baselineskip,
+    before-skip=0pt,
+    after-skip=0pt,
+}
+
 % configure spacing for list environments
-\setlist[itemize,enumerate,description]{topsep=0pt, partopsep=0pt, parsep=\parskip, itemsep=0pt}
+\setlist[itemize,enumerate,description]{
+    topsep=0pt,
+    partopsep=0pt,
+    parsep=\parskip,
+    itemsep=0pt,
+}
 
 % configure paragraph columns
 \usepackage{paracol}
