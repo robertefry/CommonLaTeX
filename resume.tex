@@ -22,7 +22,7 @@
     itemsep=0.2\baselineskip plus 0.3\baselineskip minus 0.2\baselineskip,
     }
 
-\setlength{\parskip}{0.5\baselineskip plus 0.25\baselineskip minus 0.3\baselineskip}
+\setlength{\parskip}{0.25\baselineskip plus 0.25\baselineskip minus 0.25\baselineskip}
 
 % ~ The \maketitle Command ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -133,7 +133,7 @@
 % ~ Resume Sections ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \makeatletter\NewDocumentCommand{\ResumeSection}{m}{
-    \vspace{\baselineskip}\goodbreak
+    \vspace{2\parskip}\goodbreak
     \pdfbookmark[1]{#1}{#1}
     {\Large\bfseries\scshape #1}
     \vspace{0.2\baselineskip}\hrule\vspace{0.5\baselineskip}
@@ -171,14 +171,14 @@
 % {#1}: The thesis title                (mandatory)
 % [#2]: The list of key=value options.
 %
-\makeatletter\NewDocumentCommand{\ResumeThesis}{mmO{}}{\parbox{\linewidth}{
+\makeatletter\NewDocumentCommand{\ResumeThesis}{mmO{}}{\vspace{\parskip}\parbox{\linewidth}{
     \ProcessResumeOptions{#3}
     \pdfbookmark[3]{#1}{#1}
     {\bfseries #1} {\normalfont\itshape\resume@link}
     \\ {\scshape #2}
 }}\makeatother
 
-\makeatletter\NewDocumentCommand{\ResumeReferee}{O{}}{\parbox{\linewidth}{
+\makeatletter\NewDocumentCommand{\ResumeReferee}{O{}}{\vspace{\parskip}\parbox{\linewidth}{
     \ProcessResumeOptions{#1}
     {\bfseries \resume@name}
     \if\empty\resume@position\else\\\resume@position\fi
